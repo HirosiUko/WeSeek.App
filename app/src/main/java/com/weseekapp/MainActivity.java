@@ -12,7 +12,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 public class MainActivity extends AppCompatActivity {
-
+    //
     private Page1Activity page1Activity;
     private Page2Activity page2Activity;
     private Page3Activity page3Activity;
