@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/page1"
+        android:title="Home" />
+    <item
+        android:id="@+id/page2"
+        android:title="Search" />
+    <item
+        android:id="@+id/page3"
+        android:title="3번" />
+    <item
+        android:id="@+id/page4"
+        android:title="4번" />
+    <item
+        android:id="@+id/page5"
+        android:title="5번" />
+</menu>
