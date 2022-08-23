@@ -54,7 +54,7 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
     LatLng gwangju = new LatLng(35.1398252, 126.8109661);
 
 
-    private Button btn_current, btn_location;
+    private Button btn_current;
 
 
     @Override
