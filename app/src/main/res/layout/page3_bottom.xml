@@ -8,7 +8,22 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="270dp">
+        android:layout_height="91dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_current"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Button" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="2">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -17,12 +32,13 @@
             android:orientation="horizontal">
 
             <ImageButton
-                android:id="@+id/imageButton"
+                android:id="@+id/btn_pre"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:backgroundTint="#FFFFFF"
                 app:srcCompat="@drawable/ic_action_left_arrow" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -48,7 +64,7 @@
             android:orientation="horizontal">
 
             <ImageButton
-                android:id="@+id/imageButton2"
+                android:id="@+id/btn_next"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
