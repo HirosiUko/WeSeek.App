@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,7 +28,6 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -67,11 +65,13 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
 
         btn_array = view.findViewById(R.id.btn_array);
         btn_marker = view.findViewById(R.id.btn_marker);
-        btn_location = view.findViewById(R.id.btn_location);
+
+        //btn_location = view.findViewById(R.id.btn_location);
 
         btn_array.setOnClickListener(this);
         btn_marker.setOnClickListener(this);
-        btn_location.setOnClickListener(this);
+        //btn_location.setOnClickListener(this);
+
 
         mapView = view.findViewById(R.id.map);
         mapView.onCreate(savedInstanceState);
@@ -128,7 +128,12 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
                                     gps[i] = jsonObject.getString("GPS");
 
 
+
+
+
                                 }
+
+
                                 Log.d("응답성공", "DB 로드 성공!");
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -147,6 +152,7 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
 
 
             requestQueue.add(request);
+
         } else if (view.getId() == R.id.btn_marker) {
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(gwangju, 15));
             Log.d("응답성공", "마커 표시 성공!");
@@ -164,27 +170,27 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
 
                 mMap.addMarker(markerOptions);
             }
-
-        } else if (view.getId() == R.id.btn_location) {
-            LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-            if (ActivityCompat.checkSelfPermission(view.getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(view.getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-                return;
-            }
-            Location loc_Current = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            double cur_lat = loc_Current.getLatitude();
-            double cur_lon = loc_Current.getLongitude();
-            LatLng current = new LatLng(cur_lat, cur_lon);
-            Log.d("응답성공", " " + cur_lat + " " + cur_lon);
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(current, 10));
-
         }
+//        } else if (view.getId() == R.id.btn_location) {
+//            LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+//            if (ActivityCompat.checkSelfPermission(view.getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(view.getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+//                // TODO: Consider calling
+//                //    ActivityCompat#requestPermissions
+//                // here to request the missing permissions, and then overriding
+//                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+//                //                                          int[] grantResults)
+//                // to handle the case where the user grants the permission. See the documentation
+//                // for ActivityCompat#requestPermissions for more details.
+//                return;
+//            }
+//            Location loc_Current = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+//            double cur_lat = loc_Current.getLatitude();
+//            double cur_lon = loc_Current.getLongitude();
+//            LatLng current = new LatLng(cur_lat, cur_lon);
+//            Log.d("응답성공", " " + cur_lat + " " + cur_lon);
+//            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(current, 10));
+//
+//        }
 
     }
 
