@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:elevation="10dp"
+    android:orientation="vertical"
+    tools:context=".FirstMain">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView21"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="cursive"
+            android:gravity="bottom|center"
+            android:paddingBottom="25dp"
+            android:text="We Seek"
+            android:textSize="60sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:background="#FFFFFF"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="230dp"
+            android:layout_height="50dp"
+            android:background="@drawable/button_pattern"
+            android:elevation="10dp"
+            android:gravity="center"
+            android:text="로그인"
+            android:textColor="#6C6666"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="230dp"
+            android:layout_height="50dp"
+            android:background="@drawable/button_pattern2"
+            android:elevation="10dp"
+            android:gravity="center"
+            android:text="회원가입"
+            android:textColor="#FEFCFC"
+            android:textSize="18sp" />
+    </LinearLayout>
+</LinearLayout>
