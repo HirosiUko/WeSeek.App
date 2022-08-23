@@ -37,6 +37,7 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
     private GoogleMap mMap;
     private MapView mapView;
     private TextView tv_name;
+    private TextView tv_adr;
     private ImageView btn_pre, btn_next;
     private int cnt = 0;
 
@@ -47,9 +48,11 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
     String[] location; // 소재지
     String[] gps; // GPS
     String[] gpsS;
+    LatLng[] loc; // 위치정보
 
     LatLng korea = new LatLng(36.4894573, 127.7294827);
     LatLng gwangju = new LatLng(35.1398252, 126.8109661);
+
 
     private Button btn_current, btn_location;
 
@@ -63,6 +66,7 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
         }
 
         tv_name = view.findViewById(R.id.tv_name);
+        tv_adr = view.findViewById(R.id.tv_adr);
         btn_current = view.findViewById(R.id.btn_current);
         //btn_location = view.findViewById(R.id.btn_location);
         btn_pre = view.findViewById(R.id.btn_pre);
@@ -88,13 +92,15 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
     public void onMapReady(@NonNull GoogleMap googleMap) {
         mMap = googleMap;
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(korea, 7));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(korea, 7));
 
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(@NonNull Marker marker) {
                 Log.d("이벤트확인", marker.getTitle());
-                mMap.moveCamera(CameraUpdateFactory.zoomTo(15));
+                mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
+                tv_name.setText(marker.getTitle().toString());
+                tv_adr.setText(marker.getSnippet().toString());
                 return false;
             }
         });
@@ -119,6 +125,7 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
                                 name = new String[jsonArray.length()];
                                 location = new String[jsonArray.length()];
                                 gps = new String[jsonArray.length()];
+                                loc = new LatLng[jsonArray.length()];
 
                                 for (int i = 0; i < jsonArray.length(); i++) {
 
@@ -154,7 +161,7 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
     public void onClick(View view) {
 
         if (view.getId() == R.id.btn_current) {
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(gwangju, 15)); // 차후 현재위치로 변경필요
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(gwangju, 15)); // 차후 현재위치로 변경필요
             Log.d("응답성공", "마커 표시 성공!");
 
             for (int i = 0; i < name.length; i++) {
@@ -162,6 +169,7 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
                 float a1 = Float.parseFloat(gpsS[0]);
                 float a2 = Float.parseFloat(gpsS[1]);
                 MarkerOptions markerOptions = new MarkerOptions();
+                loc[i] = new LatLng(a1, a2);
 
                 markerOptions
                         .position(new LatLng(a1, a2))
@@ -172,13 +180,38 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
 
             }
         }else if (view.getId() == R.id.btn_pre){
-            tv_name.setText(name[cnt]);
-            cnt--;
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(gwangju, 15));
+            if (cnt > 0){
+                cnt--;
+                Log.d("cnt", ""+cnt);
+                tv_name.setText(name[cnt]);
+                tv_adr.setText(location[cnt]);
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc[cnt], 15));
+
+
+            }else if (cnt == 0){
+                cnt = name.length -1;
+                Log.d("cnt", ""+cnt);
+                tv_name.setText(name[cnt]);
+                tv_adr.setText(location[cnt]);
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc[cnt], 15));
+            }
+
         }else if (view.getId() == R.id.btn_next){
-            tv_name.setText(name[cnt]);
-            cnt++;
-            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(gwangju, 15));
+            if (cnt < name.length -1){
+                cnt++;
+                Log.d("cnt", ""+cnt);
+                tv_name.setText(name[cnt]);
+                tv_adr.setText(location[cnt]);
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc[cnt], 15));
+
+            }else if (cnt == name.length -1){
+                cnt = 0;
+                Log.d("cnt", ""+cnt);
+                tv_name.setText(name[cnt]);
+                tv_adr.setText(location[cnt]);
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc[cnt], 15));
+            }
+
         }
 //        } else if (view.getId() == R.id.btn_location) {
 //            LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
@@ -197,7 +230,7 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
 //            double cur_lon = loc_Current.getLongitude();
 //            LatLng current = new LatLng(cur_lat, cur_lon);
 //            Log.d("응답성공", " " + cur_lat + " " + cur_lon);
-//            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(current, 10));
+//            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(current, 10));
 //
 //        }
 
