@@ -3,6 +3,7 @@ package com.weseekapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -52,7 +53,12 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.page2:
                         Log.d("WeSeek", "onNavigationItemSelected: move to page2Activity");
-                        fragmentManager.beginTransaction().replace(R.id.frame, page2Activity).commit();
+//                        fragmentManager.beginTransaction().replace(R.id.frame, page2Activity).commit();
+                        // Test Code from : https://kumgo1d.tistory.com/29
+                        FragmentTransaction ft = fragmentManager.beginTransaction();
+                        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+                        ft.replace(R.id.frame, page2Activity);
+                        ft.commit();
                         break;
                     case R.id.page3:
                         Log.d("WeSeek", "onNavigationItemSelected: move to page3Activity");
