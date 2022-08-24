@@ -9,7 +9,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="300dp"
+        android:layout_height="match_parent"
+        android:layout_weight="0.8"
         android:orientation="vertical">
 
         <TextView
@@ -26,7 +27,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1.1"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -45,7 +47,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1.1"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -64,7 +67,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
         android:gravity="center|right"
         android:orientation="vertical"
         android:paddingRight="30dp">
@@ -74,5 +78,12 @@
             android:layout_width="65dp"
             android:layout_height="65dp"
             app:srcCompat="@drawable/ic_action_joinin" />
+
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"></LinearLayout>
 </LinearLayout>
