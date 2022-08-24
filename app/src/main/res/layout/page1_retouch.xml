@@ -16,16 +16,25 @@
 
         <LinearLayout
             android:layout_width="match_parent"
+<<<<<<< HEAD
             android:layout_height="match_parent"
             android:layout_weight="1"
+=======
+            android:layout_height="180dp"
+>>>>>>> master
             android:orientation="vertical"></LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
+<<<<<<< HEAD
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:paddingLeft="15dp"
             android:paddingTop="10dp"
+=======
+            android:layout_height="180dp"
+            android:paddingLeft="15dp"
+>>>>>>> master
             android:paddingRight="15dp">
 
             <LinearLayout
@@ -36,7 +45,11 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
+<<<<<<< HEAD
                     android:layout_height="wrap_content"
+=======
+                    android:layout_height="140dp"
+>>>>>>> master
                     android:gravity="center"
                     android:orientation="vertical">
 
@@ -71,7 +84,11 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
+<<<<<<< HEAD
                     android:layout_height="wrap_content"
+=======
+                    android:layout_height="140dp"
+>>>>>>> master
                     android:gravity="center"
                     android:orientation="vertical">
 
@@ -101,10 +118,15 @@
 
         <LinearLayout
             android:layout_width="match_parent"
+<<<<<<< HEAD
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:paddingLeft="15dp"
             android:paddingTop="15dp"
+=======
+            android:layout_height="180dp"
+            android:paddingLeft="15dp"
+>>>>>>> master
             android:paddingRight="15dp">
 
             <LinearLayout
@@ -115,7 +137,11 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
+<<<<<<< HEAD
                     android:layout_height="wrap_content"
+=======
+                    android:layout_height="140dp"
+>>>>>>> master
                     android:gravity="center"
                     android:orientation="vertical">
 
@@ -150,7 +176,11 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
+<<<<<<< HEAD
                     android:layout_height="wrap_content"
+=======
+                    android:layout_height="140dp"
+>>>>>>> master
                     android:gravity="center"
                     android:orientation="vertical">
 
@@ -180,14 +210,21 @@
 
         <LinearLayout
             android:layout_width="match_parent"
+<<<<<<< HEAD
             android:layout_height="match_parent"
             android:layout_weight="1"
+=======
+            android:layout_height="180dp"
+>>>>>>> master
             android:orientation="vertical"></LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+<<<<<<< HEAD
             android:layout_weight="1"
+=======
+>>>>>>> master
             android:orientation="vertical"></LinearLayout>
     </LinearLayout>
 

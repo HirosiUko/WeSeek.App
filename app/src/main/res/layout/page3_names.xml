@@ -29,7 +29,7 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:id="@+id/imageView3"
+                        android:id="@+id/img_star1"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -44,12 +44,12 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:id="@+id/imageView4"
+                        android:id="@+id/img_star2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:paddingTop="10dp"
-                        app:srcCompat="@drawable/ic_action_star1" />
+                        app:srcCompat="@drawable/ic_action_star0" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -59,7 +59,7 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:id="@+id/imageView5"
+                        android:id="@+id/img_star3"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -91,7 +91,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:id="@+id/imageView2"
+                    android:id="@+id/img_bookmark"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:paddingLeft="3dp"
