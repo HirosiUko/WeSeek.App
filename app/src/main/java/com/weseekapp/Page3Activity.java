@@ -66,8 +66,6 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback {
 
     private int cnt = 0;
 
-//    final String URL = "https://dokkydokky.herokuapp.com/getAllData";
-//    RequestQueue requestQueue;
 
     String[] name; // 업소명
     String[] location; // 소재지
@@ -101,16 +99,10 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback {
         img_star3 = view.findViewById(R.id.img_star3);
 
 
-        //btn_current.setOnClickListener(this);
-        //btn_location.setOnClickListener(this);
-        //btn_pre.setOnClickListener(this);
-        //btn_next.setOnClickListener(this);
 
         mapView = view.findViewById(R.id.mapview);
         mapView.onCreate(savedInstanceState);
 
-
-        // mapView.getMapAsync(this);
         handler.post(runable);
 
 
