@@ -31,14 +31,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Page3Activity extends Fragment implements OnMapReadyCallback, View.OnClickListener {
+public class Page3Activity extends Fragment implements OnMapReadyCallback {
     @Nullable
 
     private GoogleMap mMap;
     private MapView mapView;
     private TextView tv_name;
     private TextView tv_adr;
-    private ImageView btn_pre, btn_next;
+
     private int cnt = 0;
 
     final String URL = "https://dokkydokky.herokuapp.com/getAllData";
@@ -67,15 +67,7 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
 
         tv_name = view.findViewById(R.id.tv_name);
         tv_adr = view.findViewById(R.id.tv_adr);
-        btn_current = view.findViewById(R.id.btn_current);
-        //btn_location = view.findViewById(R.id.btn_location);
-        btn_pre = view.findViewById(R.id.btn_pre);
-        btn_next = view.findViewById(R.id.btn_next);
 
-        btn_current.setOnClickListener(this);
-        //btn_location.setOnClickListener(this);
-        btn_pre.setOnClickListener(this);
-        btn_next.setOnClickListener(this);
 
         mapView = view.findViewById(R.id.mapview);
         mapView.onCreate(savedInstanceState);
@@ -157,62 +149,7 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
         }
     }
 
-    @Override
-    public void onClick(View view) {
 
-        if (view.getId() == R.id.btn_current) {
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(gwangju, 15)); // 차후 현재위치로 변경필요
-            Log.d("응답성공", "마커 표시 성공!");
-
-            for (int i = 0; i < name.length; i++) {
-                gpsS = gps[i].split(",", 2);
-                float a1 = Float.parseFloat(gpsS[0]);
-                float a2 = Float.parseFloat(gpsS[1]);
-                MarkerOptions markerOptions = new MarkerOptions();
-                loc[i] = new LatLng(a1, a2);
-
-                markerOptions
-                        .position(new LatLng(a1, a2))
-                        .title(name[i])
-                        .snippet(location[i]);
-
-                mMap.addMarker(markerOptions);
-
-            }
-        }else if (view.getId() == R.id.btn_pre){
-            if (cnt > 0){
-                cnt--;
-                Log.d("cnt", ""+cnt);
-                tv_name.setText(name[cnt]);
-                tv_adr.setText(location[cnt]);
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc[cnt], 15));
-
-
-            }else if (cnt == 0){
-                cnt = name.length -1;
-                Log.d("cnt", ""+cnt);
-                tv_name.setText(name[cnt]);
-                tv_adr.setText(location[cnt]);
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc[cnt], 15));
-            }
-
-        }else if (view.getId() == R.id.btn_next){
-            if (cnt < name.length -1){
-                cnt++;
-                Log.d("cnt", ""+cnt);
-                tv_name.setText(name[cnt]);
-                tv_adr.setText(location[cnt]);
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc[cnt], 15));
-
-            }else if (cnt == name.length -1){
-                cnt = 0;
-                Log.d("cnt", ""+cnt);
-                tv_name.setText(name[cnt]);
-                tv_adr.setText(location[cnt]);
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc[cnt], 15));
-            }
-
-        }
 //        } else if (view.getId() == R.id.btn_location) {
 //            LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
 //            if (ActivityCompat.checkSelfPermission(view.getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(view.getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -234,7 +171,7 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
 //
 //        }
 
-    }
+
 
     @Override
     public void onResume() {

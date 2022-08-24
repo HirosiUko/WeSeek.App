@@ -16,8 +16,9 @@
             android:layout_weight="1">
 
             <LinearLayout
-                android:layout_width="80dp"
+                android:layout_width="118dp"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:orientation="horizontal"
                 android:paddingLeft="8dp">
 
@@ -33,7 +34,6 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:paddingTop="10dp"
-                        android:rotation="-10"
                         app:srcCompat="@drawable/ic_action_star1" />
                 </LinearLayout>
 
@@ -64,7 +64,6 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:paddingTop="10dp"
-                        android:rotation="10"
                         app:srcCompat="@drawable/ic_action_star0" />
                 </LinearLayout>
             </LinearLayout>
@@ -72,11 +71,12 @@
             <LinearLayout
                 android:layout_width="250dp"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/tv_name"
-                    android:layout_width="match_parent"
+                    android:layout_width="222dp"
                     android:layout_height="match_parent"
                     android:gravity="bottom|center"
                     android:text="현재 위치 확인"
@@ -85,8 +85,9 @@
             </LinearLayout>
 
             <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="87dp"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:orientation="horizontal">
 
                 <ImageView
