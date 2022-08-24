@@ -32,6 +32,15 @@
             android:value="AIzaSyCwFm0xeZDRdP7WB714DiIEDiZRchnfqBg" />
 
         <activity
+            android:name=".PageDetail"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
             android:name=".FirstMain"
             android:exported="false" />
         <activity
@@ -44,12 +53,8 @@
 
         <activity
             android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:exported="false">
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 
