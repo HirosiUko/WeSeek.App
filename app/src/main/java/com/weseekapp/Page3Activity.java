@@ -81,8 +81,6 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback {
     View view;
 
 
-    private Button btn_current;
-
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -139,7 +137,6 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback {
 
     private void initContents()
     {
-
         //ViewPager2
         mPager = view.findViewById(R.id.mPager);
         //Adapter
@@ -183,8 +180,6 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback {
         });
     }
 
-
-
     private static void moveMap(StoreInfo storeInfo)
     {
         Log.d("호준", "moveMap: "+storeInfo.toString());
@@ -196,7 +191,7 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback {
                 .snippet(storeInfo.address + " : "+storeInfo.star_of_cleanliness)).showInfoWindow();
         // Move the camera to the map coordinates and zoom in closer.
         mMap.moveCamera(CameraUpdateFactory.newLatLng(loc));
-        mMap.moveCamera(CameraUpdateFactory.zoomTo(15));
+        mMap.moveCamera(CameraUpdateFactory.zoomTo(19));
     }
 
     private void sendRequest() {
@@ -270,7 +265,6 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback {
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         mMap = googleMap;
-
     }
 
     public Runnable runable = new Runnable() {
