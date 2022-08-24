@@ -2,12 +2,10 @@ package com.weseekapp;
 
 import android.os.Bundle;
 import android.os.Handler;
-import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,7 +19,6 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.HttpHeaderParser;
@@ -32,7 +29,6 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.json.JSONArray;
@@ -42,7 +38,6 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 import me.relex.circleindicator.CircleIndicator3;
 
@@ -94,11 +89,6 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback {
 
         tv_name = view.findViewById(R.id.tv_name);
         tv_adr = view.findViewById(R.id.tv_adr);
-        img_star1 = view.findViewById(R.id.img_star1);
-        img_star2 = view.findViewById(R.id.img_star2);
-        img_star3 = view.findViewById(R.id.img_star3);
-
-
 
         mapView = view.findViewById(R.id.mapview);
         mapView.onCreate(savedInstanceState);

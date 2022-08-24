@@ -9,12 +9,6 @@
     <uses-permission
         android:name="android.permission.INTERACT_ACROSS_USERS_FULL"
         tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission
-        android:name="android.permission.INTERACT_ACROSS_USERS_FULL"
-        tools:ignore="ProtectedPermissions" />
 
     <application
         android:allowBackup="true"
@@ -27,20 +21,22 @@
         android:theme="@style/Theme.Material3.Light.NoActionBar"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
-        <activity
-            android:name=".Main_log_in"
-            android:exported="false" />
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCwFm0xeZDRdP7WB714DiIEDiZRchnfqBg" />
 
         <activity
-            android:name=".PageDetail"
+            android:name=".Main_log_in"
+            android:exported="false" />
+
+        <activity
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
         <activity
             android:name=".FirstMain"
@@ -54,7 +50,7 @@
             android:value="AIzaSyCwFm0xeZDRdP7WB714DiIEDiZRchnfqBg" />
 
         <activity
-            android:name=".MainActivity"
+            android:name=".PageDetail"
             android:exported="false"></activity>
     </application>
 
