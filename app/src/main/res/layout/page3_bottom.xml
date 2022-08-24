@@ -6,71 +6,28 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
+    <FrameLayout
+        android:id="@+id/framelayout"
         android:layout_width="match_parent"
-        android:layout_height="91dp"
-        android:layout_weight="1"
-        android:orientation="horizontal">
+        android:layout_height="match_parent"
+        android:overScrollMode="never">
 
-        <Button
-            android:id="@+id/btn_current"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="현재위치" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="2">
-
-        <LinearLayout
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/mPager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal">
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:background="#F1C6C6"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:scaleType="fitXY" />
 
-            <ImageButton
-                android:id="@+id/btn_pre"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:backgroundTint="#FFFFFF"
-                app:srcCompat="@drawable/ic_action_left_arrow" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="634dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:paddingLeft="10dp"
-            android:paddingTop="10dp"
-            android:paddingRight="10dp"
-            android:paddingBottom="10dp">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:listitem="@layout/page3_pic" />
-        </LinearLayout>
-
-        <LinearLayout
+        <me.relex.circleindicator.CircleIndicator3
+            android:id="@+id/mIndicator"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal">
-
-            <ImageButton
-                android:id="@+id/btn_next"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:backgroundTint="#FFFFFF"
-                app:srcCompat="@drawable/ic_action_right_arrow" />
-        </LinearLayout>
-    </LinearLayout>
-
+            android:layout_height="48dp"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="5dp" />
+    </FrameLayout>
 </LinearLayout>

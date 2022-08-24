@@ -1,6 +1,8 @@
 package com.weseekapp;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,11 +14,17 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
+import androidx.viewpager2.widget.ViewPager2;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
+import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -31,27 +39,46 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Page3Activity extends Fragment implements OnMapReadyCallback, View.OnClickListener {
+import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+
+import me.relex.circleindicator.CircleIndicator3;
+
+public class Page3Activity extends Fragment implements OnMapReadyCallback {
     @Nullable
 
-    private GoogleMap mMap;
+    private static GoogleMap mMap;
     private MapView mapView;
     private TextView tv_name;
     private TextView tv_adr;
+    private ImageView img_star1, img_star2, img_star3;
     private ImageView btn_pre, btn_next;
+
+
+    private ViewPager2 mPager;
+    private FragmentStateAdapter pagerAdapter;
+    private int num_page = 10;
+    private CircleIndicator3 mIndicator;
+    private Handler handler; // 추가
+    private Boolean isInitial;
+
     private int cnt = 0;
 
-    final String URL = "https://dokkydokky.herokuapp.com/getAllData";
-    RequestQueue requestQueue;
+//    final String URL = "https://dokkydokky.herokuapp.com/getAllData";
+//    RequestQueue requestQueue;
 
     String[] name; // 업소명
     String[] location; // 소재지
     String[] gps; // GPS
     String[] gpsS;
+    String [] star; // 별 갯수
     LatLng[] loc; // 위치정보
 
     LatLng korea = new LatLng(36.4894573, 127.7294827);
     LatLng gwangju = new LatLng(35.1398252, 126.8109661);
+    View view;
 
 
     private Button btn_current;
@@ -59,182 +86,207 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.page3, container, false);
+        view = inflater.inflate(R.layout.page3, container, false);
 
-        if (requestQueue == null) {
-            requestQueue = Volley.newRequestQueue(view.getContext());
+        isInitial = true;
+        handler = new Handler();
+
+        if (StoreInfoHandler.requestQueue == null) {
+            StoreInfoHandler.requestQueue = Volley.newRequestQueue(getContext());
         }
+        sendRequest();
 
         tv_name = view.findViewById(R.id.tv_name);
         tv_adr = view.findViewById(R.id.tv_adr);
-        btn_current = view.findViewById(R.id.btn_current);
-        //btn_location = view.findViewById(R.id.btn_location);
-        btn_pre = view.findViewById(R.id.btn_pre);
-        btn_next = view.findViewById(R.id.btn_next);
+        img_star1 = view.findViewById(R.id.img_star1);
+        img_star2 = view.findViewById(R.id.img_star2);
+        img_star3 = view.findViewById(R.id.img_star3);
 
-        btn_current.setOnClickListener(this);
+
+        //btn_current.setOnClickListener(this);
         //btn_location.setOnClickListener(this);
-        btn_pre.setOnClickListener(this);
-        btn_next.setOnClickListener(this);
+        //btn_pre.setOnClickListener(this);
+        //btn_next.setOnClickListener(this);
 
         mapView = view.findViewById(R.id.mapview);
         mapView.onCreate(savedInstanceState);
 
-        dbSet thread1 = new dbSet();
-        thread1.start();
 
-        mapView.getMapAsync(this);
+        // mapView.getMapAsync(this);
+        handler.post(runable);
+
+
 
         return view;
+    }
+
+    private void initMap()
+    {
+        mapView.getMapAsync(new OnMapReadyCallback() {
+            @Override
+            public void onMapReady(@NonNull GoogleMap googleMap) {
+                mMap = googleMap;
+                // Set the map coordinates
+                StoreInfoHandler storeInfoHandler = StoreInfoHandler.getInstance();
+                StoreInfo storeInfo = storeInfoHandler.getStore_list().get(0);
+                moveMap(storeInfo);
+                googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+                googleMap.setTrafficEnabled(false);
+                googleMap.setBuildingsEnabled(true);
+            }
+        });
+    }
+
+    private void initContents()
+    {
+
+        //ViewPager2
+        mPager = view.findViewById(R.id.mPager);
+        //Adapter
+        pagerAdapter = new StoreViewPaperAdapter(this, num_page);
+        mPager.setAdapter(pagerAdapter);
+        //Indicator
+        mIndicator = view.findViewById(R.id.mIndicator);
+        mIndicator.setViewPager(mPager);
+        mIndicator.createIndicators(num_page,0);
+        //ViewPager Setting
+        mPager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
+
+        mPager.setCurrentItem(1); //시작 지점
+        mPager.setOffscreenPageLimit(StoreInfoHandler.getInstance().getStore_list().size()); //최대 이미지 수
+
+        mPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+                super.onPageScrollStateChanged(state);
+            }
+
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels);
+                if (positionOffsetPixels == 0) {
+                    mPager.setCurrentItem(position);
+                }
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                mIndicator.animatePageSelected(position%num_page);
+                Log.d("호준", String.format("onPageSelected: %d", position));
+                if(isInitial != true){
+                    moveMap(StoreInfoHandler.getInstance().getStore_list().get(position));
+                }
+                isInitial = false;
+            }
+        });
+    }
+
+
+
+    private static void moveMap(StoreInfo storeInfo)
+    {
+        Log.d("호준", "moveMap: "+storeInfo.toString());
+        LatLng loc = new LatLng(storeInfo.latitude, storeInfo.longitude);
+        //  Add a marker on the map coordinates.
+        mMap.addMarker(new MarkerOptions()
+                .position(loc)
+                .title(storeInfo.storeName)
+                .snippet(storeInfo.address + " : "+storeInfo.star_of_cleanliness)).showInfoWindow();
+        // Move the camera to the map coordinates and zoom in closer.
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(loc));
+        mMap.moveCamera(CameraUpdateFactory.zoomTo(15));
+    }
+
+    private void sendRequest() {
+        // 서버에 요청할 주소
+        String url = "https://dokkydokky.herokuapp.com/getStoreByGPS?lat=35.1465533&lon=126.9222613&dis=1500";
+
+        // 요청 문자열 저장
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            // 응답데이터를 받아오는 곳
+            @Override
+            public void onResponse(String response) {
+                Log.v("resultValue",response);
+                try {
+                    JSONArray jsonArray = new JSONArray (response);
+                    for(int i=0; i< jsonArray.length(); i++)
+                    {
+                        JSONObject jsonObject = (JSONObject) jsonArray.opt(i);
+
+                        String[] strGps = jsonObject.optString("GPS").split(",");
+                        StoreInfo store = new StoreInfo(
+                                jsonObject.optString("업소명"),
+                                Float.parseFloat(strGps[0]),
+                                Float.parseFloat(strGps[1]),
+                                jsonObject.optString("소재지"),
+                                jsonObject.optString("별점")
+                        );
+                        StoreInfoHandler storeInfoHandler = StoreInfoHandler.getInstance();
+                        storeInfoHandler.addStore(store);
+                        Log.d("호준", "onResponse: "+ store.toString());
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            // 서버와의 연동 에러시 출력
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        })
+        {
+            @Override //response를 UTF8로 변경해주는 소스코드
+            protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                try {
+                    String utf8String = new String(response.data, "UTF-8");
+                    return Response.success(utf8String, HttpHeaderParser.parseCacheHeaders(response));
+                } catch (UnsupportedEncodingException e) {
+                    // log error
+                    return Response.error(new ParseError(e));
+                } catch (Exception e) {
+                    // log error
+                    return Response.error(new ParseError(e));
+                }
+            }
+            // 보낼 데이터를 저장하는 곳
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+////                BreakIterator edt_id;
+//                params.put("id",edt_join_id.getText().toString());
+//                params.put("pw",edt_join_pw.getText().toString());
+//                params.put("name", edt_join_name.getText().toString());
+                return params;
+            }
+        };
+        stringRequest.setTag("ai");
+        StoreInfoHandler.requestQueue.add(stringRequest);
     }
 
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         mMap = googleMap;
 
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(korea, 7));
-
-        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(@NonNull Marker marker) {
-                Log.d("이벤트확인", marker.getTitle());
-                mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
-                tv_name.setText(marker.getTitle().toString());
-                tv_adr.setText(marker.getSnippet().toString());
-                return false;
-            }
-        });
-
     }
 
-    public class dbSet extends Thread{
+    public Runnable runable = new Runnable() {
         @Override
         public void run() {
-            StringRequest request = new StringRequest(
-                    Request.Method.GET,
-                    URL,
-                    new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-                            // 응답 성공 시
-                            Log.d("응답성공", response);
-                            String result = "";
-                            try {
-                                JSONArray jsonArray = new JSONArray(response);
-
-                                name = new String[jsonArray.length()];
-                                location = new String[jsonArray.length()];
-                                gps = new String[jsonArray.length()];
-                                loc = new LatLng[jsonArray.length()];
-
-                                for (int i = 0; i < jsonArray.length(); i++) {
-
-                                    JSONObject jsonObject = (JSONObject) jsonArray.get(i);
-
-                                    name[i] = jsonObject.getString("업소명");
-                                    location[i] = jsonObject.getString("소재지");
-                                    gps[i] = jsonObject.getString("GPS");
-
-                                }
-
-                                Log.d("응답성공", "DB 로드 성공!");
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-
-                        }
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            // 응답 실패 시
-                            Log.d("응답", "응답 실패");
-                        }
-                    }
-            );
-
-            requestQueue.add(request);
+            StoreInfoHandler storeInfoHandler = StoreInfoHandler.getInstance();
+            if(storeInfoHandler.getCurrent_state() == StoreInfoHandler.State.NORMAL){
+                initMap();
+                initContents();
+            }else{
+                handler.postDelayed(this, 500);
+            }
         }
-    }
-
-    @Override
-    public void onClick(View view) {
-
-        if (view.getId() == R.id.btn_current) {
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(gwangju, 15)); // 차후 현재위치로 변경필요
-            Log.d("응답성공", "마커 표시 성공!");
-
-            for (int i = 0; i < name.length; i++) {
-                gpsS = gps[i].split(",", 2);
-                float a1 = Float.parseFloat(gpsS[0]);
-                float a2 = Float.parseFloat(gpsS[1]);
-                MarkerOptions markerOptions = new MarkerOptions();
-                loc[i] = new LatLng(a1, a2);
-
-                markerOptions
-                        .position(new LatLng(a1, a2))
-                        .title(name[i])
-                        .snippet(location[i]);
-
-                mMap.addMarker(markerOptions);
-
-            }
-        }else if (view.getId() == R.id.btn_pre){
-            if (cnt > 0){
-                cnt--;
-                Log.d("cnt", ""+cnt);
-                tv_name.setText(name[cnt]);
-                tv_adr.setText(location[cnt]);
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc[cnt], 15));
+    };
 
 
-            }else if (cnt == 0){
-                cnt = name.length -1;
-                Log.d("cnt", ""+cnt);
-                tv_name.setText(name[cnt]);
-                tv_adr.setText(location[cnt]);
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc[cnt], 15));
-            }
-
-        }else if (view.getId() == R.id.btn_next){
-            if (cnt < name.length -1){
-                cnt++;
-                Log.d("cnt", ""+cnt);
-                tv_name.setText(name[cnt]);
-                tv_adr.setText(location[cnt]);
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc[cnt], 15));
-
-            }else if (cnt == name.length -1){
-                cnt = 0;
-                Log.d("cnt", ""+cnt);
-                tv_name.setText(name[cnt]);
-                tv_adr.setText(location[cnt]);
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc[cnt], 15));
-            }
-
-        }
-//        } else if (view.getId() == R.id.btn_location) {
-//            LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
-//            if (ActivityCompat.checkSelfPermission(view.getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(view.getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//                // TODO: Consider calling
-//                //    ActivityCompat#requestPermissions
-//                // here to request the missing permissions, and then overriding
-//                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-//                //                                          int[] grantResults)
-//                // to handle the case where the user grants the permission. See the documentation
-//                // for ActivityCompat#requestPermissions for more details.
-//                return;
-//            }
-//            Location loc_Current = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-//            double cur_lat = loc_Current.getLatitude();
-//            double cur_lon = loc_Current.getLongitude();
-//            LatLng current = new LatLng(cur_lat, cur_lon);
-//            Log.d("응답성공", " " + cur_lat + " " + cur_lon);
-//            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(current, 10));
-//
-//        }
-
-    }
 
     @Override
     public void onResume() {
