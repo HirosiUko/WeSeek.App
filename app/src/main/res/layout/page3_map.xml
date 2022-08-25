@@ -13,15 +13,6 @@
         <com.google.android.gms.maps.MapView
             android:id="@+id/mapview"
             android:layout_width="match_parent"
-            android:layout_height="270dp"
-            app:cameraTilt="30"
-            app:cameraZoom="20"
-            app:mapType="normal"
-            app:uiCompass="true"
-            app:uiRotateGestures="true"
-            app:uiScrollGestures="true"
-            app:uiTiltGestures="true"
-            app:uiZoomControls="true"
-            app:uiZoomGestures="true"/>
+            android:layout_height="match_parent" />
     </LinearLayout>
 </LinearLayout>
