@@ -1,5 +1,10 @@
 package com.weseekapp;
 
+import android.Manifest;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -11,6 +16,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
@@ -49,14 +55,12 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback {
     private TextView tv_name;
     private TextView tv_adr;
     private ImageView img_star1, img_star2, img_star3;
-    private ImageView btn_pre, btn_next;
-
 
     private ViewPager2 mPager;
     private FragmentStateAdapter pagerAdapter;
     private int num_page = 10;
     private CircleIndicator3 mIndicator;
-    private Handler handler; // 추가
+    private Handler handler;
     private Boolean isInitial;
 
     private int cnt = 0;
@@ -65,14 +69,10 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback {
     String[] name; // 업소명
     String[] location; // 소재지
     String[] gps; // GPS
-    String[] gpsS;
-    String [] star; // 별 갯수
+    String[] star; // 별 갯수
     LatLng[] loc; // 위치정보
 
-    LatLng korea = new LatLng(36.4894573, 127.7294827);
-    LatLng gwangju = new LatLng(35.1398252, 126.8109661);
     View view;
-
 
 
     @Override
@@ -96,12 +96,10 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback {
         handler.post(runable);
 
 
-
         return view;
     }
 
-    private void initMap()
-    {
+    private void initMap() {
         mapView.getMapAsync(new OnMapReadyCallback() {
             @Override
             public void onMapReady(@NonNull GoogleMap googleMap) {
@@ -117,8 +115,7 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback {
         });
     }
 
-    private void initContents()
-    {
+    private void initContents() {
         //ViewPager2
         mPager = view.findViewById(R.id.mPager);
         //Adapter
@@ -127,7 +124,7 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback {
         //Indicator
         mIndicator = view.findViewById(R.id.mIndicator);
         mIndicator.setViewPager(mPager);
-        mIndicator.createIndicators(num_page,0);
+        mIndicator.createIndicators(num_page, 0);
         //ViewPager Setting
         mPager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL);
 
@@ -152,9 +149,9 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback {
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
-                mIndicator.animatePageSelected(position%num_page);
+                mIndicator.animatePageSelected(position % num_page);
                 Log.d("호준", String.format("onPageSelected: %d", position));
-                if(isInitial != true){
+                if (isInitial != true) {
                     moveMap(StoreInfoHandler.getInstance().getStore_list().get(position));
                 }
                 isInitial = false;
@@ -162,15 +159,15 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback {
         });
     }
 
-    private static void moveMap(StoreInfo storeInfo)
+    private static void moveMap(StoreInfo storeInfo) // 초기화면 이동 + 마커 세트
     {
-        Log.d("호준", "moveMap: "+storeInfo.toString());
+        Log.d("호준", "moveMap: " + storeInfo.toString());
         LatLng loc = new LatLng(storeInfo.latitude, storeInfo.longitude);
         //  Add a marker on the map coordinates.
         mMap.addMarker(new MarkerOptions()
                 .position(loc)
                 .title(storeInfo.storeName)
-                .snippet(storeInfo.address + " : "+storeInfo.star_of_cleanliness)).showInfoWindow();
+                .snippet(storeInfo.address + " : " + storeInfo.star_of_cleanliness)).showInfoWindow();
         // Move the camera to the map coordinates and zoom in closer.
         mMap.moveCamera(CameraUpdateFactory.newLatLng(loc));
         mMap.moveCamera(CameraUpdateFactory.zoomTo(19));
@@ -178,7 +175,18 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback {
 
     private void sendRequest() {
         // 서버에 요청할 주소
-        String url = "https://dokkydokky.herokuapp.com/getStoreByGPS?lat=35.1465533&lon=126.9222613&dis=1500";
+
+        LocationManager locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+        if (ActivityCompat.checkSelfPermission(view.getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(view.getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            Log.d("gps", "onCreate: 퍼미션에러");
+            return;
+        }
+        Location loc_Current = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
+        double curLat = loc_Current.getLatitude();
+        double curLon = loc_Current.getLongitude();
+        Log.d("gps", ""+curLat + "," + curLon);
+        String url = "https://dokkydokky.herokuapp.com/getStoreByGPS?lat=" + curLat + "&lon=" + curLon + "&dis=1500";
 
         // 요청 문자열 저장
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {

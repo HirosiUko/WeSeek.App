@@ -9,7 +9,7 @@
     <TextView
         android:id="@+id/tv_contents"
         android:layout_width="match_parent"
-        android:layout_height="270dp"
+        android:layout_height="match_parent"
         android:background="#FFCDD2"
         android:gravity="center"
         android:text="1"
