@@ -6,26 +6,57 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <FrameLayout
-        android:id="@+id/framelayout"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:overScrollMode="never">
+        android:layout_weight="2">
 
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/mPager"
+        <LinearLayout
+            android:layout_width="634dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:paddingLeft="10dp"
+            android:paddingTop="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:listitem="@layout/page3_bottom_info" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/btn_pre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="#FFFFFF"
+            app:srcCompat="@drawable/ic_action_left_arrow" />
+
+        <Button
+            android:id="@+id/btn_current"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:background="@color/white"
-            android:clipChildren="false"
-            android:clipToPadding="false"
-            android:scaleType="fitXY" />
+            android:layout_weight="1"
+            android:text="현재위치" />
 
-        <me.relex.circleindicator.CircleIndicator3
-            android:id="@+id/mIndicator"
+        <ImageButton
+            android:id="@+id/btn_next"
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:layout_gravity="bottom" />
-    </FrameLayout>
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:backgroundTint="#FFFFFF"
+            app:srcCompat="@drawable/ic_action_right_arrow" />
+    </LinearLayout>
+
 </LinearLayout>

@@ -2,13 +2,20 @@ package com.weseekapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
@@ -23,6 +30,10 @@ public class MainActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
     private BottomNavigationView navi;
 
+    private String url;
+
+    private FusedLocationProviderClient fusedLocationProviderClient;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +46,34 @@ public class MainActivity extends AppCompatActivity {
         page4Activity = new Page4Activity();
         page5Activity = new Page5Activity();
 
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            Log.d("gps", "onCreate: 퍼미션에러");
+            return;
+        }
+        fusedLocationProviderClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
+            @Override
+            public void onSuccess(Location location) {
+                if (location != null){
+                    double curLat = location.getLatitude();
+                    double curLon = location.getLongitude();
+                    Log.d("나당", ""+curLat + "," + curLon);
+                    url = "https://dokkydokky.herokuapp.com/getStoreByGPS?lat=" + curLat + "&lon=" + curLon + "&dis=1500";
+                    Log.d("나당", url);
+                } else {
+                    Log.d("나당", "GPS못받음");
+                }
+            }
+        });
+
+        // 요청 문자열 저장
+        if (url != null) {
+            Log.d("나당", url);
+        }else{
+            Log.d("나당", "null값");
+        }
+
         fragmentManager = getSupportFragmentManager();
         // 처음시작 Page는 Page1로 한다.
         fragmentManager.beginTransaction().replace(R.id.frame, page1Activity).commit();
@@ -45,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
         navi.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
                 switch(item.getItemId())
                 {
                     case R.id.page1:
@@ -78,5 +118,6 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+
     }
 }
