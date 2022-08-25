@@ -74,13 +74,47 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1">
 
-                        <TextView
-                            android:id="@+id/textView25"
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:gravity="center|top"
-                            android:paddingTop="5dp"
-                            android:text="리뷰" />
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/imageView10"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                app:srcCompat="@drawable/ic_action_star1" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/imageView11"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                app:srcCompat="@drawable/ic_action_star2" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/imageView16"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                app:srcCompat="@drawable/ic_action_star0" />
+                        </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
 
@@ -116,7 +150,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center|top"
-                            android:paddingTop="5dp"
                             android:text="250" />
                     </LinearLayout>
                 </LinearLayout>
@@ -153,7 +186,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center|top"
-                            android:paddingTop="5dp"
                             android:text="15" />
                     </LinearLayout>
                 </LinearLayout>
