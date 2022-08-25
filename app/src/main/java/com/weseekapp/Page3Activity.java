@@ -35,6 +35,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import org.json.JSONArray;
@@ -52,9 +53,6 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback {
 
     private static GoogleMap mMap;
     private MapView mapView;
-    private TextView tv_name;
-    private TextView tv_adr;
-    private ImageView img_star1, img_star2, img_star3;
 
     private ViewPager2 mPager;
     private FragmentStateAdapter pagerAdapter;
@@ -66,11 +64,11 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback {
     private int cnt = 0;
 
 
-    String[] name; // 업소명
-    String[] location; // 소재지
-    String[] gps; // GPS
-    String[] star; // 별 갯수
-    LatLng[] loc; // 위치정보
+//    String[] name; // 업소명
+//    String[] location; // 소재지
+//    String[] gps; // GPS
+//    String[] star; // 별 갯수
+//    LatLng[] loc; // 위치정보
 
     View view;
 
@@ -87,8 +85,6 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback {
         }
         sendRequest();
 
-        tv_name = view.findViewById(R.id.tv_name);
-        tv_adr = view.findViewById(R.id.tv_adr);
 
         mapView = view.findViewById(R.id.mapview);
         mapView.onCreate(savedInstanceState);
@@ -108,9 +104,17 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback {
                 StoreInfoHandler storeInfoHandler = StoreInfoHandler.getInstance();
                 StoreInfo storeInfo = storeInfoHandler.getStore_list().get(0);
                 moveMap(storeInfo);
-                googleMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
-                googleMap.setTrafficEnabled(false);
-                googleMap.setBuildingsEnabled(true);
+                mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
+                mMap.setTrafficEnabled(false);
+                mMap.setBuildingsEnabled(true);
+                mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                    @Override
+                    public boolean onMarkerClick(@NonNull Marker marker) {
+                        Log.d("마커클릭", "onMarkerClick: ");
+                        mMap.animateCamera(CameraUpdateFactory.zoomTo(19)); // 도움필요
+                        return false;
+                    }
+                });
             }
         });
     }
@@ -159,7 +163,7 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback {
         });
     }
 
-    private static void moveMap(StoreInfo storeInfo) // 초기화면 이동 + 마커 세트
+    private static void moveMap(StoreInfo storeInfo) // 화면 이동 + 마커 세트
     {
         Log.d("호준", "moveMap: " + storeInfo.toString());
         LatLng loc = new LatLng(storeInfo.latitude, storeInfo.longitude);
@@ -169,8 +173,7 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback {
                 .title(storeInfo.storeName)
                 .snippet(storeInfo.address + " : " + storeInfo.star_of_cleanliness)).showInfoWindow();
         // Move the camera to the map coordinates and zoom in closer.
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(loc));
-        mMap.moveCamera(CameraUpdateFactory.zoomTo(19));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc, 19));
     }
 
     private void sendRequest() {

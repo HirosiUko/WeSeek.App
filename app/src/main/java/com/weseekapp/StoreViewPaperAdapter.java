@@ -21,7 +21,7 @@ public class StoreViewPaperAdapter extends FragmentStateAdapter {
         StoreInfoHandler storeInfoHandler = StoreInfoHandler.getInstance();
         StoreInfo store = storeInfoHandler.getStore_list().get(position);
         StoreFragment storeFragment = new StoreFragment();
-        storeFragment.setContent(store.toString());
+        storeFragment.setStoreInfo(store);
         return storeFragment;
     }
 
