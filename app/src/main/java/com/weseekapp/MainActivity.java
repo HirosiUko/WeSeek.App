@@ -30,9 +30,6 @@ public class MainActivity extends AppCompatActivity {
     private FragmentManager fragmentManager;
     private BottomNavigationView navi;
 
-    private String url;
-
-    private FusedLocationProviderClient fusedLocationProviderClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,33 +43,6 @@ public class MainActivity extends AppCompatActivity {
         page4Activity = new Page4Activity();
         page5Activity = new Page5Activity();
 
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
-
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            Log.d("gps", "onCreate: 퍼미션에러");
-            return;
-        }
-        fusedLocationProviderClient.getLastLocation().addOnSuccessListener(this, new OnSuccessListener<Location>() {
-            @Override
-            public void onSuccess(Location location) {
-                if (location != null){
-                    double curLat = location.getLatitude();
-                    double curLon = location.getLongitude();
-                    Log.d("나당", ""+curLat + "," + curLon);
-                    url = "https://dokkydokky.herokuapp.com/getStoreByGPS?lat=" + curLat + "&lon=" + curLon + "&dis=1500";
-                    Log.d("나당", url);
-                } else {
-                    Log.d("나당", "GPS못받음");
-                }
-            }
-        });
-
-        // 요청 문자열 저장
-        if (url != null) {
-            Log.d("나당", url);
-        }else{
-            Log.d("나당", "null값");
-        }
 
         fragmentManager = getSupportFragmentManager();
         // 처음시작 Page는 Page1로 한다.
