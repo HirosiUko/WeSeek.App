@@ -25,7 +25,7 @@
                 android:paddingBottom="8dp">
 
                 <ImageView
-                    android:id="@+id/imageView4"
+                    android:id="@+id/page2_img_store"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -50,12 +50,11 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/tv_name"
+                            android:id="@+id/page2_tv_name"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:gravity="center"
-                            android:text="어쩌고 맛집"
                             android:textSize="24sp" />
                     </LinearLayout>
 
@@ -65,16 +64,19 @@
                         android:layout_weight="1"
                         android:orientation="horizontal">
 
-                        <ImageView
-                            android:id="@+id/imageView"
+                        <ToggleButton
+                            android:id="@+id/button_favorite_page2"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:layout_marginLeft="3dp"
-                            android:layout_marginTop="3dp"
-                            android:layout_marginRight="3dp"
-                            android:layout_marginBottom="3dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
                             android:layout_weight="1"
-                            app:srcCompat="@drawable/ic_action_jjim" />
+                            android:background="@drawable/button_favorite_animation"
+                            android:checked="false"
+                            android:text=""
+                            android:textOff=""
+                            android:textOn="" />
+
                     </LinearLayout>
                 </LinearLayout>
 
@@ -85,7 +87,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/textView2"
+                        android:id="@+id/page2_tv_addr"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginStart="5dp"
