@@ -80,12 +80,10 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
 
 
         btn_current = view.findViewById(R.id.btn_current);
-        //btn_location = view.findViewById(R.id.btn_location);
         btn_pre = view.findViewById(R.id.btn_pre);
         btn_next = view.findViewById(R.id.btn_next);
 
         btn_current.setOnClickListener(this);
-        //btn_location.setOnClickListener(this);
         btn_pre.setOnClickListener(this);
         btn_next.setOnClickListener(this);
 
@@ -131,6 +129,7 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
             Location loc_Current = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             curLat = loc_Current.getLatitude();
             curLon = loc_Current.getLongitude();
+            Log.d("위치정보", curLat + " , " + curLon);
 
 
             StringRequest request = new StringRequest(
@@ -187,19 +186,16 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
         }
     }
 
-    private class markerSet extends Thread {
-        @Override
-        public void run() {
-//            tv_name.setText(name[cnt]);
-//            tv_adr.setText(location[cnt]);
-//            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc[cnt], 15));
-        }
+    public void markerset (int cnt){
+        Log.d("cnt", ""+cnt);
+        tv_name.setText(name[cnt]);
+        tv_adr.setText(location[cnt]);
+        tv_star.setText(star[cnt]);
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc[cnt], 15));
     }
 
 
     public void onClick(View view) {
-
-        markerSet markerthread = new markerSet();
 
         if (view.getId() == R.id.btn_current) {
             LocationManager locationManager = (LocationManager) getActivity().getSystemService(getContext().LOCATION_SERVICE);
@@ -230,38 +226,22 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
         }else if (view.getId() == R.id.btn_pre){
             if (cnt > 0){
                 cnt--;
-                Log.d("cnt", ""+cnt);
-                tv_name.setText(name[cnt]);
-                tv_adr.setText(location[cnt]);
-                tv_star.setText(star[cnt]);
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc[cnt], 15));
+                markerset(cnt);
 
 
             }else if (cnt == 0){
                 cnt = name.length -1;
-                Log.d("cnt", ""+cnt);
-                tv_name.setText(name[cnt]);
-                tv_adr.setText(location[cnt]);
-                tv_star.setText(star[cnt]);
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc[cnt], 15));
+                markerset(cnt);
             }
 
         }else if (view.getId() == R.id.btn_next){
             if (cnt < name.length -1){
                 cnt++;
-                Log.d("cnt", ""+cnt);
-                tv_name.setText(name[cnt]);
-                tv_adr.setText(location[cnt]);
-                tv_star.setText(star[cnt]);
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc[cnt], 15));
+                markerset(cnt);
 
             }else if (cnt == name.length -1){
                 cnt = 0;
-                Log.d("cnt", ""+cnt);
-                tv_name.setText(name[cnt]);
-                tv_adr.setText(location[cnt]);
-                tv_star.setText(star[cnt]);
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc[cnt], 15));
+                markerset(cnt);
             }
 
         }
