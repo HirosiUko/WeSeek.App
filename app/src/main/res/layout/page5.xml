@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -54,17 +55,20 @@
                         android:id="@+id/textView46"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:gravity="center"
                         android:text="# 피너츠 좋아"
                         android:textSize="20sp" />
 
                     <ImageButton
                         android:id="@+id/imageButton2"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
                         android:layout_gravity="center"
                         android:layout_marginLeft="5dp"
                         android:background="#FFFFFF"
-                        app:srcCompat="@drawable/ic_action_detail" />
+                        app:srcCompat="@drawable/ic_action_detail"
+                        tools:ignore="SpeakableTextPresentCheck" />
                 </LinearLayout>
 
                 <EditText
@@ -73,7 +77,8 @@
                     android:layout_height="wrap_content"
                     android:ems="10"
                     android:hint="리뷰를 적어주세요"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName"
+                    android:minHeight="48dp" />
 
             </LinearLayout>
 
