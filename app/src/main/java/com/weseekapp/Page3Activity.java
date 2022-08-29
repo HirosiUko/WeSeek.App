@@ -2,6 +2,9 @@ package com.weseekapp;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -28,6 +31,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -36,7 +40,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Page3Activity extends Fragment implements OnMapReadyCallback, View.OnClickListener {
+import java.util.ArrayList;
+
+public class Page3Activity extends Fragment implements OnMapReadyCallback, View.OnClickListener, GoogleMap.OnMarkerClickListener {
     @Nullable
 
     private GoogleMap mMap;
@@ -57,15 +63,19 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
 
     Double curLat, curLon;
 
-    LatLng korea = new LatLng(36.4894573, 127.7294827);
+    LatLng currentLoc;
 
+    private Button btn_search;
 
-    private Button btn_current;
-
+    ProgressDialog customProgressDialog;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.page3, container, false);
+
+        customProgressDialog = new ProgressDialog(view.getContext());
+        customProgressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
 
         if (requestQueue == null) {
             requestQueue = Volley.newRequestQueue(view.getContext());
@@ -75,18 +85,16 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
         tv_adr = view.findViewById(R.id.tv_adr);
         tv_star = view.findViewById(R.id.tv_star);
 
-
-        btn_current = view.findViewById(R.id.btn_current);
-        //btn_location = view.findViewById(R.id.btn_location);
+        btn_search = view.findViewById(R.id.btn_search);
         btn_pre = view.findViewById(R.id.btn_pre);
         btn_next = view.findViewById(R.id.btn_next);
 
-        btn_current.setOnClickListener(this);
-        //btn_location.setOnClickListener(this);
+        btn_search.setOnClickListener(this);
         btn_pre.setOnClickListener(this);
         btn_next.setOnClickListener(this);
 
         mapView = view.findViewById(R.id.mapview);
+        Log.d("에러", "onCreateView: ");
         mapView.onCreate(savedInstanceState);
 
         dbSet dbthread = new dbSet();
@@ -99,23 +107,45 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
 
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
+
+        customProgressDialog.show();
         mMap = googleMap;
 
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(korea, 7));
+        currentLoc = new LatLng(curLat, curLon);
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLoc, 17));
 
-        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(@NonNull Marker marker) {
-                Log.d("이벤트확인", marker.getTitle());
-                mMap.animateCamera(CameraUpdateFactory.zoomTo(16));
-                tv_name.setText(marker.getTitle());
-                tv_adr.setText(marker.getSnippet());
+        mMap.setOnMarkerClickListener(this);
 
-                return false;
-            }
-        });
 
     }
+
+    private void getMarkerItem(){
+        ArrayList<MarkerItem> markerItemArrayList = new ArrayList<>();
+
+//        for (MarkerItem markerItem : markerItemArrayList){
+//            addMarker(markerItem, false);
+//        }
+    }
+
+    @Override
+    public boolean onMarkerClick(@NonNull Marker marker) {
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(17));
+
+        tv_name.setText(marker.getTitle());
+        tv_adr.setText(marker.getSnippet());
+
+        String title = marker.getTitle();
+        String snippet = marker.getSnippet();
+        double lat = marker.getPosition().latitude;
+        double lon = marker.getPosition().longitude;
+        Log.d("좌표", lat + ", " + lon);
+
+        marker.remove();
+        addMarker(title, snippet, lat, lon, true);
+
+        return false;
+    }
+
 
     private class dbSet extends Thread {
         @Override
@@ -129,10 +159,9 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
             curLat = loc_Current.getLatitude();
             curLon = loc_Current.getLongitude();
 
-
             StringRequest request = new StringRequest(
                     Request.Method.GET,
-                    url = "https://dokkydokky.herokuapp.com/getStoreByGPS?lat=" + curLat + "&lon=" + curLon + "&dis=500",
+                    url = "https://dokkydokky.herokuapp.com/getStoreByGPS?lat=" + curLat + "&lon=" + curLon + "&dis=1500",
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
@@ -147,7 +176,6 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
                                 gps = new String[jsonArray.length()];
                                 star = new String[jsonArray.length()];
                                 loc = new LatLng[jsonArray.length()];
-
 
                                 for (int i = 0; i < jsonArray.length(); i++) {
 
@@ -178,39 +206,49 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
                             Log.d("응답", "응답 실패");
                         }
                     }
+
             );
 
+            Log.d("에러", url);
             requestQueue.add(request);
+            customProgressDialog.dismiss();
         }
     }
 
-    private class markerSet extends Thread {
-        @Override
-        public void run() {
-//            tv_name.setText(name[cnt]);
-//            tv_adr.setText(location[cnt]);
-//            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc[cnt], 15));
-        }
+    public void infoset(int cnt){
+        tv_name.setText(name[cnt]);
+        tv_adr.setText(location[cnt]);
+        tv_star.setText(star[cnt]);
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc[cnt], 17));
+    }
+
+    private Marker addMarker(String title, String snippet, double lat, double lon, boolean isSelectedMarker){
+        LatLng position = new LatLng(lat, lon);
+
+        BitmapDrawable bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.markerblue);
+        Bitmap b = bitmapdraw.getBitmap();
+        Bitmap blueMarker = Bitmap.createScaledBitmap(b, 80, 120, false);
+
+
+        MarkerOptions markerOptions = new MarkerOptions();
+        markerOptions
+                .position(position)
+                .title(title)
+                .snippet(snippet)
+                .icon(BitmapDescriptorFactory.fromBitmap(blueMarker));
+
+        return mMap.addMarker(markerOptions);
+
     }
 
 
     public void onClick(View view) {
 
-        markerSet markerthread = new markerSet();
+        if (view.getId() == R.id.btn_search) {
+            // 오류뜨면 위치코드 넣어야함
 
-        if (view.getId() == R.id.btn_current) {
-            LocationManager locationManager = (LocationManager) getActivity().getSystemService(getContext().LOCATION_SERVICE);
-
-            if (ActivityCompat.checkSelfPermission(view.getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(view.getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
-            }
-            Location loc_Current = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            curLat = loc_Current.getLatitude();
-            curLon = loc_Current.getLongitude();
-            Log.d("현재위치", curLat + "," + curLon);
-
-            LatLng currentLoc = new LatLng(curLat, curLon);
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLoc, 15)); // 차후 현재위치로 변경필요
+            currentLoc = new LatLng(curLat, curLon);
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLoc, 15));
             Log.d("응답성공", "마커 표시 성공!");
 
             for (int i = 0; i < name.length; i++) {
@@ -224,41 +262,30 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
                 mMap.addMarker(markerOptions);
 
             }
+
         }else if (view.getId() == R.id.btn_pre){
             if (cnt > 0){
                 cnt--;
                 Log.d("cnt", ""+cnt);
-                tv_name.setText(name[cnt]);
-                tv_adr.setText(location[cnt]);
-                tv_star.setText(star[cnt]);
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc[cnt], 15));
+                infoset(cnt);
 
 
             }else if (cnt == 0){
                 cnt = name.length -1;
                 Log.d("cnt", ""+cnt);
-                tv_name.setText(name[cnt]);
-                tv_adr.setText(location[cnt]);
-                tv_star.setText(star[cnt]);
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc[cnt], 15));
+                infoset(cnt);
             }
 
         }else if (view.getId() == R.id.btn_next){
             if (cnt < name.length -1){
                 cnt++;
                 Log.d("cnt", ""+cnt);
-                tv_name.setText(name[cnt]);
-                tv_adr.setText(location[cnt]);
-                tv_star.setText(star[cnt]);
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc[cnt], 15));
+                infoset(cnt);
 
             }else if (cnt == name.length -1){
                 cnt = 0;
                 Log.d("cnt", ""+cnt);
-                tv_name.setText(name[cnt]);
-                tv_adr.setText(location[cnt]);
-                tv_star.setText(star[cnt]);
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc[cnt], 15));
+                infoset(cnt);
             }
 
         }

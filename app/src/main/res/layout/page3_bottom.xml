@@ -6,32 +6,20 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="2">
+        android:layout_weight="1">
 
-        <LinearLayout
-            android:layout_width="634dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:paddingLeft="10dp"
-            android:paddingTop="10dp"
-            android:paddingRight="10dp"
-            android:paddingBottom="10dp">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                tools:listitem="@layout/page3_bottom_info" />
-        </LinearLayout>
-
-    </LinearLayout>
+        <include
+            layout="@layout/page3_bottom_info"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </ScrollView>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="80dp"
         android:layout_weight="1"
         android:orientation="horizontal">
 
@@ -44,11 +32,11 @@
             app:srcCompat="@drawable/ic_action_left_arrow" />
 
         <Button
-            android:id="@+id/btn_current"
+            android:id="@+id/btn_search"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="현재위치" />
+            android:text="주변탐색" />
 
         <ImageButton
             android:id="@+id/btn_next"
