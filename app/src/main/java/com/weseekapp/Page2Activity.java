@@ -10,6 +10,7 @@ import android.view.animation.BounceInterpolator;
 import android.view.animation.ScaleAnimation;
 import android.widget.CompoundButton;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -37,6 +38,12 @@ public class Page2Activity extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.page2, container, false);
 
+
+
+
+
+
+
         page_listView = (ListView) view.findViewById(R.id.page2_listView);
         adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_action_camera), "세계제일감자탕집",
                 "광주 광산구 어쩌고동");
@@ -48,16 +55,6 @@ public class Page2Activity extends Fragment {
         adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_action_camera), "힝구","광주 북구 맛있다리");
 
 
-
-
-
-
-
-        adapter.notifyDataSetChanged();
-        page_listView.setAdapter(adapter);
-
-
-//
 //        scaleAnimation = new ScaleAnimation(0.7f, 1.0f, 0.7f, 1.0f, Animation.RELATIVE_TO_SELF,
 //                0.7f, Animation.RELATIVE_TO_SELF, 0.7f);
 //        scaleAnimation.setDuration(500);
@@ -71,6 +68,32 @@ public class Page2Activity extends Fragment {
 //                compoundButton.startAnimation(scaleAnimation);
 //            }
 //        });
+
+
+//        button_favoite_page2 = (CompoundButton) view.findViewById(R.id.button_favorite_page2);
+//        button_favoite_page2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Toast.makeText(getContext(), "dsf",Toast.LENGTH_SHORT).show();
+//            }
+//        });
+
+
+
+        adapter.notifyDataSetChanged();
+        page_listView.setAdapter(adapter);
+
+
+
+
+
+
+
+
+
+
+
+
 
 
         return view;

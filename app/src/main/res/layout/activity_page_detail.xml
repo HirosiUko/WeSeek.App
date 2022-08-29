@@ -22,7 +22,7 @@
             <TextView
                 android:id="@+id/textView43"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="80dp"
                 android:gravity="center"
                 android:text="세계제일 감자탕집"
                 android:textSize="34sp"
@@ -68,7 +68,7 @@
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/navi2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="60dp"
             app:menu="@menu/detail_menu_item" />
     </LinearLayout>
 
