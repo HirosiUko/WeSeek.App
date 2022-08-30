@@ -47,7 +47,8 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
 
     private GoogleMap mMap;
     private MapView mapView;
-    private TextView tv_name, tv_adr, tv_star, tv_distance;
+    private TextView tv_name, tv_adr, tv_star, tv_distance; // 구 레이아웃용, 나중에 삭제
+    private TextView tv_store_id, tv_store_name, tv_store_tel, tv_store_adr, tv_store_hours, img_store_img, img_store_thumb, tv_store_star, tv_store_distance; // 임시, 새 레이아웃용
     private ImageView btn_pre, btn_next;
     private int cnt = 0;
 

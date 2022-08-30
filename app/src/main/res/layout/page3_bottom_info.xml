@@ -28,7 +28,7 @@
                 android:paddingBottom="10dp">
 
                 <ImageView
-                    android:id="@+id/img_storeImg"
+                    android:id="@+id/img_store_thumb"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:srcCompat="@drawable/bird001" />
@@ -49,7 +49,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/tv_storeName"
+                        android:id="@+id/tv_store_name"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
@@ -64,7 +64,7 @@
                     android:layout_weight="1">
 
                     <TextView
-                        android:id="@+id/tv_storeNum"
+                        android:id="@+id/tv_store_tel"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center|start"
@@ -79,7 +79,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/tv_storeStar"
+                        android:id="@+id/tv_store_star"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center|start"
@@ -105,7 +105,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tv_storeTime"
+                    android:id="@+id/tv_store_hours"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
@@ -135,12 +135,25 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/tv_storeHomepage"
+                    android:id="@+id/tv_store_id"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center|start"
                     android:text="https://jhon_mat_team_gu_ri"
                     android:textSize="20sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_store_distance"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="TextView" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
