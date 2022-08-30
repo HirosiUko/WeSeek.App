@@ -49,7 +49,7 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/editTextTextPersonName"
+            android:id="@+id/edt_signUp_nick"
             android:layout_width="230dp"
             android:layout_height="50dp"
             android:background="@drawable/button_pattern"
@@ -68,7 +68,7 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/editTextTextPersonName2"
+            android:id="@+id/edt_signUp_id"
             android:layout_width="230dp"
             android:layout_height="50dp"
             android:background="@drawable/button_pattern2"
@@ -87,7 +87,7 @@
         android:orientation="vertical">
 
         <EditText
-            android:id="@+id/editTextTextPassword"
+            android:id="@+id/edt_signUp_pw"
             android:layout_width="230dp"
             android:layout_height="50dp"
             android:background="@drawable/button_pattern3"
@@ -119,7 +119,7 @@
             android:paddingRight="30dp">
 
             <ImageView
-                android:id="@+id/imageView12"
+                android:id="@+id/btn_signUp_check"
                 android:layout_width="65dp"
                 android:layout_height="65dp"
                 app:srcCompat="@drawable/ic_action_joinin" />

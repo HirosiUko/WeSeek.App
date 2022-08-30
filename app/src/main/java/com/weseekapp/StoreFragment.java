@@ -31,13 +31,13 @@ public class StoreFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup view = (ViewGroup) inflater.inflate(
                 R.layout.page3_bottom_info, container, false);
-        tv_storeName = view.findViewById(R.id.tv_storeName);
-        tv_storeNum = view.findViewById(R.id.tv_storeNum);
-        tv_storeStar = view.findViewById(R.id.tv_storeStar);
-        tv_storeTime = view.findViewById(R.id.tv_storeTime);
-        tv_storeAdr = view.findViewById(R.id.tv_storeAdr);
-        tv_storeHomepage = view.findViewById(R.id.tv_storeHomepage);
-        img_storeImg = view.findViewById(R.id.img_storeImg);
+//        tv_storeName = view.findViewById(R.id.tv_storeName);
+//        tv_storeNum = view.findViewById(R.id.tv_storeNum);
+//        tv_storeStar = view.findViewById(R.id.tv_storeStar);
+//        tv_storeTime = view.findViewById(R.id.tv_storeTime);
+//        tv_storeAdr = view.findViewById(R.id.tv_storeAdr);
+//        tv_storeHomepage = view.findViewById(R.id.tv_storeHomepage);
+//        img_storeImg = view.findViewById(R.id.img_storeImg);
 
         tv_storeName.setText(storeInfo.storeName); // 모든 정보는 storeInfo에 저장되어있다!
         tv_storeNum.setText("가게 전화번호");
