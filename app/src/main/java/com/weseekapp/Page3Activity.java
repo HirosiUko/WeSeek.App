@@ -293,54 +293,58 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
 
     public void onClick(View view) { // 버튼 클릭 이벤트
 
-        if (view.getId() == R.id.btn_search) { // 주변탐색 버튼 클릭시 이벤트
-            // 오류뜨면 위치코드 넣어야함
-            
-            Log.d("응답성공", "마커 표시 성공!");
+        try {
+            if (view.getId() == R.id.btn_search) { // 주변탐색 버튼 클릭시 이벤트
+                // 오류뜨면 위치코드 넣어야함
 
-            for (int i = 0; i < name.length; i++) { // db에서 받아온 정보로 마커 표시
+                Log.d("응답성공", "마커 표시 성공!");
 
-                MarkerOptions markerOptions = new MarkerOptions();
-                markerOptions
-                        .position(loc[i])
-                        .title(name[i])
-                        .snippet(location[i]);
+                for (int i = 0; i < name.length; i++) { // db에서 받아온 정보로 마커 표시
 
-                mMap.addMarker(markerOptions);
+                    MarkerOptions markerOptions = new MarkerOptions();
+                    markerOptions
+                            .position(loc[i])
+                            .title(name[i])
+                            .snippet(location[i]);
 
-            }
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLoc, 17));
-            cnt = 0;
+                    mMap.addMarker(markerOptions);
 
-        }else if (view.getId() == R.id.btn_pre){
-            if (cnt > 0){
-                cnt--;
-                Log.d("cnt", ""+cnt);
-                getDistance(loc[cnt].latitude, loc[cnt].longitude);
-                infoset(cnt);
-
-
-            }else if (cnt == 0){
-                cnt = name.length -1;
-                Log.d("cnt", ""+cnt);
-                getDistance(loc[cnt].latitude, loc[cnt].longitude);
-                infoset(cnt);
-            }
-
-        }else if (view.getId() == R.id.btn_next){
-            if (cnt < name.length -1){
-                cnt++;
-                Log.d("cnt", ""+cnt);
-                getDistance(loc[cnt].latitude, loc[cnt].longitude);
-                infoset(cnt);
-
-            }else if (cnt == name.length -1){
+                }
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLoc, 17));
                 cnt = 0;
-                Log.d("cnt", ""+cnt);
-                getDistance(loc[cnt].latitude, loc[cnt].longitude);
-                infoset(cnt);
-            }
 
+            }else if (view.getId() == R.id.btn_pre){
+                if (cnt > 0){
+                    cnt--;
+                    Log.d("cnt", ""+cnt);
+                    getDistance(loc[cnt].latitude, loc[cnt].longitude);
+                    infoset(cnt);
+
+
+                }else if (cnt == 0){
+                    cnt = name.length -1;
+                    Log.d("cnt", ""+cnt);
+                    getDistance(loc[cnt].latitude, loc[cnt].longitude);
+                    infoset(cnt);
+                }
+
+            }else if (view.getId() == R.id.btn_next){
+                if (cnt < name.length -1){
+                    cnt++;
+                    Log.d("cnt", ""+cnt);
+                    getDistance(loc[cnt].latitude, loc[cnt].longitude);
+                    infoset(cnt);
+
+                }else if (cnt == name.length -1){
+                    cnt = 0;
+                    Log.d("cnt", ""+cnt);
+                    getDistance(loc[cnt].latitude, loc[cnt].longitude);
+                    infoset(cnt);
+                }
+
+            }
+        }catch (Exception e){
+            e.printStackTrace();
         }
 
     }

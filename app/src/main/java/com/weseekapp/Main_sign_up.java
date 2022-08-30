@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
@@ -34,6 +35,8 @@ public class Main_sign_up extends AppCompatActivity {
     // 요청할 떄 필요한 요청사항을 기록하는 객체
     private StringRequest stringRequest;
 
+    private String check;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,8 +51,16 @@ public class Main_sign_up extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 sendRequest();
-                Intent intent = new Intent(getApplicationContext(), FirstMain.class);
+
+//                if (check == null){
+//                    Toast.makeText(getApplicationContext(),"아이디가 중복되었거나 빈 칸이 있습니다. 다시 시도해 주세요!",Toast.LENGTH_SHORT).show();
+//                }
+//                else{
+//                    Toast.makeText(getApplicationContext(),check + "님 가입을 환영합니다!",Toast.LENGTH_SHORT).show();
+//                }
+                Intent intent = new Intent(getApplicationContext(), FirstMain.class); // 프로그램 실행 후 초기화면으로 이동, 회원가입 성공 여부 체크할 방법 필요
                 startActivity(intent);
+
             }
         });
 
@@ -67,6 +78,7 @@ public class Main_sign_up extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 Log.v("resultValue",response);
+                check = response;
             }
         }, new Response.ErrorListener() {
             // 서버와의 연동 에러시 출력
@@ -103,6 +115,7 @@ public class Main_sign_up extends AppCompatActivity {
                 return params;
             }
         };
+
 
         String TAG = "회원가입 TEST";
         stringRequest.setTag(TAG);
