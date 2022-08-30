@@ -2,101 +2,110 @@ package com.weseekapp;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.BounceInterpolator;
 import android.view.animation.ScaleAnimation;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Page2Activity extends Fragment {
 
-    private ListView page_listView;
-    private page2Adapter adapter = new page2Adapter();
 
-    private ScaleAnimation scaleAnimation;
-    private BounceInterpolator bounceInterpolator;
-    private CompoundButton button_favoite_page2;
+    private RecyclerView page2_recyclerView;
+    private Page2Adapter page2Adapter;
+    private SearchView searchView_page2;
 
-
-
+    private ArrayList<Page2VO> arrayList;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.page2, container, false);
 
+        searchView_page2 = (SearchView) view.findViewById(R.id.searchView_page2);
+        searchView_page2.clearFocus();
+
+        searchView_page2.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterList(newText);
+                return true;
+            }
+        });
 
 
+        page2_recyclerView = (RecyclerView) view.findViewById(R.id.page2_recyclerView);
+        page2_recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext(),
+                RecyclerView.VERTICAL, false));
 
 
+        arrayList = new ArrayList<>();
+        page2Adapter = new Page2Adapter();
 
+        page2Adapter.addItem(new Page2VO(R.drawable.ic_action_camera,"aaa","sdfsdf"));
+        page2Adapter.addItem(new Page2VO(R.drawable.ic_action_detail,"bbb","adfasdfasf"));
+        page2Adapter.addItem(new Page2VO(R.drawable.ic_action_camera,"sdfsdf","sdfsdf"));
+        page2Adapter.addItem(new Page2VO(R.drawable.ic_action_camera,"fgf","sdfsdf"));
+        page2Adapter.addItem(new Page2VO(R.drawable.ic_action_camera,"eeee","sdfsdf"));
+        page2Adapter.addItem(new Page2VO(R.drawable.ic_action_camera,"assss","sdfsdf"));
+        page2Adapter.addItem(new Page2VO(R.drawable.ic_action_camera,"ww","sdfsdf"));
+        page2Adapter.addItem(new Page2VO(R.drawable.ic_action_camera,"yyyyy","sdfsdf"));
+        page2Adapter.addItem(new Page2VO(R.drawable.ic_action_camera,"nnnnn","sdfsdf"));
+        page2Adapter.addItem(new Page2VO(R.drawable.ic_action_camera,"111","sdfsdf"));
+        page2Adapter.addItem(new Page2VO(R.drawable.ic_action_camera,"aaaaaa","sdfsdf"));
+        page2Adapter.addItem(new Page2VO(R.drawable.ic_action_camera,"pppppp","sdfsdf"));
+        page2Adapter.addItem(new Page2VO(R.drawable.ic_action_camera,"jjjjj","sdfsdf"));
 
-        page_listView = (ListView) view.findViewById(R.id.page2_listView);
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_action_camera), "세계제일감자탕집",
-                "광주 광산구 어쩌고동");
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_action_food),"존맛탱구리","광주 동구 어쩌고동");
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_action_joinin), "국밥한사발주이소","광주 북구 어쩌고");
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_action_home), "광주하면상추튀김이지","광주 맛있동");
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.bird001),"새도들르는방앗간","광주임당");
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_action_detail), "아조맛있어요","광주어쩌고저쩌고힘들다야");
-        adapter.addItem(ContextCompat.getDrawable(getActivity(), R.drawable.ic_action_camera), "힝구","광주 북구 맛있다리");
+        for (int i = 0; i < page2Adapter.getItemCount(); i++){
+            arrayList.add(page2Adapter.getItem(i));
+        }
 
-
-//        scaleAnimation = new ScaleAnimation(0.7f, 1.0f, 0.7f, 1.0f, Animation.RELATIVE_TO_SELF,
-//                0.7f, Animation.RELATIVE_TO_SELF, 0.7f);
-//        scaleAnimation.setDuration(500);
-//        bounceInterpolator = new BounceInterpolator();
-//        scaleAnimation.setInterpolator(bounceInterpolator);
-//        button_favoite_page2 = (CompoundButton) view.findViewById(R.id.button_favorite_page2);
-//
-//        button_favoite_page2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-//                compoundButton.startAnimation(scaleAnimation);
-//            }
-//        });
-
-
-//        button_favoite_page2 = (CompoundButton) view.findViewById(R.id.button_favorite_page2);
-//        button_favoite_page2.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Toast.makeText(getContext(), "dsf",Toast.LENGTH_SHORT).show();
-//            }
-//        });
-
-
-
-        adapter.notifyDataSetChanged();
-        page_listView.setAdapter(adapter);
-
-
-
-
-
-
-
-
-
+        page2_recyclerView.setAdapter(page2Adapter);
 
 
 
 
 
         return view;
-
     }
+
+    private void filterList(String text) {
+        ArrayList<Page2VO> filteredList = new ArrayList<>();
+        for (Page2VO vo : arrayList){
+            if (vo.getVo_store_id().toLowerCase().contains(text.toLowerCase()) || vo.getVo_store_addr().toLowerCase().contains(text.toLowerCase())){
+                filteredList.add(vo);
+            }
+        }
+        if (filteredList.isEmpty()){
+            Toast.makeText(getActivity().getApplicationContext(),"no data", Toast.LENGTH_SHORT).show();
+        } else {
+            page2Adapter.setFilteredList(filteredList);
+        }
+    }
+
+
 }

@@ -26,6 +26,7 @@ public class PageDetail extends AppCompatActivity {
     private BounceInterpolator bounceInterpolator;
     private CompoundButton button_favorite;
 
+    Page2VO selected_store;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +46,6 @@ public class PageDetail extends AppCompatActivity {
                 compoundButton.startAnimation(scaleAnimation);
             }
         });
-
 
         detail_frag1 = new Detail_Frag1();
         detail_frag2 = new Detail_Frag2();
@@ -75,4 +75,6 @@ public class PageDetail extends AppCompatActivity {
 
 
     }
+
+
 }
