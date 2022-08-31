@@ -6,9 +6,9 @@ public class Detail_Frag3_VO {
 
     private Drawable profile;
     private String tag, review;
-    private int rate;
+    private Float rate;
 
-    public Detail_Frag3_VO(Drawable profile, String tag, String review) {
+    public Detail_Frag3_VO(Drawable profile, String tag, String review, Float rate) {
         this.profile = profile;
         this.tag = tag;
         this.review = review;
@@ -39,11 +39,11 @@ public class Detail_Frag3_VO {
         this.review = review;
     }
 
-    public int getRate() {
+    public float getRate() {
         return rate;
     }
 
-    public void setRate(int rate) {
+    public void setRate(float rate) {
         this.rate = rate;
     }
 }

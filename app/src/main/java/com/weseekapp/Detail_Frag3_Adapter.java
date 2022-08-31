@@ -52,13 +52,14 @@ public class Detail_Frag3_Adapter extends BaseAdapter {
         img_profile.setImageDrawable(vo.getProfile());
         tv_id_review.setText(vo.getTag());
         tv_review.setText(vo.getReview());
+        ratingcount.setRating(vo.getRate());
 
         return view;
     }
 
 
-    public void addItem(Drawable profile, String tag, String review){
-        Detail_Frag3_VO vo = new Detail_Frag3_VO(profile, tag, review);
+    public void addItem(Drawable profile, String tag, String review, Float rate){
+        Detail_Frag3_VO vo = new Detail_Frag3_VO(profile, tag, review, rate);
         items.add(vo);
     }
 }

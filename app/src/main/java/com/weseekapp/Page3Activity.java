@@ -106,10 +106,16 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
         if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
 
         }
-        Location loc_Current = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-        curLat = loc_Current.getLatitude();
-        curLon = loc_Current.getLongitude();
-        Log.d("현재위치", "" + curLat + "," + curLon);
+
+        try {
+            Location loc_Current = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            curLat = loc_Current.getLatitude();
+            curLon = loc_Current.getLongitude();
+            Log.d("현재위치", "" + curLat + "," + curLon);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
         
         dbSet dbthread = new dbSet();
         dbthread.start(); // db 호출
@@ -126,20 +132,29 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
 
         mMap = googleMap;
 
-        currentLoc = new LatLng(curLat, curLon);
+        try {
+            currentLoc = new LatLng(curLat, curLon);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
 
         BitmapDrawable bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.markerblue);
         Bitmap b = bitmapdraw.getBitmap();
         Bitmap blueMarker = Bitmap.createScaledBitmap(b, 80, 120, false);
 
-        MarkerOptions markerOptions = new MarkerOptions();
-        markerOptions.position(currentLoc)
-                     .title("현재위치")
-                     .icon(BitmapDescriptorFactory.fromBitmap(blueMarker));
+        try {
+            MarkerOptions markerOptions = new MarkerOptions();
+            markerOptions.position(currentLoc)
+                    .title("현재위치")
+                    .icon(BitmapDescriptorFactory.fromBitmap(blueMarker));
 
-        mMap.addMarker(markerOptions);
+            mMap.addMarker(markerOptions);
 
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLoc, 17));
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLoc, 17));
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         mMap.setOnMarkerClickListener(this);
 
