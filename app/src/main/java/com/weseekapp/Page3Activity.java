@@ -353,7 +353,7 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
                     mMap.addMarker(markerOptions);
 
                 }
-                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLoc, 17));
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLoc, 15));
                 cnt = 0;
 
             }else if (view.getId() == R.id.btn_pre){
