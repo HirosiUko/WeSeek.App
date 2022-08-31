@@ -30,7 +30,7 @@ public class StoreFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         ViewGroup view = (ViewGroup) inflater.inflate(
-                R.layout.page3_bottom_info, container, false);
+                R.layout.page3_retouch2, container, false);
 //        tv_storeName = view.findViewById(R.id.tv_storeName);
 //        tv_storeNum = view.findViewById(R.id.tv_storeNum);
 //        tv_storeStar = view.findViewById(R.id.tv_storeStar);

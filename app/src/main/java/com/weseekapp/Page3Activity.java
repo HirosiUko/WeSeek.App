@@ -12,9 +12,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.BounceInterpolator;
+import android.view.animation.ScaleAnimation;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -49,10 +55,13 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
     private MapView mapView;
     private TextView tv_name, tv_adr, tv_star, tv_distance; // 구 레이아웃용, 나중에 삭제
     private TextView tv_store_id, tv_store_name, tv_store_tel, tv_store_adr, tv_store_hours, img_store_img, img_store_thumb, tv_store_star, tv_store_distance; // 임시, 새 레이아웃용
-    private ImageView btn_pre, btn_next;
+    private ImageButton btn_pre, btn_next;
+    private TextView btn_search;
     private int cnt = 0;
 
-    private Button btn_search;
+    private CompoundButton page3_favorite_animation;
+    private BounceInterpolator bounceInterpolator;
+    private ScaleAnimation scaleAnimation;
 
 
     String url;
@@ -75,6 +84,25 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.page3, container, false);
+
+
+
+        scaleAnimation = new ScaleAnimation(0.7f, 1.0f, 0.7f, 1.0f, Animation.RELATIVE_TO_SELF,
+                0.7f, Animation.RELATIVE_TO_SELF, 0.7f);
+
+        scaleAnimation.setDuration(500);
+        bounceInterpolator = new BounceInterpolator();
+        scaleAnimation.setInterpolator(bounceInterpolator);
+        page3_favorite_animation = (CompoundButton) view.findViewById(R.id.page3_favorite_animation);
+        page3_favorite_animation.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
+                compoundButton.startAnimation(scaleAnimation);
+            }
+        });
+
+
+
 
         customProgressDialog = new ProgressDialog(view.getContext());
         customProgressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));

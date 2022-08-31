@@ -5,6 +5,9 @@ import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.BounceInterpolator;
+import android.view.animation.ScaleAnimation;
 import android.widget.Adapter;
 import android.widget.BaseAdapter;
 import android.widget.CompoundButton;
@@ -22,6 +25,8 @@ import java.util.Locale;
 
 public class Page2Adapter extends RecyclerView.Adapter<ViewHolder>{
 
+    private CompoundButton button_favoite_page2;
+    private BounceInterpolator bounceInterpolator;
 
 
     public interface OnItemClickListener {
@@ -67,6 +72,20 @@ public class Page2Adapter extends RecyclerView.Adapter<ViewHolder>{
 
         ViewHolder viewHolder = new ViewHolder(context, view);
 
+        // 하트 애니메이션
+        ScaleAnimation scaleAnimation = new ScaleAnimation(0.7f, 1.0f, 0.7f, 1.0f, Animation.RELATIVE_TO_SELF,
+                0.7f, Animation.RELATIVE_TO_SELF, 0.7f);
+        scaleAnimation.setDuration(500);
+        bounceInterpolator = new BounceInterpolator();
+        scaleAnimation.setInterpolator(bounceInterpolator);
+        button_favoite_page2 = (CompoundButton) view.findViewById(R.id.button_favorite_page2);
+
+        button_favoite_page2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                compoundButton.startAnimation(scaleAnimation);
+            }
+        });
 
 
 
@@ -82,6 +101,7 @@ public class Page2Adapter extends RecyclerView.Adapter<ViewHolder>{
         holder.page2_tv_name.setText(vo.vo_store_id);
         holder.page2_tv_addr.setText(vo.vo_store_addr);
         holder.page2_img_store.setImageResource(vo.vo_store_pic);
+        holder.button_favorite_page2.setOnClickListener((View.OnClickListener) vo.vo_btn_favorite);
 
 
 

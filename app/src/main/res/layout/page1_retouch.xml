@@ -43,7 +43,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/textView35"
+                        android:id="@+id/btn_page1_menu"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="8dp"
@@ -84,7 +84,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/textView36"
+                        android:id="@+id/btn_page1_info"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="8dp"
@@ -133,7 +133,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/textView37"
+                        android:id="@+id/btn_page1_location"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="8dp"
@@ -141,7 +141,7 @@
                         android:layout_marginRight="8dp"
                         android:layout_marginBottom="8dp"
                         android:background="@drawable/button_main3"
-                        android:elevation="10dp" />
+                        android:elevation="8dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -174,7 +174,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/textView38"
+                        android:id="@+id/btn_page1_jjim"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="8dp"
@@ -182,7 +182,7 @@
                         android:layout_marginRight="8dp"
                         android:layout_marginBottom="8dp"
                         android:background="@drawable/button_main4"
-                        android:elevation="10dp" />
+                        android:elevation="8dp" />
                 </LinearLayout>
 
                 <LinearLayout

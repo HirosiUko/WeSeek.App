@@ -1,10 +1,8 @@
 package com.weseekapp;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
-import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -13,7 +11,6 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
 
@@ -31,15 +28,18 @@ public class FirstMain extends AppCompatActivity implements View.OnClickListener
             Manifest.permission.READ_EXTERNAL_STORAGE
     };
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_main);
 
+
         firstLayout = findViewById(R.id.firstLayout);
 
 //        checkPermission();
         OnCheckPermission();
+
 
         tv_logIn = findViewById(R.id.tv_logIn);
         tv_logIn.setOnClickListener(this);
@@ -141,4 +141,5 @@ public class FirstMain extends AppCompatActivity implements View.OnClickListener
 //            }
 //        }
 //    }
+
 }
