@@ -46,12 +46,12 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:id="@+id/tv_store_star"
+                        android:id="@+id/img_store_star_01"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_gravity="right"
                         android:layout_weight="1"
-                        app:srcCompat="@drawable/ic_action_star1" />
+                        app:srcCompat="@drawable/ic_action_star0" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -61,11 +61,11 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:id="@+id/imageView2"
+                        android:id="@+id/img_store_star_02"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        app:srcCompat="@drawable/ic_action_star1" />
+                        app:srcCompat="@drawable/ic_action_star0" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -76,7 +76,7 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:id="@+id/imageView3"
+                        android:id="@+id/img_store_star_03"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"

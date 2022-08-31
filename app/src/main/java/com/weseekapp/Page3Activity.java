@@ -54,7 +54,8 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
     private GoogleMap mMap;
     private MapView mapView;
     private TextView tv_name, tv_adr, tv_star, tv_distance; // 구 레이아웃용, 나중에 삭제
-    private TextView tv_store_id, tv_store_name, tv_store_tel, tv_store_adr, tv_store_hours, img_store_img, img_store_thumb, tv_store_star, tv_store_distance; // 임시, 새 레이아웃용
+    private TextView tv_store_id, tv_store_name, tv_store_tel, tv_store_adr, tv_store_hours, tv_store_distance; // 임시, 새 레이아웃용
+    private ImageView img_store_img, img_store_thumb, img_store_star_01, img_store_star_02, img_store_star_03;
     private ImageButton btn_pre, btn_next;
     private TextView btn_search;
     private int cnt = 0;
@@ -112,10 +113,14 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
             requestQueue = Volley.newRequestQueue(view.getContext());
         }
 
-        tv_name = view.findViewById(R.id.tv_name);
-        tv_adr = view.findViewById(R.id.tv_adr);
+        tv_store_name = view.findViewById(R.id.tv_store_name);
+        tv_store_adr = view.findViewById(R.id.tv_store_adr);
         tv_star = view.findViewById(R.id.tv_star);
-        tv_distance = view.findViewById(R.id.tv_distance);
+        tv_store_distance = view.findViewById(R.id.tv_store_distance);
+
+        img_store_star_01 = view.findViewById(R.id.img_store_star_01);
+        img_store_star_02 = view.findViewById(R.id.img_store_star_02);
+        img_store_star_03 = view.findViewById(R.id.img_store_star_03);
 
         btn_search = view.findViewById(R.id.btn_search);
         btn_pre = view.findViewById(R.id.btn_pre);
@@ -218,10 +223,6 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
         getDistance(loc[cnt].latitude, loc[cnt].longitude);
         infoset(cnt);
 
-        tv_name.setText(marker.getTitle());
-        tv_adr.setText(marker.getSnippet());
-        tv_distance.setText(distance);
-
         return false;
     }
 
@@ -307,10 +308,25 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
     }
 
     public void infoset(int cnt){
-        tv_name.setText(name[cnt]);
-        tv_adr.setText(location[cnt]);
-        tv_star.setText(star[cnt]);
-        tv_distance.setText(distance);
+        tv_store_name.setText(name[cnt]);
+        tv_store_adr.setText(location[cnt]);
+
+        if (star[cnt].equals("★")) {
+            img_store_star_01.setImageResource(R.drawable.ic_action_star1);
+            img_store_star_02.setImageResource(R.drawable.ic_action_star0);
+            img_store_star_03.setImageResource(R.drawable.ic_action_star0);
+        } else if (star[cnt].equals("★★")){
+            img_store_star_01.setImageResource(R.drawable.ic_action_star1);
+            img_store_star_02.setImageResource(R.drawable.ic_action_star1);
+            img_store_star_03.setImageResource(R.drawable.ic_action_star0);
+        } else if (star[cnt].equals("★★★")){
+            img_store_star_01.setImageResource(R.drawable.ic_action_star1);
+            img_store_star_02.setImageResource(R.drawable.ic_action_star1);
+            img_store_star_03.setImageResource(R.drawable.ic_action_star1);
+        }
+
+
+        tv_store_distance.setText(distance);
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc[cnt], 17));
     }
 
