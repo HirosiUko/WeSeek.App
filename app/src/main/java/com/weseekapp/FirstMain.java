@@ -46,7 +46,7 @@ public class FirstMain extends AppCompatActivity implements View.OnClickListener
         tv_logIn.setOnClickListener(this);
 
         tv_signUp = findViewById(R.id.tv_signUp);
-        tv_signUp.setOnClickListener(this);
+        tv_signUp.setOnClickListener(this);// d
 
     }
 
