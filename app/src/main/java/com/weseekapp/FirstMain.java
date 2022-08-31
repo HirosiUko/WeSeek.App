@@ -18,6 +18,8 @@ import android.widget.Toast;
 import com.google.android.material.snackbar.Snackbar;
 
 
+import com.google.android.material.snackbar.Snackbar;
+
 public class FirstMain extends AppCompatActivity implements View.OnClickListener {
 
     private TextView tv_logIn, tv_signUp;
@@ -31,7 +33,6 @@ public class FirstMain extends AppCompatActivity implements View.OnClickListener
             Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.READ_EXTERNAL_STORAGE
     };
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
