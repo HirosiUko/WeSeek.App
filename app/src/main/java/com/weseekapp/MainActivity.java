@@ -3,13 +3,16 @@ package com.weseekapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
+import android.os.ConditionVariable;
 import android.util.Log;
 import android.view.MenuItem;
 
@@ -29,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
 
     private FragmentManager fragmentManager;
     private BottomNavigationView navi;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,4 +92,17 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+    public void onFragmentChange(int index){
+        if (index == 0) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.frame, page2Activity).commit();
+        }else if (index == 1) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.frame, page4Activity).commit();
+        }else if (index == 2) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.frame, page3Activity).commit();
+        }else if (index == 3) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.frame, page5Activity).commit();
+        }
+    }
+
+
 }
