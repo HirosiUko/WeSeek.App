@@ -38,7 +38,7 @@ public class Detail_Frag3 extends Fragment{
             adapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.anya0001), "# 태그2", "맛있다!", 4.5F);
             adapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.anya0001), "# 태그2", "맛있다!", 5.0F);
 
-            check = !check;//test
+            check = !check;//t
         }
 
 
