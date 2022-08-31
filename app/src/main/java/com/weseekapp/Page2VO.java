@@ -7,11 +7,13 @@ public class Page2VO {
     int vo_store_pic;
     String vo_store_id;
     String vo_store_addr;
+    CompoundButton vo_btn_favorite;
 
-    public Page2VO(int vo_store_pic, String vo_store_id, String vo_store_addr) {
+    public Page2VO(int vo_store_pic, String vo_store_id, String vo_store_addr, CompoundButton vo_btn_favorite) {
         this.vo_store_pic = vo_store_pic;
         this.vo_store_id = vo_store_id;
         this.vo_store_addr = vo_store_addr;
+        this.vo_btn_favorite = vo_btn_favorite;
     }
 
     public int getVo_store_pic() {
@@ -37,4 +39,8 @@ public class Page2VO {
     public void setVo_store_addr(String vo_store_addr) {
         this.vo_store_addr = vo_store_addr;
     }
+
+    public CompoundButton getVo_btn_favorite() { return vo_btn_favorite; }
+
+    public void setVo_btn_favorite(CompoundButton vo_btn_favorite) { this.vo_btn_favorite = vo_btn_favorite; }
 }
