@@ -24,7 +24,7 @@ public class FirstMain extends AppCompatActivity implements View.OnClickListener
 
     static final int PERMISSIONS_REQUEST = 0x0000001;
 
-    String[] permission_list = { // 필요한 권한은 여기에!
+    String[] permission_list = { // 필요한 권한은 여기에
             Manifest.permission.ACCESS_FINE_LOCATION,
             Manifest.permission.ACCESS_COARSE_LOCATION,
             Manifest.permission.READ_EXTERNAL_STORAGE
