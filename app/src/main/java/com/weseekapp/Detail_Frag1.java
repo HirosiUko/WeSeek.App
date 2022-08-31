@@ -15,6 +15,7 @@ public class Detail_Frag1 extends Fragment{
 
     private GridView frame_grid_detail_frag1;
     private Detail_Frag1_Adapter adapter = new Detail_Frag1_Adapter();
+    private boolean isStart = true;
 
     @Nullable
     @Override
@@ -22,21 +23,25 @@ public class Detail_Frag1 extends Fragment{
         View view = inflater.inflate(R.layout.detail_page1, container, false);
 
         frame_grid_detail_frag1 = (GridView) view.findViewById(R.id.frame_grid_detail_frag1);
+        if (isStart == true){
+            adapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.wheat_back));
+            adapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.wheat_back));
+            adapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.wheat_back));
+            adapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.wheat_back));
+            adapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.wheat_back));
+            adapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.wheat_back));
+            adapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.wheat_back));
+            adapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.wheat_back));
+            adapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.wheat_back));
+            adapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.wheat_back));
+            adapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.wheat_back));
+            adapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.wheat_back));
+            adapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.wheat_back));
+            adapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.wheat_back));
 
-        adapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.wheat_back));
-        adapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.wheat_back));
-        adapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.wheat_back));
-        adapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.wheat_back));
-        adapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.wheat_back));
-        adapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.wheat_back));
-        adapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.wheat_back));
-        adapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.wheat_back));
-        adapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.wheat_back));
-        adapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.wheat_back));
-        adapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.wheat_back));
-        adapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.wheat_back));
-        adapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.wheat_back));
-        adapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.wheat_back));
+            isStart = false;
+        }
+
 
 
 

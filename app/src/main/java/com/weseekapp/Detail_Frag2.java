@@ -29,6 +29,7 @@ public class Detail_Frag2 extends Fragment{
 
         radarChart = (RadarChart) view.findViewById(R.id.radarChart);
 
+
         ArrayList<RadarEntry> visitors = new ArrayList<>();
         visitors.add(new RadarEntry(5));
         visitors.add(new RadarEntry(7));
@@ -36,11 +37,16 @@ public class Detail_Frag2 extends Fragment{
         visitors.add(new RadarEntry(8));
         visitors.add(new RadarEntry(6));
 
-        RadarDataSet radarDataSet = new RadarDataSet(visitors, "visitors");
+        RadarDataSet radarDataSet = new RadarDataSet(visitors, " ");
         radarDataSet.setColor(Color.RED);
         radarDataSet.setLineWidth(2f);
         radarDataSet.setValueTextColor(Color.RED);
-        radarDataSet.setValueTextSize(14f);
+        radarDataSet.setValueTextSize(9f);
+
+        radarChart.getLegend().setEnabled(false);
+        radarChart.getDescription().setEnabled(false);
+
+
 
         RadarData radarData = new RadarData();
         radarData.addDataSet(radarDataSet);
@@ -48,6 +54,8 @@ public class Detail_Frag2 extends Fragment{
         String[] labels = {"위생점수", "맛점수", "어쩌고", "저쩌고", "가격"};
 
         XAxis xAxis = radarChart.getXAxis();
+
+
         xAxis.setValueFormatter(new IndexAxisValueFormatter(labels));
 
         radarChart.setData(radarData);
