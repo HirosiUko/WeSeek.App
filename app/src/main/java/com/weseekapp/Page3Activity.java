@@ -1,6 +1,7 @@
 package com.weseekapp;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
@@ -41,6 +42,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -48,13 +50,12 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class Page3Activity extends Fragment implements OnMapReadyCallback, View.OnClickListener, GoogleMap.OnMarkerClickListener {
+public class Page3Activity extends Fragment implements OnMapReadyCallback, View.OnClickListener {
     @Nullable
 
     private GoogleMap mMap;
     private MapView mapView;
-    private TextView tv_name, tv_adr, tv_star, tv_distance; // 구 레이아웃용, 나중에 삭제
-    private TextView tv_store_id, tv_store_name, tv_store_tel, tv_store_adr, tv_store_hours, tv_store_distance; // 임시, 새 레이아웃용
+    private TextView tv_store_id, tv_store_name, tv_store_tel, tv_store_adr, tv_store_hours, tv_store_distance, tv_store_url; // 상세 페이지 뷰
     private ImageView img_store_img, img_store_thumb, img_store_star_01, img_store_star_02, img_store_star_03;
     private ImageButton btn_pre, btn_next;
     private TextView btn_search;
@@ -65,19 +66,24 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
     private ScaleAnimation scaleAnimation;
 
 
-    String url;
+    String url_id;
+    String url_info;
     RequestQueue requestQueue;
 
-    String[] name; // 업소명
-    String[] location; // 소재지
-    String[] gps; // GPS
-    String[] gpsS;
-    String[] star; // 별 갯수
+    int[] store_id; // 가게 ID
+    String[] store_name; // 업소명
+    String[] store_address; // 소재지
+    String[] store_phone; // 전화번호
+    String[] store_hours; // 운영시간
+    String[] store_url; // 가게 인터넷 주소
+    String[] store_grade; // 별 갯수
+
     LatLng[] loc; // 위치정보
 
     Double curLat, curLon;
 
     LatLng currentLoc;
+    String hours;
     String distance;
 
     ProgressDialog customProgressDialog;
@@ -85,7 +91,6 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.page3, container, false);
-
 
 
         scaleAnimation = new ScaleAnimation(0.7f, 1.0f, 0.7f, 1.0f, Animation.RELATIVE_TO_SELF,
@@ -103,8 +108,6 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
         });
 
 
-
-
         customProgressDialog = new ProgressDialog(view.getContext());
         customProgressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
@@ -113,10 +116,13 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
             requestQueue = Volley.newRequestQueue(view.getContext());
         }
 
+
         tv_store_name = view.findViewById(R.id.tv_store_name);
         tv_store_adr = view.findViewById(R.id.tv_store_adr);
-        tv_star = view.findViewById(R.id.tv_star);
         tv_store_distance = view.findViewById(R.id.tv_store_distance);
+        tv_store_tel = view.findViewById(R.id.tv_store_tel);
+        tv_store_hours = view.findViewById(R.id.tv_store_hours);
+        tv_store_url = view.findViewById(R.id.tv_store_url);
 
         img_store_star_01 = view.findViewById(R.id.img_store_star_01);
         img_store_star_02 = view.findViewById(R.id.img_store_star_02);
@@ -161,7 +167,12 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) { // 지도 띄우기 + 현재위치 받아와서 마커 표시
 
-//        customProgressDialog.show();
+        LayoutInflater inflater2 = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view2 = inflater2.inflate(R.layout.bottom_sheet, null, false);
+        final BottomSheetDialog bottomSheetDialog = new BottomSheetDialog(view2.getContext());
+        bottomSheetDialog.setContentView(view2);
+
+        customProgressDialog.show();
 
         mMap = googleMap;
 
@@ -189,42 +200,29 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
             e.printStackTrace();
         }
 
-        mMap.setOnMarkerClickListener(this);
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(@NonNull Marker marker) {
+                mMap.animateCamera(CameraUpdateFactory.zoomTo(17));
 
-//        customProgressDialog.dismiss();
+
+                cnt = Integer.parseInt(marker.getId().replaceAll("[^\\d]", ""))-1;
+                Log.d("태그", ""+cnt);
+
+                getDistance(loc[cnt].latitude, loc[cnt].longitude);
+//                infoset(cnt);
+                bottomSheetDialog.show();
+
+                return false;
+            }
+        });
+
+        customProgressDialog.dismiss();
 
 
 
     }
 
-    private void getMarkerItem(){
-        ArrayList<MarkerItem> markerItemArrayList = new ArrayList<>();
-
-//        for (MarkerItem markerItem : markerItemArrayList){
-//            addMarker(markerItem, false);
-//        }
-    }
-
-    @Override
-    public boolean onMarkerClick(@NonNull Marker marker) {
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(17));
-
-//        String title = marker.getTitle();
-//        String snippet = marker.getSnippet();
-//        double lat = marker.getPosition().latitude;
-//        double lon = marker.getPosition().longitude;
-//        Log.d("좌표", lat + ", " + lon);
-//        marker.remove();
-//        addMarker(title, snippet, lat, lon, true);
-
-        cnt = Integer.parseInt(marker.getId().replaceAll("[^\\d]", ""))-1;
-        Log.d("태그", ""+cnt);
-
-        getDistance(loc[cnt].latitude, loc[cnt].longitude);
-        infoset(cnt);
-
-        return false;
-    }
 
 
     private class dbSet extends Thread { // db에서 데이터 가져오기
@@ -233,7 +231,7 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
 
             StringRequest request = new StringRequest(
                     Request.Method.GET,
-                    url = "https://dokkydokky.herokuapp.com/getStoreByGPS?lat=" + curLat + "&lon=" + curLon + "&dis=1500",
+                    url_id = "https://kirakirahikari.herokuapp.com/store_api/getStoreByGPS?lat=" + curLat + "&lon=" + curLon + "&dis=1500",
                     new Response.Listener<String>() {
                         @Override
                         public void onResponse(String response) {
@@ -243,28 +241,43 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
                             try {
                                 JSONArray jsonArray = new JSONArray(response);
 
-                                name = new String[jsonArray.length()];
-                                location = new String[jsonArray.length()];
-                                gps = new String[jsonArray.length()];
-                                star = new String[jsonArray.length()];
+                                store_id = new int[jsonArray.length()];
+                                store_name = new String[jsonArray.length()];
+                                store_address = new String[jsonArray.length()];
+                                store_phone = new String[jsonArray.length()];
+                                store_hours = new String[jsonArray.length()];
+                                store_url = new String[jsonArray.length()];
+
+
+                                store_grade = new String[jsonArray.length()];
                                 loc = new LatLng[jsonArray.length()];
 
                                 for (int i = 0; i < jsonArray.length(); i++) {
 
                                     JSONObject jsonObject = (JSONObject) jsonArray.get(i);
 
-                                    name[i] = jsonObject.getString("업소명");
-                                    location[i] = jsonObject.getString("소재지");
-                                    gps[i] = jsonObject.getString("GPS");
-                                    star[i] = jsonObject.getString("별점");
-                                    gpsS = gps[i].split(",", 2);
-                                    float a1 = Float.parseFloat(gpsS[0]);
-                                    float a2 = Float.parseFloat(gpsS[1]);
-                                    loc[i] = new LatLng(a1, a2);
+                                    store_id[i] = jsonObject.getInt("id");
+                                    store_name[i] = jsonObject.getString("place_name");
+                                    store_address[i] = jsonObject.getString("address_name");
+                                    store_phone[i] = jsonObject.getString("phone");
+                                    store_url[i] = jsonObject.getString("place_url");
+
+                                    store_grade[i] = jsonObject.getString("evl_grade");
+
+                                    Double lat = jsonObject.getDouble("y");
+                                    Double lon = jsonObject.getDouble("x");
+
+                                    loc[i] = new LatLng(lat, lon);
 
                                 }
 
-                                Log.d("응답성공", "DB 로드 성공!");
+                                Log.d("응답", "storeid : " + store_id.length);
+//                                for (int i = 0; i < store_id.length; i++){
+//                                    getInfo(store_id[i]);
+//                                    store_hours[i] = hours;
+//                                }
+
+                                Log.d("응답성공", "ID 로드 성공!");
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
@@ -281,8 +294,9 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
 
             );
 
-            Log.d("에러", url);
             requestQueue.add(request);
+            Log.d("응답", url_id);
+
         }
     }
 
@@ -307,47 +321,82 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
         return distance;
     }
 
-    public void infoset(int cnt){
-        tv_store_name.setText(name[cnt]);
-        tv_store_adr.setText(location[cnt]);
+    public String getInfo(int store_id){ // 개선필요
+        StringRequest request = new StringRequest(
+                Request.Method.GET,
+                url_info = "https://kirakirahikari.herokuapp.com/store_api/getStoreInfoFromId?store_id=" + store_id,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // 응답 성공 시
+                        Log.d("응답성공", response);
+                        String result = "";
+                        try {
+                            JSONArray jsonArray = new JSONArray(response);
+                            for (int i = 0; i < jsonArray.length(); i++){
+                                JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+                                hours = jsonObject.getString("store_hours");
+                            }
 
-        if (star[cnt].equals("★")) {
+
+                            Log.d("응답성공", "ID 로드 성공!");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // 응답 실패 시
+                        Log.d("응답", "응답 실패");
+                    }
+                }
+
+        );
+
+        requestQueue.add(request);
+        Log.d("응답", url_id);
+
+        return hours;
+    }
+
+    public void infoset(int cnt){
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc[cnt], 17));
+
+        tv_store_name.setText(store_name[cnt]);
+        tv_store_adr.setText(store_address[cnt]);
+        if (store_phone.equals("")){
+            tv_store_tel.setText("정보 없음");
+        }else{
+            tv_store_tel.setText(store_phone[cnt]);
+        }
+        tv_store_url.setText(store_url[cnt]);
+        tv_store_hours.setText(store_hours[cnt]);
+
+        if (store_grade[cnt].equals("★")) {
             img_store_star_01.setImageResource(R.drawable.ic_action_star1);
             img_store_star_02.setImageResource(R.drawable.ic_action_star0);
             img_store_star_03.setImageResource(R.drawable.ic_action_star0);
-        } else if (star[cnt].equals("★★")){
+        } else if (store_grade[cnt].equals("★★")){
             img_store_star_01.setImageResource(R.drawable.ic_action_star1);
             img_store_star_02.setImageResource(R.drawable.ic_action_star1);
             img_store_star_03.setImageResource(R.drawable.ic_action_star0);
-        } else if (star[cnt].equals("★★★")){
+        } else if (store_grade[cnt].equals("★★★")){
             img_store_star_01.setImageResource(R.drawable.ic_action_star1);
             img_store_star_02.setImageResource(R.drawable.ic_action_star1);
             img_store_star_03.setImageResource(R.drawable.ic_action_star1);
         }
 
+//        getInfo(store_id[cnt]);
 
+        tv_store_hours.setText(hours);
         tv_store_distance.setText(distance);
-        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc[cnt], 17));
-    }
 
-//    private Marker addMarker(String title, String snippet, double lat, double lon, boolean isSelectedMarker){
-//        LatLng position = new LatLng(lat, lon);
-//
-//        BitmapDrawable bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.markerblue);
-//        Bitmap b = bitmapdraw.getBitmap();
-//        Bitmap blueMarker = Bitmap.createScaledBitmap(b, 80, 120, false);
-//
-//
-//        MarkerOptions markerOptions = new MarkerOptions();
-//        markerOptions
-//                .position(position)
-//                .title(title)
-//                .snippet(snippet)
-//                .icon(BitmapDescriptorFactory.fromBitmap(blueMarker));
-//
-//        return mMap.addMarker(markerOptions);
-//
-//    }
+
+
+    }
 
 
     public void onClick(View view) { // 버튼 클릭 이벤트
@@ -358,19 +407,21 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
 
                 Log.d("응답성공", "마커 표시 성공!");
 
-                for (int i = 0; i < name.length; i++) { // db에서 받아온 정보로 마커 표시
+                for (int i = 0; i < store_id.length; i++) { // db에서 받아온 정보로 마커 표시
 
                     MarkerOptions markerOptions = new MarkerOptions();
                     markerOptions
                             .position(loc[i])
-                            .title(name[i])
-                            .snippet(location[i]);
+                            .title(store_name[i])
+                            .snippet(store_address[i]);
 
                     mMap.addMarker(markerOptions);
 
                 }
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLoc, 15));
                 cnt = 0;
+
+
 
             }else if (view.getId() == R.id.btn_pre){
                 if (cnt > 0){
@@ -381,20 +432,20 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
 
 
                 }else if (cnt == 0){
-                    cnt = name.length -1;
+                    cnt = store_id.length -1;
                     Log.d("cnt", ""+cnt);
                     getDistance(loc[cnt].latitude, loc[cnt].longitude);
                     infoset(cnt);
                 }
 
             }else if (view.getId() == R.id.btn_next){
-                if (cnt < name.length -1){
+                if (cnt < store_id.length -1){
                     cnt++;
                     Log.d("cnt", ""+cnt);
                     getDistance(loc[cnt].latitude, loc[cnt].longitude);
                     infoset(cnt);
 
-                }else if (cnt == name.length -1){
+                }else if (cnt == store_id.length -1){
                     cnt = 0;
                     Log.d("cnt", ""+cnt);
                     getDistance(loc[cnt].latitude, loc[cnt].longitude);
