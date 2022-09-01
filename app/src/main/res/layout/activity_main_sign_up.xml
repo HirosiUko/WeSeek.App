@@ -29,14 +29,14 @@
         android:orientation="vertical">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/circle_iv2"
+            android:id="@+id/signup_img"
             android:layout_width="180dp"
             android:layout_height="180dp"
             android:layout_gravity="center"
             android:backgroundTint="#FFFCFC"
             android:elevation="15dp"
             android:paddingLeft="5dp"
-            android:src="@drawable/sign_up_person"
+            android:src="@drawable/cir_img7"
             app:civ_border_color="#FFFFFF"
             app:civ_border_overlay="true"
             app:civ_border_width="5dp" />
