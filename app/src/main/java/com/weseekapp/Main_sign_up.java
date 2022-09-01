@@ -3,6 +3,7 @@ package com.weseekapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,10 +26,13 @@ import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class Main_sign_up extends AppCompatActivity {
 
     private EditText edt_signUp_nick, edt_signUp_id, edt_signUp_pw;
     private ImageView btn_signUp_check;
+    private CircleImageView signup_img;
 
     // 실제로 해당 Server에 요청하는 객체
     private RequestQueue queue;
@@ -41,6 +45,27 @@ public class Main_sign_up extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_sign_up);
+
+        signup_img = findViewById(R.id.signup_img);
+
+        signup_img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Drawable drawable = signup_img.getDrawable();
+                alert_scaner alert = new alert_scaner(Main_sign_up.this, drawable);
+                alert.callFun();
+                alert.setModifyReturnListener(new alert_scaner.ModifyReturnListener() {
+                    @Override
+                    public void afterModify(Drawable context) {
+                        signup_img.setImageDrawable(drawable);
+                    }
+                });
+            }
+        });
+
+
+
+
 
         edt_signUp_nick = findViewById(R.id.edt_signUp_nick);
         edt_signUp_id = findViewById(R.id.edt_signUp_id);

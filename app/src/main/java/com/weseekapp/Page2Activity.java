@@ -12,6 +12,7 @@ import android.view.animation.ScaleAnimation;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -66,19 +67,19 @@ public class Page2Activity extends Fragment {
         arrayList = new ArrayList<>();
         page2Adapter = new Page2Adapter();
 
-        page2Adapter.addItem(new Page2VO(R.drawable.ic_action_camera,"aaa","sdfsdf", (CompoundButton) view.findViewById(R.id.button_favorite_page2)));
-        page2Adapter.addItem(new Page2VO(R.drawable.ic_action_detail,"bbb","adfasdfasf",(CompoundButton) view.findViewById(R.id.button_favorite_page2)));
-        page2Adapter.addItem(new Page2VO(R.drawable.ic_action_camera,"sdfsdf","sdfsdf",(CompoundButton) view.findViewById(R.id.button_favorite_page2)));
-        page2Adapter.addItem(new Page2VO(R.drawable.ic_action_camera,"fgf","sdfsdf",(CompoundButton) view.findViewById(R.id.button_favorite_page2)));
-        page2Adapter.addItem(new Page2VO(R.drawable.ic_action_camera,"eeee","sdfsdf",(CompoundButton) view.findViewById(R.id.button_favorite_page2)));
-        page2Adapter.addItem(new Page2VO(R.drawable.ic_action_camera,"assss","sdfsdf",(CompoundButton) view.findViewById(R.id.button_favorite_page2)));
-        page2Adapter.addItem(new Page2VO(R.drawable.ic_action_camera,"ww","sdfsdf",(CompoundButton) view.findViewById(R.id.button_favorite_page2)));
-        page2Adapter.addItem(new Page2VO(R.drawable.ic_action_camera,"yyyyy","sdfsdf",(CompoundButton) view.findViewById(R.id.button_favorite_page2)));
-        page2Adapter.addItem(new Page2VO(R.drawable.ic_action_camera,"nnnnn","sdfsdf",(CompoundButton) view.findViewById(R.id.button_favorite_page2)));
-        page2Adapter.addItem(new Page2VO(R.drawable.ic_action_camera,"111","sdfsdf",(CompoundButton) view.findViewById(R.id.button_favorite_page2)));
-        page2Adapter.addItem(new Page2VO(R.drawable.ic_action_camera,"aaaaaa","sdfsdf",(CompoundButton) view.findViewById(R.id.button_favorite_page2)));
-        page2Adapter.addItem(new Page2VO(R.drawable.ic_action_camera,"pppppp","sdfsdf",(CompoundButton) view.findViewById(R.id.button_favorite_page2)));
-        page2Adapter.addItem(new Page2VO(R.drawable.ic_action_camera,"jjjjj","sdfsdf",(CompoundButton) view.findViewById(R.id.button_favorite_page2)));
+        page2Adapter.addItem(new Page2VO(R.drawable.ic_action_camera,"aaa","광주광역시 북구 어쩌고동 어쩌고길 11-1", (CompoundButton) view.findViewById(R.id.button_favorite_page2), (ImageView) view.findViewById(R.id.page2_coupon)));
+        page2Adapter.addItem(new Page2VO(R.drawable.ic_action_detail,"bbb","adfasdfasf",(CompoundButton) view.findViewById(R.id.button_favorite_page2), (ImageView) view.findViewById(R.id.page2_coupon)));
+        page2Adapter.addItem(new Page2VO(R.drawable.ic_action_camera,"sdfsdf","sdfsdf",(CompoundButton) view.findViewById(R.id.button_favorite_page2), (ImageView) view.findViewById(R.id.page2_coupon)));
+        page2Adapter.addItem(new Page2VO(R.drawable.ic_action_camera,"fgf","sdfsdf",(CompoundButton) view.findViewById(R.id.button_favorite_page2), (ImageView) view.findViewById(R.id.page2_coupon)));
+        page2Adapter.addItem(new Page2VO(R.drawable.ic_action_camera,"eeee","sdfsdf",(CompoundButton) view.findViewById(R.id.button_favorite_page2), (ImageView) view.findViewById(R.id.page2_coupon)));
+        page2Adapter.addItem(new Page2VO(R.drawable.ic_action_camera,"assss","sdfsdf",(CompoundButton) view.findViewById(R.id.button_favorite_page2),(ImageView) view.findViewById(R.id.page2_coupon)));
+        page2Adapter.addItem(new Page2VO(R.drawable.ic_action_camera,"ww","sdfsdf",(CompoundButton) view.findViewById(R.id.button_favorite_page2),(ImageView) view.findViewById(R.id.page2_coupon)));
+        page2Adapter.addItem(new Page2VO(R.drawable.ic_action_camera,"yyyyy","sdfsdf",(CompoundButton) view.findViewById(R.id.button_favorite_page2),(ImageView) view.findViewById(R.id.page2_coupon)));
+        page2Adapter.addItem(new Page2VO(R.drawable.ic_action_camera,"nnnnn","sdfsdf",(CompoundButton) view.findViewById(R.id.button_favorite_page2), (ImageView) view.findViewById(R.id.page2_coupon)));
+        page2Adapter.addItem(new Page2VO(R.drawable.ic_action_camera,"111","sdfsdf",(CompoundButton) view.findViewById(R.id.button_favorite_page2), (ImageView) view.findViewById(R.id.page2_coupon)));
+        page2Adapter.addItem(new Page2VO(R.drawable.ic_action_camera,"aaaaaa","sdfsdf",(CompoundButton) view.findViewById(R.id.button_favorite_page2), (ImageView) view.findViewById(R.id.page2_coupon)));
+        page2Adapter.addItem(new Page2VO(R.drawable.ic_action_camera,"pppppp","sdfsdf",(CompoundButton) view.findViewById(R.id.button_favorite_page2),(ImageView) view.findViewById(R.id.page2_coupon)));
+        page2Adapter.addItem(new Page2VO(R.drawable.ic_action_camera,"jjjjj","sdfsdf",(CompoundButton) view.findViewById(R.id.button_favorite_page2),(ImageView) view.findViewById(R.id.page2_coupon)));
 
         for (int i = 0; i < page2Adapter.getItemCount(); i++){
             arrayList.add(page2Adapter.getItem(i));

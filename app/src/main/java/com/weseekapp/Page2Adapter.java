@@ -1,33 +1,25 @@
 package com.weseekapp;
 
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.BounceInterpolator;
 import android.view.animation.ScaleAnimation;
-import android.widget.Adapter;
-import android.widget.BaseAdapter;
 import android.widget.CompoundButton;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Locale;
 
 public class Page2Adapter extends RecyclerView.Adapter<ViewHolder>{
 
     private CompoundButton button_favoite_page2;
     private BounceInterpolator bounceInterpolator;
-
+    private ImageView page2_coupon;
 
     public interface OnItemClickListener {
         void onItemClick(int pos);
@@ -86,6 +78,9 @@ public class Page2Adapter extends RecyclerView.Adapter<ViewHolder>{
                 compoundButton.startAnimation(scaleAnimation);
             }
         });
+
+
+        page2_coupon = (ImageView) view.findViewById(R.id.page2_coupon);
 
 
 
