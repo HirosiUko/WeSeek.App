@@ -31,7 +31,8 @@ def read_DB(dbfile):
         gpsy.append(y)
     fda_df['GPSX'] = pd.Series(gpsx)
     fda_df['GPSY'] = pd.Series(gpsy)
-    del fda_df['GPS']
+    # del fda_df['GPS']
+    # fda_df['GPS'] = pd.Series(gpsx)+','+pd.Series(gpsy)
 
     new_fda_list = []
     for lat, long, name, hid, star, evl_fda \
@@ -43,6 +44,7 @@ def read_DB(dbfile):
         tmp_dic['evl_num'] = hid
         tmp_dic['evl_grade'] = star
         tmp_dic['evl_fda'] = evl_fda
+        tmp_dic['GPS'] = f"{tmp_dic['y']}, {tmp_dic['x']}"
         new_fda_list.append(tmp_dic)
 
     new_fda_df = pd.read_json(json.dumps(new_fda_list, ensure_ascii=False))
@@ -175,4 +177,4 @@ def main2():
 
 if __name__ == '__main__':
     main()
-    main2()
+    # main2()
