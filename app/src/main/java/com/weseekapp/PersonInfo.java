@@ -6,6 +6,7 @@ public class PersonInfo {
     private String nickName;
     private String email;
     private String lastVisit;
+    private boolean isLogin = false;
 
     public String getLastVisit() {
         return lastVisit;
