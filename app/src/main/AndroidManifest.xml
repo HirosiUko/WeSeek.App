@@ -9,18 +9,30 @@
     <uses-permission
         android:name="android.permission.INTERACT_ACROSS_USERS_FULL"
         tools:ignore="ProtectedPermissions" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+   <!--uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+   <uses-permission android:name="android.permission.CAMERA"/>
+   <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/-->
+
+    <uses-feature android:name="android.hardware.camera2"/>
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/ic_main"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_main_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Material3.Light.NoActionBar"
         android:usesCleartextTraffic="true"
-        tools:targetApi="31" >
+        tools:targetApi="31">
+            <!--<provider
+                android:authorities="Page4Activity"
+                android:name="android.content.SearchRecentSuggestionsProvider"
+                android:exported="false"
+                android:grantUriPermissions="true"></provider>
+                <meta-data
+                    android:name="android.support.v4.File_PROVIDER_PATHS"
+                    android:resource="@xml/file_paths"/-->
         <activity
             android:name=".SplashActivity"
             android:exported="false">
