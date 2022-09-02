@@ -85,7 +85,7 @@ public class Page4Activity extends Fragment {
         view.findViewById(R.id.btn_login).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "너는 이미 눌렀다.", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "너는 이미 눌렀다.", Toast.LENGTH_SHORT).show();
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 Fragment fragment = new Login_Frag();
@@ -99,7 +99,13 @@ public class Page4Activity extends Fragment {
         view.findViewById(R.id.btn_join).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), "오마에와 모 신지떼르!", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "오마에와 모 신지떼르!", Toast.LENGTH_SHORT).show();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                Fragment fragment = new Join_Frag();
+//                fragmentTransaction.add(R.id.frame, fragment);
+                fragmentTransaction.replace(R.id.frame, fragment);
+                fragmentTransaction.commit();
                 alertDialog.dismiss();
             }
         });
