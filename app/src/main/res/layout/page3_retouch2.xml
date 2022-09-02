@@ -46,7 +46,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center|start"
-                    android:text="062 123 4567"
+                    android:hint="전화번호"
                     android:textSize="22sp" />
             </LinearLayout>
 
@@ -67,7 +67,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center_vertical"
-                        android:text="AM 10:00 - PM 21:00"
+                        android:hint="영업시간"
                         android:textSize="20sp" />
                 </LinearLayout>
 
@@ -84,7 +84,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center|start|center_horizontal"
-                    android:text="주소" />
+                    android:hint="주소" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

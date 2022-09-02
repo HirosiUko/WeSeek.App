@@ -1,13 +1,17 @@
 package com.weseekapp;
 
 import android.Manifest;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,6 +27,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ToggleButton;
 
 import androidx.annotation.NonNull;
@@ -36,6 +41,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -58,6 +64,8 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
     private GoogleMap mMap;
     private MapView mapView;
     private TextView tv_name, tv_star, tv_distance, tv_adr; // 심플 페이지 뷰
+    private ImageView img_detail;
+
     private TextView tv_store_id, tv_store_name, tv_store_tel, tv_store_adr, tv_store_hours, tv_store_distance, tv_store_url; // 상세 페이지 뷰
 
     private Button btn_link, btn_call, btn_cancel; // 상세 페이지 3버튼
@@ -86,11 +94,12 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
 
     LatLng[] loc; // 위치정보
 
-    Double curLat, curLon;
+    Double curLat, curLon; // 현재 위,경도
 
-    LatLng currentLoc;
-    String hours;
-    String distance;
+    LatLng currentLoc; // 현재위치
+    String hours; // 운영시간
+    String distance; // 거리
+    String imgUrl; // 이미지 URL
 
     ProgressDialog customProgressDialog;
 
@@ -103,6 +112,8 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.page3, container, false);
+
+        isOpen = false;
 
         sliding = (LinearLayout) view.findViewById(R.id.sliding);
         slidingUp= AnimationUtils.loadAnimation(view.getContext(), R.anim.sliding_up);
@@ -142,6 +153,7 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
         tv_adr = view.findViewById(R.id.tv_adr);
         tv_distance = view.findViewById(R.id.tv_distance);
         tv_star = view.findViewById(R.id.tv_star);
+        img_detail = view.findViewById(R.id.img_detail);
 
         tv_store_name = view.findViewById(R.id.tv_store_name); // 상세 페이지 뷰
         tv_store_adr = view.findViewById(R.id.tv_store_adr);
@@ -153,6 +165,8 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
         btn_link = view.findViewById(R.id.btn_link);
         btn_call = view.findViewById(R.id.btn_call);
         btn_cancel = view.findViewById(R.id.btn_cancel);
+
+        img_store_thumb = view.findViewById(R.id.img_store_thumb);
 
         img_store_star_01 = view.findViewById(R.id.img_store_star_01);
         img_store_star_02 = view.findViewById(R.id.img_store_star_02);
@@ -167,6 +181,10 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
         btn_next.setOnClickListener(this);
 
         btn_cancel.setOnClickListener(this);
+        btn_call.setOnClickListener(this);
+        btn_link.setOnClickListener(this);
+
+        img_detail.setOnClickListener(this);
 
         mapView = view.findViewById(R.id.mapview);
         Log.d("에러", "onCreateView: ");
@@ -252,19 +270,28 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(@NonNull Marker marker) {
-                mMap.animateCamera(CameraUpdateFactory.zoomTo(17));
+                try {
+                    mMap.animateCamera(CameraUpdateFactory.zoomTo(17));
 
 
-                cnt = Integer.parseInt(marker.getId().replaceAll("[^\\d]", ""))-1;
-                Log.d("태그", ""+cnt);
+                    cnt = Integer.parseInt(marker.getId().replaceAll("[^\\d]", ""))-1;
+                    Log.d("태그", ""+cnt);
 
-//                bottomSheetDialog.show();
-                getDistance(loc[cnt].latitude, loc[cnt].longitude);
-                infoset(cnt);
-                infoset_simple(cnt);
+                    getDistance(loc[cnt].latitude, loc[cnt].longitude);
+                    infoset(cnt);
+                    infoset_simple(cnt);
+                    getInfo(store_id[cnt]);
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
 
                 if (isOpen){ // 슬라이딩 레이아웃이 열려져 있으면
                     // 보류
+                } else if (marker.getTitle().equals("현재위치")){
+                    if (isOpen){ // 슬라이딩 레이아웃이 열려져 있으면
+                        sliding.startAnimation(slidingDown); // 슬라이딩 레이아웃 닫기
+                    }
+
                 } else { // 슬라이딩 레이아웃이 닫혀져 있으면
                     sliding.setVisibility(View.VISIBLE); // 슬라이딩 레이아웃을 보이게하기
                     sliding.startAnimation(slidingUp); // 슬라이딩 레이아웃 열기
@@ -272,6 +299,15 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
 
 
                 return false;
+            }
+        });
+
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(@NonNull LatLng latLng) {
+                if (isOpen){ // 슬라이딩 레이아웃이 열려져 있으면
+                    sliding.startAnimation(slidingDown); // 슬라이딩 레이아웃 닫기
+                }
             }
         });
 
@@ -392,10 +428,34 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
                             for (int i = 0; i < jsonArray.length(); i++){
                                 JSONObject jsonObject = (JSONObject) jsonArray.get(i);
                                 hours = jsonObject.getString("store_hours");
+                                imgUrl = jsonObject.getString("store_img");
+                                Log.d("응답, imgUrls", imgUrl);
                             }
 
+                            if (hours.equals("N\\/A")){
+                                tv_store_hours.setText("정보 없음");
+                            }else{
+                                tv_store_hours.setText(hours);
+                            }
+                            Log.d("응답", hours);
 
-                            Log.d("응답성공", "ID 로드 성공!");
+                            String[] imgUrls = imgUrl.split(",");
+                            String urlt = "";
+
+                            for (int i = 0; i < imgUrls.length; i++){
+                                if (imgUrls[i].length() != 0){
+                                    Log.d("응답, 길이", "" + imgUrls[i].length());
+                                    urlt = imgUrls[i];
+                                    break;
+                                }
+                            }
+
+                            Log.d("응답, 길이", urlt);
+
+                            Log.d("응답, imgUrls", urlt);
+                            Glide.with(getContext()).load(urlt).into(img_store_thumb);
+
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -454,11 +514,6 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
 
         tv_store_tel.setText(store_phone[cnt]);
         tv_store_url.setText(store_url[cnt]);
-        tv_store_hours.setText(store_hours[cnt]);
-        
-//        getInfo(store_id[cnt]);
-
-        tv_store_hours.setText(hours);
 
 
     }
@@ -509,7 +564,6 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
                     Log.d("cnt", ""+cnt);
                     getDistance(loc[cnt].latitude, loc[cnt].longitude);
                     infoset_simple(cnt);
-                    infoset(cnt);
 
                 }else if (cnt == store_id.length -1){
                     cnt = 0;
@@ -523,6 +577,30 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
                     sliding.startAnimation(slidingDown);
                 }
 
+            }else if (view.getId() == R.id.btn_call){
+                String num = tv_store_tel.getText().toString().replace("-", "");
+                Log.d("응답", num);
+                Uri uri = Uri.parse("tel:"+num);
+                Intent intent = new Intent(Intent.ACTION_DIAL, uri);
+                startActivity(intent);
+            }else if (view.getId() == R.id.btn_link){
+                ClipboardManager clipboard = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText("label", tv_store_url.getText().toString());
+                Toast.makeText(getActivity().getApplicationContext(),"클립보드에 복사되었습니다.", Toast.LENGTH_SHORT).show();
+                clipboard.setPrimaryClip(clip);
+            }
+
+            else if (view.getId() == R.id.img_detail){
+                if (isOpen){ // 슬라이딩 레이아웃이 열려져 있으면
+                    // 보류
+                } else { // 슬라이딩 레이아웃이 닫혀져 있으면
+                    sliding.setVisibility(View.VISIBLE); // 슬라이딩 레이아웃을 보이게하기
+                    sliding.startAnimation(slidingUp); // 슬라이딩 레이아웃 열기
+                    Log.d("응답", ""+cnt);
+                    getDistance(loc[cnt].latitude, loc[cnt].longitude);
+                    infoset(cnt);
+                    getInfo(store_id[cnt]);
+                }
             }
         }catch (Exception e){
             e.printStackTrace();
