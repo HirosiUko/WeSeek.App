@@ -9,7 +9,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="100dp"
         android:orientation="vertical">
 
         <TextView
@@ -25,13 +25,13 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="130dp"
         android:orientation="vertical">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/signup_img"
             android:layout_width="180dp"
-            android:layout_height="180dp"
+            android:layout_height="100dp"
             android:layout_gravity="center"
             android:backgroundTint="#FFFCFC"
             android:elevation="15dp"
@@ -44,26 +44,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <EditText
-            android:id="@+id/edt_signUp_nick"
-            android:layout_width="230dp"
-            android:layout_height="50dp"
-            android:background="@drawable/button_pattern"
-            android:elevation="10dp"
-            android:ems="10"
-            android:gravity="center"
-            android:hint="닉네임"
-            android:inputType="textPersonName"
-            android:textColorHint="#807D7D" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="60dp"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -71,18 +52,18 @@
             android:id="@+id/edt_signUp_id"
             android:layout_width="230dp"
             android:layout_height="50dp"
-            android:background="@drawable/button_pattern2"
-            android:elevation="10dp"
+            android:background="@drawable/button_pattern"
+            android:elevation="5dp"
             android:ems="10"
             android:gravity="center"
             android:hint="아이디"
             android:inputType="textPersonName"
-            android:textColorHint="#767171" />
+            android:textColorHint="#807D7D" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="60dp"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -90,14 +71,90 @@
             android:id="@+id/edt_signUp_pw"
             android:layout_width="230dp"
             android:layout_height="50dp"
-            android:background="@drawable/button_pattern3"
-            android:elevation="10dp"
+            android:background="@drawable/button_pattern2"
+            android:elevation="5dp"
             android:ems="10"
             android:gravity="center"
             android:hint="비밀번호"
             android:inputType="textPassword"
-            android:textColorHint="#E8DFDF" />
+            android:textColorHint="#5F5C5C" />
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/edt_signUp_pw2"
+            android:layout_width="230dp"
+            android:layout_height="50dp"
+            android:background="@drawable/button_pattern3"
+            android:elevation="5dp"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="비밀번호확인"
+            android:inputType="textPassword"
+            android:textColorHint="#E8E8E8" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/edt_singUp_email"
+            android:layout_width="230dp"
+            android:layout_height="50dp"
+            android:background="@drawable/button_pattern4"
+            android:elevation="5dp"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="이메일"
+            android:inputType="textEmailAddress"
+            android:textColorHint="#FFFFFF" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/edt_signUp_nick"
+            android:layout_width="230dp"
+            android:layout_height="50dp"
+            android:background="@drawable/button_pattern5"
+            android:elevation="5dp"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="닉네임"
+            android:inputType="textPersonName"
+            android:textColorHint="#FFFFFF" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/editTextTextPersonName2"
+            android:layout_width="230dp"
+            android:layout_height="50dp"
+            android:background="@drawable/button_pattern6"
+            android:elevation="5dp"
+            android:ems="10"
+            android:gravity="center"
+            android:hint="프로필"
+            android:inputType="textPersonName"
+            android:textColorHint="#FFFFFF" />
     </LinearLayout>
 
     <LinearLayout
@@ -108,7 +165,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical"/>
+            android:orientation="vertical" />
 
         <LinearLayout
             android:layout_width="match_parent"
