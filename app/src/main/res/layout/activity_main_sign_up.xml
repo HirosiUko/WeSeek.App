@@ -16,6 +16,7 @@
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:fontFamily="cursive"
             android:gravity="center"
             android:text="sign up"
@@ -25,13 +26,14 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="130dp"
+        android:layout_height="815dp"
+        android:layout_weight="1"
         android:orientation="vertical">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/signup_img"
             android:layout_width="180dp"
-            android:layout_height="100dp"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:backgroundTint="#FFFCFC"
             android:elevation="15dp"
@@ -44,7 +46,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -63,7 +66,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -83,7 +87,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -102,7 +107,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -121,7 +127,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -140,7 +147,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
         android:gravity="center"
         android:orientation="vertical">
 
@@ -159,13 +167,16 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp">
+        android:layout_height="match_parent"
+        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:orientation="vertical" />
+            android:orientation="vertical" >
+
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -182,4 +193,5 @@
                 app:srcCompat="@drawable/ic_action_joinin" />
         </LinearLayout>
     </LinearLayout>
+
 </LinearLayout>
