@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
@@ -67,7 +66,7 @@ public class Main_sign_up extends AppCompatActivity {
 
 
 
-        edt_signUp_nick = findViewById(R.id.edt_signUp_nick);
+        edt_signUp_nick = findViewById(R.id.edt_signUp_id);
         edt_signUp_id = findViewById(R.id.edt_signUp_id);
         edt_signUp_pw = findViewById(R.id.edt_signUp_pw);
 
