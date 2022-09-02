@@ -47,7 +47,7 @@ public class Main_sign_up extends AppCompatActivity {
         setContentView(R.layout.activity_main_sign_up);
 
         signup_img = findViewById(R.id.signup_img);
-
+        signup_img.setImageResource(ImageInfo.loginImage);
         signup_img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

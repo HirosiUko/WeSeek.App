@@ -1,6 +1,7 @@
 package com.weseekapp;
 
 import android.content.Context;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,8 @@ import android.view.animation.BounceInterpolator;
 import android.view.animation.ScaleAnimation;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -76,6 +79,10 @@ public class Page2Adapter extends RecyclerView.Adapter<ViewHolder>{
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 compoundButton.startAnimation(scaleAnimation);
+                Toast toast = Toast.makeText(context, "찜!", Toast.LENGTH_SHORT);
+
+
+                toast.show();
             }
         });
 
@@ -86,6 +93,7 @@ public class Page2Adapter extends RecyclerView.Adapter<ViewHolder>{
 
         return viewHolder;
     }
+
 
 
 

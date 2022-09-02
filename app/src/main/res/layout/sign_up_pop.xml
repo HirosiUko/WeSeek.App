@@ -41,6 +41,12 @@
                         android:id="@+id/pop_img1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/pop_img_pattern"
+                        android:paddingLeft="3dp"
+                        android:paddingTop="3dp"
+                        android:paddingRight="3dp"
+                        android:paddingBottom="3dp"
+                        android:scaleType="fitXY"
                         app:srcCompat="@drawable/cir_img2" />
                 </LinearLayout>
 
@@ -54,6 +60,12 @@
                         android:id="@+id/pop_img2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/pop_img_pattern"
+                        android:paddingLeft="3dp"
+                        android:paddingTop="3dp"
+                        android:paddingRight="3dp"
+                        android:paddingBottom="3dp"
+                        android:scaleType="fitCenter"
                         app:srcCompat="@drawable/cir_img11" />
                 </LinearLayout>
 
@@ -67,6 +79,11 @@
                         android:id="@+id/pop_img3"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:background="@drawable/pop_img_pattern"
+                        android:paddingLeft="3dp"
+                        android:paddingTop="3dp"
+                        android:paddingRight="3dp"
+                        android:paddingBottom="3dp"
                         app:srcCompat="@drawable/cir_img3" />
                 </LinearLayout>
             </LinearLayout>
@@ -86,7 +103,12 @@
                         android:id="@+id/pop_img4"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/cir_img4" />
+                        app:srcCompat="@drawable/cir_img4"
+                        android:background="@drawable/pop_img_pattern"
+                        android:paddingLeft="3dp"
+                        android:paddingTop="3dp"
+                        android:paddingRight="3dp"
+                        android:paddingBottom="3dp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -99,7 +121,12 @@
                         android:id="@+id/pop_img5"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/cir_img5" />
+                        app:srcCompat="@drawable/cir_img5"
+                        android:background="@drawable/pop_img_pattern"
+                        android:paddingLeft="3dp"
+                        android:paddingTop="3dp"
+                        android:paddingRight="3dp"
+                        android:paddingBottom="3dp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -112,7 +139,12 @@
                         android:id="@+id/pop_img6"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/cir_img6" />
+                        app:srcCompat="@drawable/cir_img6"
+                        android:background="@drawable/pop_img_pattern"
+                        android:paddingLeft="3dp"
+                        android:paddingTop="3dp"
+                        android:paddingRight="3dp"
+                        android:paddingBottom="3dp"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -131,7 +163,12 @@
                         android:id="@+id/pop_img7"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/cir_img9" />
+                        app:srcCompat="@drawable/cir_img9"
+                        android:background="@drawable/pop_img_pattern"
+                        android:paddingLeft="3dp"
+                        android:paddingTop="3dp"
+                        android:paddingRight="3dp"
+                        android:paddingBottom="3dp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -144,7 +181,12 @@
                         android:id="@+id/pop_img8"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/cir_img7" />
+                        app:srcCompat="@drawable/cir_img7"
+                        android:background="@drawable/pop_img_pattern"
+                        android:paddingLeft="3dp"
+                        android:paddingTop="3dp"
+                        android:paddingRight="3dp"
+                        android:paddingBottom="3dp"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -157,7 +199,12 @@
                         android:id="@+id/pop_img9"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        app:srcCompat="@drawable/cir_img10" />
+                        app:srcCompat="@drawable/cir_img10"
+                        android:background="@drawable/pop_img_pattern"
+                        android:paddingLeft="3dp"
+                        android:paddingTop="3dp"
+                        android:paddingRight="3dp"
+                        android:paddingBottom="3dp"/>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
