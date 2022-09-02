@@ -45,7 +45,11 @@ public class Page1Activity extends Fragment implements View.OnClickListener{
         btn_page1_location.setOnClickListener(this);
         btn_page1_jjim.setOnClickListener(this);
 
-
+        PersonInfo personInfo = PersonInfo.getInstance();
+        if(personInfo.isLogin)
+        {
+            ((TextView)view.findViewById(R.id.tv_page1_title)).setText("Hello "+personInfo.getName());
+        }
         return view;
     }
 
