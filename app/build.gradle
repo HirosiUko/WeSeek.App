@@ -58,4 +58,5 @@ dependencies {
     implementation 'com.google.android.material:material:1.6.1'
     // https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.12.3'
+    implementation 'com.ramotion.foldingcell:folding-cell:1.2.3'
 }
