@@ -72,7 +72,7 @@
                     android:orientation="horizontal">
 
                     <TextView
-                        android:id="@+id/textView14"
+                        android:id="@+id/tv_page4_nickname"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="20dp"
@@ -113,7 +113,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/textView15"
+                        android:id="@+id/tv_page4_name"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="20dp"
@@ -143,7 +143,7 @@
                         android:layout_marginLeft="30dp"
                         android:layout_weight="1"
                         android:gravity="center|start"
-                        android:text="비밀번호"
+                        android:text="e-mail"
                         android:textSize="24sp" />
                 </LinearLayout>
 
@@ -154,7 +154,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/textView16"
+                        android:id="@+id/tv_page4_email"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="20dp"
@@ -184,7 +184,7 @@
                         android:layout_marginLeft="30dp"
                         android:layout_weight="1"
                         android:gravity="center|start"
-                        android:text="전화번호"
+                        android:text="가입일"
                         android:textSize="24sp" />
                 </LinearLayout>
 
@@ -195,7 +195,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/textView17"
+                        android:id="@+id/tv_page4_createDate"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="20dp"
@@ -243,7 +243,7 @@
                         android:layout_marginLeft="30dp"
                         android:layout_weight="1"
                         android:gravity="center|start"
-                        android:text="최근방문"
+                        android:text="프로필"
                         android:textSize="24sp" />
                 </LinearLayout>
 
@@ -254,7 +254,7 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/textView19"
+                        android:id="@+id/tv_page4_profile"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="20dp"

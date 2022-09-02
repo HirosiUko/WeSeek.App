@@ -3,6 +3,7 @@ package com.weseekapp;
 import android.app.Dialog;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,24 +33,36 @@ public class Page4Activity extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.page4, container, false);
 
-        // 시작
-        dialog = new Dialog(view.getContext());
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setContentView(R.layout.layout_green_dialog);
-        showCustomDialog();
-
-        // 끝
-
         circle_iv=(CircleImageView) view.findViewById(R.id.circle_iv);
         circle_iv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Toast.makeText(getContext(), "너는 사진을 바꿀 수 없다. 불가능 지금은", Toast.LENGTH_SHORT).show();
             }
         });
 
+        PersonInfo personInfo = PersonInfo.getInstance();
+        if(personInfo.isLogin == false)
+        {
+            // 시작
+            dialog = new Dialog(view.getContext());
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setContentView(R.layout.layout_green_dialog);
+            showCustomDialog();
+            // 끝
+        }else{
+            updateProfile();
+        }
 
         return view;
+    }
+    private void updateProfile(){
+        PersonInfo personInfo = PersonInfo.getInstance();
+        ((TextView)view.findViewById(R.id.tv_page4_name)).setText(personInfo.getName());
+        ((TextView)view.findViewById(R.id.tv_page4_nickname)).setText(personInfo.getNickName());
+        ((TextView)view.findViewById(R.id.tv_page4_email)).setText(personInfo.getEmail());
+        ((TextView)view.findViewById(R.id.tv_page4_createDate)).setText(personInfo.getCreateDate());
+        ((TextView)view.findViewById(R.id.tv_page4_profile)).setText(personInfo.getUserProfile());
     }
     private void showCustomDialog() {
 
@@ -76,7 +89,8 @@ public class Page4Activity extends Fragment {
                 FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 Fragment fragment = new Login_Frag();
-                fragmentTransaction.add(R.id.frame, fragment);
+//                fragmentTransaction.add(R.id.frame, fragment);
+                fragmentTransaction.replace(R.id.frame, fragment);
                 fragmentTransaction.commit();
                 alertDialog.dismiss();
             }
@@ -94,7 +108,6 @@ public class Page4Activity extends Fragment {
         if(alertDialog.getWindow() != null){
             alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(0));
         }
-
         alertDialog.show();
     }
 
