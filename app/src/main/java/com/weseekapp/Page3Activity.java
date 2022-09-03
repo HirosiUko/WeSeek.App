@@ -381,6 +381,7 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
                         public void onErrorResponse(VolleyError error) {
                             // 응답 실패 시
                             Log.d("응답", "응답 실패");
+                            Toast.makeText(getActivity().getApplicationContext(),"현재 위치를 알 수 없습니다.\nGPS 설정을 허가해 주세요.", Toast.LENGTH_SHORT).show();
                         }
                     }
 
