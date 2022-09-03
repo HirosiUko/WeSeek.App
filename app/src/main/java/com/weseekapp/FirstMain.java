@@ -95,10 +95,10 @@ public class FirstMain extends AppCompatActivity implements View.OnClickListener
         Intent intent = null;
         switch (btnId){
             case R.id.tv_logIn:
-                intent = new Intent(this, Main_log_in.class);
+//                intent = new Intent(this, Main_log_in.class);
                 break;
             case R.id.tv_signUp:
-                intent = new Intent(this, Main_sign_up.class);
+//                intent = new Intent(this, Main_sign_up.class);
                 break;
 
         }

@@ -3,7 +3,6 @@ package com.weseekapp;
 import android.app.Dialog;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -78,11 +77,11 @@ public class Page4Activity extends Fragment {
         ((TextView)view.findViewById(R.id.textTitle)).setText("WeSeek.App");
         ((TextView)view.findViewById(R.id.textMessage)).setText("아앗! 아직 로그인을 안하셨군요 데헷!\n 로그인후 저희와 함께 여행을 시작해요!❤️");
         ((Button)view.findViewById(R.id.btn_join)).setText("Join");
-        ((Button)view.findViewById(R.id.btn_login)).setText("Login");
+        ((Button)view.findViewById(R.id.btn_profile_select_ok)).setText("Login");
 
         AlertDialog alertDialog = builder.create();
 
-        view.findViewById(R.id.btn_login).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.btn_profile_select_ok).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 //                Toast.makeText(getContext(), "너는 이미 눌렀다.", Toast.LENGTH_SHORT).show();
