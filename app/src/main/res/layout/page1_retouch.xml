@@ -91,7 +91,7 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginRight="8dp"
                         android:layout_marginBottom="8dp"
-                        android:background="@drawable/button_main2"
+                        android:background="@drawable/button_main1"
                         android:elevation="10dp" />
                 </LinearLayout>
 
@@ -140,7 +140,7 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginRight="8dp"
                         android:layout_marginBottom="8dp"
-                        android:background="@drawable/button_main3"
+                        android:background="@drawable/button_main1"
                         android:elevation="8dp" />
                 </LinearLayout>
 
@@ -181,7 +181,7 @@
                         android:layout_marginTop="8dp"
                         android:layout_marginRight="8dp"
                         android:layout_marginBottom="8dp"
-                        android:background="@drawable/button_main4"
+                        android:background="@drawable/button_main1"
                         android:elevation="8dp" />
                 </LinearLayout>
 

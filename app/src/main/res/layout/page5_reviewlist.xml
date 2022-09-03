@@ -26,9 +26,10 @@
                 android:layout_margin="5dp"
                 android:background="@android:color/transparent"
                 android:backgroundTint="#F6F6F6"
+                android:elevation="3dp"
                 android:paddingLeft="5dp"
                 android:src="@drawable/anya0001"
-                app:civ_border_color="#302E28"
+                app:civ_border_color="@color/mainGray"
                 app:civ_border_overlay="true"
                 app:civ_border_width="5dp" />
 

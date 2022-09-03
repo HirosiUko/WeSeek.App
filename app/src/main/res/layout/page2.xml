@@ -4,6 +4,7 @@
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_005"
     android:orientation="vertical">
 
     <LinearLayout
@@ -16,7 +17,7 @@
         <SearchView
             android:id="@+id/searchView_page2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:iconifiedByDefault="false"
             android:queryHint="검색어를 입력하세요" />
 

@@ -27,7 +27,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="fitXY"
-                    app:srcCompat="@drawable/wheat_back" />
+                    app:srcCompat="@drawable/background_001" />
             </LinearLayout>
 
             <LinearLayout
