@@ -47,7 +47,7 @@
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_join"
-                android:layout_width="50dp"
+                android:layout_width="30dp"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:layout_marginLeft="10dp"
@@ -61,8 +61,8 @@
                 android:textSize="14sp" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_login"
-                android:layout_width="50dp"
+                android:id="@+id/btn_profile_select_ok"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginLeft="10dp"

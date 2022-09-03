@@ -70,12 +70,6 @@
             android:name=".FirstMain"
             android:exported="false" />
 
-        <activity
-            android:name=".Main_sign_up"
-            android:exported="true">
-
-        </activity>
-
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCwFm0xeZDRdP7WB714DiIEDiZRchnfqBg" />
