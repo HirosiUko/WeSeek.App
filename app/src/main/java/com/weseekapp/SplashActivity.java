@@ -19,7 +19,7 @@ public class SplashActivity extends AppCompatActivity {
         Handler handler=new Handler();
         handler.postDelayed(new Runnable(){
             public void run(){
-                Intent intent=new Intent(getApplicationContext(),FirstMain.class);
+                Intent intent=new Intent(getApplicationContext(),MainActivity.class); // 스플래시 다음화면 설정부분
                 startActivity(intent);
                 finish();
             }
