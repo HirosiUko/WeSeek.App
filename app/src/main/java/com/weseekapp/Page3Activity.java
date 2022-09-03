@@ -68,7 +68,8 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
 
     private TextView tv_store_id, tv_store_name, tv_store_tel, tv_store_adr, tv_store_hours, tv_store_distance, tv_store_url; // 상세 페이지 뷰
 
-    private Button btn_link, btn_call, btn_cancel; // 상세 페이지 3버튼
+    // textView로 변경
+    private TextView btn_link, btn_call, btn_cancel; // 상세 페이지 3버튼
 
     private ImageView img_store_img, img_store_thumb, img_store_star_01, img_store_star_02, img_store_star_03;
     private ImageButton btn_pre, btn_next;
