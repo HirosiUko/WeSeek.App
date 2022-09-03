@@ -16,19 +16,40 @@ import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.ConditionVariable;
+import android.os.Handler;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.NetworkResponse;
+import com.android.volley.ParseError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.HttpHeaderParser;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.snackbar.Snackbar;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
     private Page3Activity page3Activity;
     private Page4Activity page4Activity;
     private Page5Activity page5Activity;
-
+    private Handler handler;
     private FragmentManager fragmentManager;
     private BottomNavigationView navi;
 
@@ -58,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
 
         OnCheckPermission();
 
+        handler = new Handler();
+
         // Frame 설정하는 부분
         page1Activity = new Page1Activity();
         page2Activity = new Page2Activity();
@@ -66,8 +89,6 @@ public class MainActivity extends AppCompatActivity {
         page5Activity = new Page5Activity();
 
         firstLayout = findViewById(R.id.firstLayout);
-
-
 
         PersonInfo personInfo = PersonInfo.getInstance();
         // get data
@@ -121,6 +142,16 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        // init request Queue
+        if (StoreInfoHandler.requestQueue == null) {
+            // requestQueue 생성
+            StoreInfoHandler.requestQueue = Volley.newRequestQueue(getApplicationContext());
+        }
+        // get Data.
+        sendRequest();
+        // check Data.
+        handler.post(runable);
+
     }
     public void onFragmentChange(int index){
         if (index == 0) {
@@ -166,11 +197,93 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }).show();
                 }
-
                 break;
         }
-
     }
 
+    private void sendRequest() {
+        // 서버에 요청할 주소
+        String url = "https://kirakirahikari.herokuapp.com/store_api/getStoreAll";
 
+        // 요청 문자열 저장
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            // 응답데이터를 받아오는 곳
+            @Override
+            public void onResponse(String response) {
+                Log.v("WeSeek", "Res"+response);
+                parsingResp(response);
+            }
+        }, new Response.ErrorListener() {
+            // 서버와의 연동 에러시 출력
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+        })
+        {
+            @Override //response를 UTF8로 변경해주는 소스코드
+            protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                try {
+                    String utf8String = new String(response.data, "UTF-8");
+                    return Response.success(utf8String, HttpHeaderParser.parseCacheHeaders(response));
+                } catch (UnsupportedEncodingException e) {
+                    // log error
+                    return Response.error(new ParseError(e));
+                } catch (Exception e) {
+                    // log error
+                    return Response.error(new ParseError(e));
+                }
+            }
+            // 보낼 데이터를 저장하는 곳
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+////                BreakIterator edt_id;
+//                params.put("id",edt_join_id.getText().toString());
+//                params.put("pw",edt_join_pw.getText().toString());
+//                params.put("name", edt_join_name.getText().toString());
+                return params;
+            }
+        };
+        stringRequest.setTag("ai");
+        StoreInfoHandler.requestQueue.add(stringRequest);
+    }
+
+    private void parsingResp(String response)
+    {
+        Log.d("result", response);
+        try {
+            JSONArray jsonArray = new JSONArray (response);
+            JSONObject jsonObject1 = (JSONObject) jsonArray.opt(0);
+            JSONObject jsonObject2 = (JSONObject) jsonArray.opt(1);
+            if(jsonObject1.optString("result").compareTo("success")==0)
+            {
+//                PersonInfo personInfo = PersonInfo.getInstance();
+//                personInfo.setEveryThing(
+//                        jsonObject2.optString("user"),
+//                        jsonObject2.optString("nick"),
+//                        jsonObject2.optString("email"),
+//                        jsonObject2.optString("create_date"),
+//                        jsonObject2.optString("userprofile"),
+//                        jsonObject2.optString("pic"));
+
+            } else{
+                // todo
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public Runnable runable = new Runnable() {
+        @Override
+        public void run() {
+            StoreInfoHandler storeInfoHandler = StoreInfoHandler.getInstance();
+            if(storeInfoHandler.getCurrent_state() == StoreInfoHandler.State.NORMAL){
+                Log.d("WeSeek", "Loading Store info from the https://kirakirahikari.herokuapp.com");
+            }else{
+                handler.postDelayed(this, 500);
+            }
+        }
+    };
 }
