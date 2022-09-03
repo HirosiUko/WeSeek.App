@@ -99,11 +99,19 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <Button
+            <TextView
                 android:id="@+id/btn_link"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="링크" />
+                android:layout_height="match_parent"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginBottom="3dp"
+                android:background="@drawable/button_green_background"
+                android:gravity="center"
+                android:text="링크"
+                android:textColor="@color/white" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -112,11 +120,18 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <Button
+            <TextView
                 android:id="@+id/btn_call"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="전화" />
+                android:layout_height="match_parent"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginBottom="3dp"
+                android:background="@drawable/button_green_background"
+                android:gravity="center"
+                android:text="전화"
+                android:textColor="@color/white" />
         </LinearLayout>
 
         <LinearLayout
@@ -125,11 +140,19 @@
             android:layout_weight="1"
             android:orientation="vertical">
 
-            <Button
+            <TextView
                 android:id="@+id/btn_cancel"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="뒤로가기" />
+                android:layout_height="match_parent"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginBottom="3dp"
+                android:background="@drawable/button_green_background"
+                android:gravity="center"
+                android:text="취소"
+                android:textColor="@color/white" />
+
         </LinearLayout>
     </LinearLayout>
 
