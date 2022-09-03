@@ -34,7 +34,6 @@ public class Page2Activity extends Fragment {
     private RecyclerView page2_recyclerView;
     private Page2Adapter page2Adapter;
     private SearchView searchView_page2;
-
     private ArrayList<Page2VO> arrayList;
 
     @Nullable
