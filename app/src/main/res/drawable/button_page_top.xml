@@ -3,8 +3,10 @@
     <item android:state_pressed="true" >
         <shape>
             <stroke
-                android:width="2dp"
-                android:color="#f49999" />
+                android:width="3dp"
+                android:color="@color/mainBlue" />
+            <solid
+                android:color="@color/mainGray"/>
             <corners
                 android:radius="20dp" />
             <padding
@@ -18,29 +20,12 @@
     <!-- pressed -->
 
 
-    <item android:state_focused="true">
-        <shape>
-            <stroke
-                android:width="2dp"
-                android:color="#8ce38c" />
-            <corners
-                android:radius="2dp" />
-            <padding
-                android:left="10dp"
-                android:top="10dp"
-                android:right="10dp"
-                android:bottom="10dp"/>
-        </shape>
-    </item>
-    <!-- focused -->
-
-
     <item>
         <shape>
 
             <stroke
-                android:width="6dp"
-                android:color="#fcafaf" />
+                android:width="3dp"
+                android:color="@color/mainBlue" />
             <corners
                 android:radius="20dp" />
             <padding

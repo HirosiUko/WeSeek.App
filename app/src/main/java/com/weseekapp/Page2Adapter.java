@@ -79,10 +79,15 @@ public class Page2Adapter extends RecyclerView.Adapter<ViewHolder>{
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 compoundButton.startAnimation(scaleAnimation);
-                Toast toast = Toast.makeText(context, "찜!", Toast.LENGTH_SHORT);
+                if (b == true){
+                    Toast toast = Toast.makeText(context, "찜!", Toast.LENGTH_SHORT);
+                    toast.show();
+                }else{
+                    Toast toast = Toast.makeText(context, "찜이 취소되었습니다", Toast.LENGTH_SHORT);
+                    toast.show();
+                }
 
 
-                toast.show();
             }
         });
 

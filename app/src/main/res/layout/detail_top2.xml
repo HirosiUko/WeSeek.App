@@ -30,9 +30,10 @@
                 android:layout_gravity="center"
                 android:background="@android:color/transparent"
                 android:backgroundTint="#F6F6F6"
+                android:elevation="5dp"
                 android:paddingLeft="5dp"
                 android:src="@drawable/bird001"
-                app:civ_border_color="#d89b16"
+                app:civ_border_color="@color/mainGray"
                 app:civ_border_overlay="true"
                 app:civ_border_width="5dp" />
         </LinearLayout>
