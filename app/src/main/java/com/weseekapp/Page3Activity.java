@@ -74,8 +74,9 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
 
     private TextView tv_store_id, tv_store_name, tv_store_tel, tv_store_adr, tv_store_hours, tv_store_distance, tv_store_url; // 상세 페이지 뷰
 
-    // textView로 변경
-    private TextView btn_link, btn_call, btn_cancel; // 상세 페이지 3버튼
+    // 상세 페이지 버튼
+    private TextView btn_link, btn_cancel, btn_detailPage;
+    private ImageView btn_call;
 
     private ImageView img_store_img, img_store_thumb, img_store_star_01, img_store_star_02, img_store_star_03;
     private ImageButton btn_pre, btn_next;
@@ -172,6 +173,7 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
         btn_link = view.findViewById(R.id.btn_link);
         btn_call = view.findViewById(R.id.btn_call);
         btn_cancel = view.findViewById(R.id.btn_cancel);
+        btn_detailPage = view.findViewById(R.id.btn_detailPage);
 
         img_store_thumb = view.findViewById(R.id.img_store_thumb);
 
@@ -190,6 +192,7 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
         btn_cancel.setOnClickListener(this);
         btn_call.setOnClickListener(this);
         btn_link.setOnClickListener(this);
+        btn_detailPage.setOnClickListener(this);
 
         img_detail.setOnClickListener(this);
 
@@ -606,6 +609,15 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
                 Uri uri = Uri.parse("tel:"+num);
                 Intent intent = new Intent(Intent.ACTION_DIAL, uri);
                 startActivity(intent);
+            }else if (view.getId() == R.id.btn_detailPage){
+                Intent intent = new Intent(getContext(), PageDetail.class);
+                int storeIdtoDetail = store_id[cnt];
+                Log.d("응답", "디테일페이지 : " + storeIdtoDetail);
+                intent.putExtra("storeId", storeIdtoDetail);
+                startActivity(intent);
+
+
+
             }else if (view.getId() == R.id.btn_link){
                 ClipboardManager clipboard = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
                 ClipData clip = ClipData.newPlainText("label", tv_store_url.getText().toString());
