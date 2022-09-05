@@ -130,10 +130,19 @@ public class Detail_Frag2 extends Fragment implements OnMapReadyCallback{
 
         mMap = googleMap;
 
+        Detail_INFO_VO detail_info_vo = null;
+
+        Bundle bundle = getArguments();
+
+        if (bundle != null){
+            detail_info_vo = (Detail_INFO_VO) bundle.getSerializable("vo");
+        }
+
         try {
             MarkerOptions markerOptions = new MarkerOptions();
             markerOptions.position(loc)
-                    .title("현재위치");
+                    .title(detail_info_vo.storeName)
+                    .snippet(detail_info_vo.adr);
 
             mMap.addMarker(markerOptions);
 

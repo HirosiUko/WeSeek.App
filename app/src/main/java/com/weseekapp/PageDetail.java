@@ -225,7 +225,7 @@ public class PageDetail extends AppCompatActivity {
 
         requestQueue.add(request);
 
-        Detail_INFO_VO detail_infoVO = new Detail_INFO_VO(adr, hours, tel, lat, lon);
+        Detail_INFO_VO detail_infoVO = new Detail_INFO_VO(storeName, adr, hours, tel, lat, lon);
 
         return detail_infoVO;
     }
