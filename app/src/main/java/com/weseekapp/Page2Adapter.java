@@ -91,16 +91,9 @@ public class Page2Adapter extends RecyclerView.Adapter<ViewHolder>{
             }
         });
 
-
         page2_coupon = (ImageView) view.findViewById(R.id.page2_coupon);
-
-
-
         return viewHolder;
     }
-
-
-
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
@@ -108,11 +101,8 @@ public class Page2Adapter extends RecyclerView.Adapter<ViewHolder>{
 
         holder.page2_tv_name.setText(vo.vo_store_id);
         holder.page2_tv_addr.setText(vo.vo_store_addr);
-        holder.page2_img_store.setImageResource(vo.vo_store_pic);
+        vo.vo_store_pic.into(holder.page2_img_store);
         holder.button_favorite_page2.setOnClickListener((View.OnClickListener) vo.vo_btn_favorite);
-
-
-
     }
 
     @Override
