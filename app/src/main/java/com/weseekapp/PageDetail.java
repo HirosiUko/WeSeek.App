@@ -158,8 +158,9 @@ public class PageDetail extends AppCompatActivity {
                                 adr = jsonObject.getString("store_addr"); // 주소
                                 hours = jsonObject.getString("store_hours"); // 영업시간
                                 tel = jsonObject.getString("store_tel"); // 전화번호
-                                lon = jsonObject.getDouble("store_long");
-                                lat = jsonObject.getDouble("store_lat");
+                                lat = jsonObject.getDouble("store_long");
+                                lon = jsonObject.getDouble("store_lat");
+
 
                             }
 
@@ -224,7 +225,7 @@ public class PageDetail extends AppCompatActivity {
 
         requestQueue.add(request);
 
-        Detail_INFO_VO detail_infoVO = new Detail_INFO_VO(adr, hours, tel, lon, lat);
+        Detail_INFO_VO detail_infoVO = new Detail_INFO_VO(adr, hours, tel, lat, lon);
 
         return detail_infoVO;
     }
