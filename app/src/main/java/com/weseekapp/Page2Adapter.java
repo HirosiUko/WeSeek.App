@@ -10,6 +10,7 @@ import android.view.animation.BounceInterpolator;
 import android.view.animation.ScaleAnimation;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,6 +25,7 @@ public class Page2Adapter extends RecyclerView.Adapter<ViewHolder>{
     private BounceInterpolator bounceInterpolator;
     private ImageView page2_coupon;
     private View view;
+
 
     public interface OnItemClickListener {
         void onItemClick(int pos);
@@ -106,6 +108,9 @@ public class Page2Adapter extends RecyclerView.Adapter<ViewHolder>{
         holder.page2_tv_name.setText(vo.vo_store_id);
         holder.page2_tv_addr.setText(vo.vo_store_addr);
         vo.vo_store_pic.into(holder.page2_img_store);
+        //page2_stars
+//        holder.page
+//        vo.vo_stars.setNumStars();
         holder.button_favorite_page2.setOnClickListener((View.OnClickListener) vo.vo_btn_favorite);
     }
 
