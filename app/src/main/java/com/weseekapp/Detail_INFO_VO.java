@@ -6,16 +6,17 @@ public class Detail_INFO_VO implements Serializable {
     String adr; // 주소
     String hours; // 영업시간
     String tel; // 전화번호
-    Double lon;
     Double lat;
+    Double lon;
 
-    public Detail_INFO_VO(String adr, String hours, String tel, Double lon, Double lat){ // 생성자
+
+    public Detail_INFO_VO(String adr, String hours, String tel, Double lat, Double lon){ // 생성자
 
         this.adr = adr;
         this.hours = hours;
         this.tel = tel;
-        this.lon = lon;
         this.lat = lat;
+        this.lon = lon;
     }
 
     public String getAdr() {
@@ -42,6 +43,14 @@ public class Detail_INFO_VO implements Serializable {
         this.tel = tel;
     }
 
+    public Double getLat() {
+        return lat;
+    }
+
+    public void setLat(Double lat) {
+        this.lat = lat;
+    }
+
     public Double getLon() {
         return lon;
     }
@@ -50,11 +59,4 @@ public class Detail_INFO_VO implements Serializable {
         this.lon = lon;
     }
 
-    public Double getLat() {
-        return lat;
-    }
-
-    public void setLat(Double lat) {
-        this.lat = lat;
-    }
 }

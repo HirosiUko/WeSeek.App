@@ -39,7 +39,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView31"
+                    android:id="@+id/tv_detail_tel"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center|start"
@@ -54,7 +54,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView32"
+                    android:id="@+id/tv_detail_hours"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:gravity="center|start"
@@ -97,20 +97,10 @@
         android:layout_weight="1"
         android:orientation="vertical">
 
-        <ScrollView
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/mapView_detail"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent" />
 
-            <ImageView
-                android:id="@+id/imageView13"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:paddingLeft="10dp"
-                android:paddingTop="10dp"
-                android:paddingRight="10dp"
-                android:paddingBottom="10dp"
-                android:scaleType="fitXY"
-                app:srcCompat="@drawable/map" />
-        </ScrollView>
     </LinearLayout>
 </LinearLayout>
