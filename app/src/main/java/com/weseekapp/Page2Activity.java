@@ -161,7 +161,7 @@ public class Page2Activity extends Fragment implements View.OnClickListener{
             }
         }
         if (filteredList.isEmpty()){
-            customToast("no data");
+//            customToast("no data");
 
 //            Toast.makeText(getActivity().getApplicationContext(),"no data", Toast.LENGTH_SHORT).show();
         } else {
@@ -201,9 +201,9 @@ public class Page2Activity extends Fragment implements View.OnClickListener{
         LayoutInflater inflater = getLayoutInflater();
         View layout = inflater.inflate(R.layout.toast_board, (ViewGroup) page2_recyclerView.findViewById(R.id.toast_layout_root));
         TextView textView = layout.findViewById(R.id.textboard);
+        textView.setText(text);
 
-
-        Toast toastView = Toast.makeText(getContext().getApplicationContext(), "", Toast.LENGTH_SHORT);
+        Toast toastView = Toast.makeText(getContext().getApplicationContext(), text, Toast.LENGTH_SHORT);
         toastView.setGravity(Gravity.CENTER,0,350);
         toastView.setView(layout);
         toastView.show();

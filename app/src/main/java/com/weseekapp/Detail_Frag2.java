@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.github.mikephil.charting.charts.Chart;
 import com.github.mikephil.charting.charts.RadarChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.RadarData;
@@ -41,17 +42,19 @@ public class Detail_Frag2 extends Fragment{
         radarDataSet.setColor(Color.RED);
         radarDataSet.setLineWidth(2f);
         radarDataSet.setValueTextColor(Color.RED);
-        radarDataSet.setValueTextSize(9f);
+        radarDataSet.setValueTextSize(11f);
 
         radarChart.getLegend().setEnabled(false);
         radarChart.getDescription().setEnabled(false);
+        radarChart.setRotationEnabled(false);
+
 
 
 
         RadarData radarData = new RadarData();
         radarData.addDataSet(radarDataSet);
 
-        String[] labels = {"위생점수", "맛점수", "어쩌고", "저쩌고", "가격"};
+        String[] labels = {"위생", "맛", "위치", "교통", "가격"};
 
         XAxis xAxis = radarChart.getXAxis();
 
