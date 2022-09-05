@@ -61,7 +61,7 @@
                     android:orientation="horizontal">
 
                     <ImageView
-                        android:id="@+id/imageView"
+                        android:id="@+id/btn_call"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_marginLeft="10dp"
@@ -133,7 +133,7 @@
                 android:layout_marginBottom="3dp"
                 android:background="@drawable/button_green_background"
                 android:gravity="center"
-                android:text="링크"
+                android:text="주소 복사"
                 android:textColor="@color/white" />
 
         </LinearLayout>
@@ -145,7 +145,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/btn_call"
+                android:id="@+id/btn_detailPage"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_marginStart="3dp"
@@ -154,7 +154,7 @@
                 android:layout_marginBottom="3dp"
                 android:background="@drawable/button_green_background"
                 android:gravity="center"
-                android:text="전화"
+                android:text="상세 정보"
                 android:textColor="@color/white" />
         </LinearLayout>
 
