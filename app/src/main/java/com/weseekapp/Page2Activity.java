@@ -181,22 +181,41 @@ public class Page2Activity extends Fragment implements View.OnClickListener{
     }
     private String gu = "";
     @Override
-    public void onClick(View view) {
-
-        view.setSelected(!view.isSelected());
-        if (!view.isSelected()){//고쳐주세요 ........ㅜㅜㅜㅜㅠㅜㅠㅜㅠㅜㅜㅠ
+    public void onClick(View clicked_view) {
+        clicked_view.setSelected(!clicked_view.isSelected());
+        if (!clicked_view.isSelected()){
             page2_recyclerView.setAdapter(page2Adapter);
-        } else if (view.isSelected()) {
-            if (view.getId() == R.id.btn_sort1) {
+        } else if (clicked_view.isSelected()) {
+            if (clicked_view.getId() == R.id.btn_sort1) {
                 gu = "동구";
-            } else if (view.getId() == R.id.btn_sort2) {
+                (view.findViewById(R.id.btn_sort2)).setSelected(false);
+                (view.findViewById(R.id.btn_sort3)).setSelected(false);
+                (view.findViewById(R.id.btn_sort4)).setSelected(false);
+                (view.findViewById(R.id.btn_sort5)).setSelected(false);
+            } else if (clicked_view.getId() == R.id.btn_sort2) {
                 gu = "서구";
-            } else if (view.getId() == R.id.btn_sort3) {
+                (view.findViewById(R.id.btn_sort1)).setSelected(false);
+                (view.findViewById(R.id.btn_sort3)).setSelected(false);
+                (view.findViewById(R.id.btn_sort4)).setSelected(false);
+                (view.findViewById(R.id.btn_sort5)).setSelected(false);
+            } else if (clicked_view.getId() == R.id.btn_sort3) {
                 gu = "북구";
-            } else if (view.getId() == R.id.btn_sort4) {
+                (view.findViewById(R.id.btn_sort1)).setSelected(false);
+                (view.findViewById(R.id.btn_sort2)).setSelected(false);
+                (view.findViewById(R.id.btn_sort4)).setSelected(false);
+                (view.findViewById(R.id.btn_sort5)).setSelected(false);
+            } else if (clicked_view.getId() == R.id.btn_sort4) {
                 gu = "남구";
-            } else if (view.getId() == R.id.btn_sort5) {
+                (view.findViewById(R.id.btn_sort1)).setSelected(false);
+                (view.findViewById(R.id.btn_sort2)).setSelected(false);
+                (view.findViewById(R.id.btn_sort3)).setSelected(false);
+                (view.findViewById(R.id.btn_sort5)).setSelected(false);
+            } else if (clicked_view.getId() == R.id.btn_sort5) {
                 gu = "광산구";
+                (view.findViewById(R.id.btn_sort1)).setSelected(false);
+                (view.findViewById(R.id.btn_sort2)).setSelected(false);
+                (view.findViewById(R.id.btn_sort3)).setSelected(false);
+                (view.findViewById(R.id.btn_sort4)).setSelected(false);
             }
             ArrayList<Page2VO> filteredList = new ArrayList<>();
             for (Page2VO vo : arrayList) {
@@ -209,7 +228,6 @@ public class Page2Activity extends Fragment implements View.OnClickListener{
                 page2Adapter.setFilteredList(filteredList);
             }
         }
-
     }
 
 
