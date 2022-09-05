@@ -6,7 +6,9 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,6 +33,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestBuilder;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
@@ -46,14 +51,17 @@ public class Page2Activity extends Fragment implements View.OnClickListener{
     private SearchView searchView_page2;
     private TextView btn_sort1, btn_sort2, btn_sort3, btn_sort4, btn_sort5;
     private ArrayList<Page2VO> arrayList;
+    private View view;
+    private Handler handler;
     private Boolean isSelected = false;
+
 
     private CompoundButton button_favoite_page2;
     private BounceInterpolator bounceInterpolator;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.page2, container, false);
+        view = inflater.inflate(R.layout.page2, container, false);
 
         btn_sort1 = view.findViewById(R.id.btn_sort1);
         btn_sort2 = view.findViewById(R.id.btn_sort2);
@@ -82,8 +90,26 @@ public class Page2Activity extends Fragment implements View.OnClickListener{
                 return true;
             }
         });
+        loadingView();
+//        handler.post(runable);
+        return view;
+    }
 
+    public Runnable runable = new Runnable() {
+        @Override
+        public void run() {
+            StoreInfoHandler storeInfoHandler = StoreInfoHandler.getInstance();
+            if(storeInfoHandler.getCurrent_state() != StoreInfoHandler.State.NORMAL) {
+                Log.d("WeSeek", "run: Loading from Server");
+                handler.postDelayed(this, 100);
+            }else{
+                loadingView();
+            }
+        }
+    };
 
+    private void loadingView()
+    {
         page2_recyclerView = (RecyclerView) view.findViewById(R.id.page2_recyclerView);
         page2_recyclerView.setLayoutManager(new LinearLayoutManager(getActivity().getApplicationContext(),
                 RecyclerView.VERTICAL, false));
@@ -95,52 +121,34 @@ public class Page2Activity extends Fragment implements View.OnClickListener{
         StoreInfoHandler storeInfoHandler = StoreInfoHandler.getInstance();
         for(StoreInfo storeInfo : storeInfoHandler.getStore_list())
         {
+            RequestBuilder image_request;
+            if(storeInfo.img_list.isEmpty())
+            {
+                image_request = Glide.with(this).load(getContext().getDrawable(R.drawable.ic_action_camera));
+            }else {
+                String load_image_url = storeInfo.img_list.get(0);
+                image_request = Glide.with(this).load(load_image_url).error(R.drawable.ic_action_camera);
+                Log.d("WeSeek", "Image:"+storeInfo.img_list.get(0));
+            }
             page2Adapter.addItem(
                     new Page2VO(
-                            R.drawable.ic_action_camera,
+//                            R.drawable.ic_action_camera,
 //                                drawableFromUrl(storeInfo.img_list.get(0)),
+                            image_request,
                             storeInfo.storeName,
                             storeInfo.address,
                             (CompoundButton) view.findViewById(R.id.button_favorite_page2),
                             (ImageView) view.findViewById(R.id.page2_coupon)
                     )
             );
-        }
 
-//        page2Adapter.addItem(new Page2VO(
-//        R.drawable.ic_action_camera,
-//        "aaa",
-//        "광주광역시 북구 어쩌고동 어쩌고길 11-1",
-//        (CompoundButton) view.findViewById(R.id.button_favorite_page2),
-//        (ImageView) view.findViewById(R.id.page2_coupon)
-//        )
-//        );
-//        page2Adapter.addItem(new Page2VO(R.drawable.ic_action_detail,"bbb","adfasdfasf",(CompoundButton) view.findViewById(R.id.button_favorite_page2), (ImageView) view.findViewById(R.id.page2_coupon)));
-//        page2Adapter.addItem(new Page2VO(R.drawable.ic_action_camera,"sdfsdf","sdfsdf",(CompoundButton) view.findViewById(R.id.button_favorite_page2), (ImageView) view.findViewById(R.id.page2_coupon)));
-//        page2Adapter.addItem(new Page2VO(R.drawable.ic_action_camera,"fgf","sdfsdf",(CompoundButton) view.findViewById(R.id.button_favorite_page2), (ImageView) view.findViewById(R.id.page2_coupon)));
-//        page2Adapter.addItem(new Page2VO(R.drawable.ic_action_camera,"eeee","sdfsdf",(CompoundButton) view.findViewById(R.id.button_favorite_page2), (ImageView) view.findViewById(R.id.page2_coupon)));
-//        page2Adapter.addItem(new Page2VO(R.drawable.ic_action_camera,"assss","sdfsdf",(CompoundButton) view.findViewById(R.id.button_favorite_page2),(ImageView) view.findViewById(R.id.page2_coupon)));
-//        page2Adapter.addItem(new Page2VO(R.drawable.ic_action_camera,"ww","sdfsdf",(CompoundButton) view.findViewById(R.id.button_favorite_page2),(ImageView) view.findViewById(R.id.page2_coupon)));
-//        page2Adapter.addItem(new Page2VO(R.drawable.ic_action_camera,"yyyyy","sdfsdf",(CompoundButton) view.findViewById(R.id.button_favorite_page2),(ImageView) view.findViewById(R.id.page2_coupon)));
-//        page2Adapter.addItem(new Page2VO(R.drawable.ic_action_camera,"nnnnn","sdfsdf",(CompoundButton) view.findViewById(R.id.button_favorite_page2), (ImageView) view.findViewById(R.id.page2_coupon)));
-//        page2Adapter.addItem(new Page2VO(R.drawable.ic_action_camera,"111","sdfsdf",(CompoundButton) view.findViewById(R.id.button_favorite_page2), (ImageView) view.findViewById(R.id.page2_coupon)));
-//        page2Adapter.addItem(new Page2VO(R.drawable.ic_action_camera,"aaaaaa","sdfsdf",(CompoundButton) view.findViewById(R.id.button_favorite_page2), (ImageView) view.findViewById(R.id.page2_coupon)));
-//        page2Adapter.addItem(new Page2VO(R.drawable.ic_action_camera,"pppppp","sdfsdf",(CompoundButton) view.findViewById(R.id.button_favorite_page2),(ImageView) view.findViewById(R.id.page2_coupon)));
-//        page2Adapter.addItem(new Page2VO(R.drawable.ic_action_camera,"jjjjj","sdfsdf",(CompoundButton) view.findViewById(R.id.button_favorite_page2),(ImageView) view.findViewById(R.id.page2_coupon)));
+        }
 
         for (int i = 0; i < page2Adapter.getItemCount(); i++){
             arrayList.add(page2Adapter.getItem(i));
         }
 
         page2_recyclerView.setAdapter(page2Adapter);
-
-
-
-
-
-
-
-        return view;
     }
 
     private void filterList(String text) {
@@ -158,8 +166,7 @@ public class Page2Activity extends Fragment implements View.OnClickListener{
             page2Adapter.setFilteredList(filteredList);
         }
     }
-    private Drawable drawableFromUrl(String url)
-            throws IOException {
+    private Drawable drawableFromUrl(String url) throws IOException {
         Bitmap x;
 
         HttpURLConnection connection =
@@ -170,7 +177,6 @@ public class Page2Activity extends Fragment implements View.OnClickListener{
         x = BitmapFactory.decodeStream(input);
         return new BitmapDrawable(getResources(),x);
     }
-
     @Override
     public void onClick(View view) {
         view.setSelected(!view.isSelected());

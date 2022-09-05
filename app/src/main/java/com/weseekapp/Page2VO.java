@@ -4,14 +4,16 @@ import android.graphics.drawable.Drawable;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 
+import com.bumptech.glide.RequestBuilder;
+
 public class Page2VO {
-    int vo_store_pic;
+    RequestBuilder vo_store_pic;
     String vo_store_id;
     String vo_store_addr;
     CompoundButton vo_btn_favorite;
     ImageView vo_coupon;
 
-    public Page2VO(int vo_store_pic, String vo_store_id, String vo_store_addr, CompoundButton vo_btn_favorite, ImageView vo_coupon) {
+    public Page2VO(RequestBuilder vo_store_pic, String vo_store_id, String vo_store_addr, CompoundButton vo_btn_favorite, ImageView vo_coupon) {
         this.vo_store_pic = vo_store_pic;
         this.vo_store_id = vo_store_id;
         this.vo_store_addr = vo_store_addr;
@@ -19,11 +21,11 @@ public class Page2VO {
         this.vo_coupon = vo_coupon;
     }
 
-    public int getVo_store_pic() {
+    public RequestBuilder getVo_store_pic() {
         return vo_store_pic;
     }
 
-    public void setVo_store_pic(int vo_store_pic) {
+    public void setVo_store_pic(RequestBuilder vo_store_pic) {
         this.vo_store_pic = vo_store_pic;
     }
 
