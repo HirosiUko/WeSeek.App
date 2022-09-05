@@ -35,10 +35,13 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
+import com.android.volley.NetworkResponse;
+import com.android.volley.ParseError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
@@ -56,6 +59,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 
 public class Page3Activity extends Fragment implements OnMapReadyCallback, View.OnClickListener {
@@ -329,7 +335,9 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
                         @Override
                         public void onResponse(String response) {
                             // 응답 성공 시
+//깨짐                            URLEncoder.encode(response, "UTF-8");
                             Log.d("응답성공", response);
+//                            response.setCharacterEncoding("UTF-8");
                             String result = "";
                             try {
                                 JSONArray jsonArray = new JSONArray(response);
@@ -385,7 +393,21 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
                         }
                     }
 
-            );
+            ){
+                @Override //response를 UTF8로 변경해주는 소스코드
+                protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                    try {
+                        String utf8String = new String(response.data, "UTF-8");
+                        return Response.success(utf8String, HttpHeaderParser.parseCacheHeaders(response));
+                    } catch (UnsupportedEncodingException e) {
+                        // log error
+                        return Response.error(new ParseError(e));
+                    } catch (Exception e) {
+                        // log error
+                        return Response.error(new ParseError(e));
+                    }
+                }
+            };
 
             requestQueue.add(request);
             Log.d("응답", url_id);
