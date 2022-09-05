@@ -21,6 +21,7 @@ import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RatingBar;
 import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -138,7 +139,8 @@ public class Page2Activity extends Fragment implements View.OnClickListener{
                             storeInfo.storeName,
                             storeInfo.address,
                             (CompoundButton) view.findViewById(R.id.button_favorite_page2),
-                            (ImageView) view.findViewById(R.id.page2_coupon)
+                            (ImageView) view.findViewById(R.id.page2_coupon),
+                            (RatingBar) view.findViewById(R.id.page2_stars)
                     )
             );
 
@@ -159,7 +161,7 @@ public class Page2Activity extends Fragment implements View.OnClickListener{
             }
         }
         if (filteredList.isEmpty()){
-            customToast("no data");
+//            customToast("no data");
 
 //            Toast.makeText(getActivity().getApplicationContext(),"no data", Toast.LENGTH_SHORT).show();
         } else {
@@ -199,10 +201,10 @@ public class Page2Activity extends Fragment implements View.OnClickListener{
         LayoutInflater inflater = getLayoutInflater();
         View layout = inflater.inflate(R.layout.toast_board, (ViewGroup) page2_recyclerView.findViewById(R.id.toast_layout_root));
         TextView textView = layout.findViewById(R.id.textboard);
+        textView.setText(text);
 
-
-        Toast toastView = Toast.makeText(getContext().getApplicationContext(), "", Toast.LENGTH_SHORT);
-        toastView.setGravity(Gravity.CENTER,100,100);
+        Toast toastView = Toast.makeText(getContext().getApplicationContext(), text, Toast.LENGTH_SHORT);
+        toastView.setGravity(Gravity.CENTER,0,350);
         toastView.setView(layout);
         toastView.show();
 

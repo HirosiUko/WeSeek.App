@@ -26,12 +26,20 @@
                 android:paddingRight="8dp"
                 android:paddingBottom="8dp">
 
-                <ImageView
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/page2_img_store"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_gravity="center"
                     android:layout_weight="1"
-                    app:srcCompat="@drawable/ic_launcher_foreground" />
+                    android:background="@android:color/transparent"
+                    android:backgroundTint="#F6F6F6"
+                    android:elevation="5dp"
+                    android:src="@drawable/cir_img7"
+                    app:civ_border_color="@color/mainGray"
+                    app:civ_border_overlay="true"
+                    app:civ_border_width="5dp" />
+
             </LinearLayout>
 
             <LinearLayout
