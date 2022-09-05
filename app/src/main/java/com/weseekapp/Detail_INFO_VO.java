@@ -3,6 +3,7 @@ package com.weseekapp;
 import java.io.Serializable;
 
 public class Detail_INFO_VO implements Serializable {
+    String storeName; // 가게이름
     String adr; // 주소
     String hours; // 영업시간
     String tel; // 전화번호
@@ -10,13 +11,22 @@ public class Detail_INFO_VO implements Serializable {
     Double lon;
 
 
-    public Detail_INFO_VO(String adr, String hours, String tel, Double lat, Double lon){ // 생성자
+    public Detail_INFO_VO(String storeName, String adr, String hours, String tel, Double lat, Double lon){ // 생성자
 
+        this.storeName = storeName;
         this.adr = adr;
         this.hours = hours;
         this.tel = tel;
         this.lat = lat;
         this.lon = lon;
+    }
+
+    public String getStoreName() {
+        return storeName;
+    }
+
+    public void setStoreName(String storeName) {
+        this.storeName = storeName;
     }
 
     public String getAdr() {

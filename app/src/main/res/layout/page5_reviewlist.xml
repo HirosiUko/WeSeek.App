@@ -40,7 +40,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/textView44"
+                    android:id="@+id/page5_tv_stid"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -49,7 +49,7 @@
                     android:textSize="20dp" />
 
                 <TextView
-                    android:id="@+id/textView43"
+                    android:id="@+id/page5_tv_stad"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -57,7 +57,7 @@
                     android:textColor="#28282D" />
 
                 <TextView
-                    android:id="@+id/textView5"
+                    android:id="@+id/page5_tv_stdate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -65,7 +65,7 @@
                     android:textColor="#28282D" />
 
                 <TextView
-                    android:id="@+id/textView45"
+                    android:id="@+id/page5_tv_rvcount"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
