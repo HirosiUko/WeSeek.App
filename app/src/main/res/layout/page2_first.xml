@@ -17,131 +17,101 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginStart="5dp"
+                android:layout_marginRight="5dp"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/button2"
-                    style="@style/Widget.Material3.Button.OutlinedButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginBottom="5dp"
+                <TextView
+                    android:id="@+id/btn_sort1"
+                    android:layout_width="90dp"
+                    android:layout_height="40dp"
                     android:layout_weight="1"
-                    android:drawingCacheQuality="auto"
+                    android:background="@drawable/button_page2_sort"
                     android:gravity="center"
                     android:text="동구"
-                    android:textAlignment="center"
-                    android:textColor="#000000"
-                    android:textSize="16sp"
-                    app:strokeColor="@color/darkGray"
-                    app:strokeWidth="4.5dp" />
+                    android:textSize="18sp" />
+
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/button"
-                    style="@style/Widget.Material3.Button.OutlinedButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginBottom="5dp"
+                <TextView
+                    android:id="@+id/btn_sort2"
+                    android:layout_width="90dp"
+                    android:layout_height="40dp"
                     android:layout_weight="1"
-                    android:drawingCacheQuality="auto"
+                    android:background="@drawable/button_page2_sort"
                     android:gravity="center"
                     android:text="서구"
-                    android:textAlignment="center"
-                    android:textColor="#000000"
-                    android:textSize="16sp"
-                    app:strokeColor="@color/darkGray"
-                    app:strokeWidth="4.5dp" />
+                    android:textSize="18sp" />
+
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/button4"
-                    style="@style/Widget.Material3.Button.OutlinedButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginBottom="5dp"
+                <TextView
+                    android:id="@+id/btn_sort3"
+                    android:layout_width="90dp"
+                    android:layout_height="40dp"
                     android:layout_weight="1"
-                    android:drawingCacheQuality="auto"
-                    android:gravity="center"
-                    android:text="남구"
-                    android:textAlignment="center"
-                    android:textColor="#000000"
-                    android:textSize="16sp"
-                    app:strokeColor="@color/darkGray"
-                    app:strokeWidth="4.5dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/button7"
-                    style="@style/Widget.Material3.Button.OutlinedButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginBottom="5dp"
-                    android:layout_weight="1"
-                    android:drawingCacheQuality="auto"
+                    android:background="@drawable/button_page2_sort"
                     android:gravity="center"
                     android:text="북구"
-                    android:textAlignment="center"
-                    android:textColor="#000000"
-                    android:textSize="16sp"
-                    app:strokeColor="@color/darkGray"
-                    app:strokeWidth="4.5dp" />
+                    android:textSize="18sp" />
+
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/button6"
-                    style="@style/Widget.Material3.Button.OutlinedButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginTop="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginBottom="5dp"
+                <TextView
+                    android:id="@+id/btn_sort4"
+                    android:layout_width="90dp"
+                    android:layout_height="40dp"
                     android:layout_weight="1"
-                    android:drawingCacheQuality="auto"
+                    android:background="@drawable/button_page2_sort"
+                    android:gravity="center"
+                    android:text="남구"
+                    android:textSize="18sp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/btn_sort5"
+                    android:layout_width="90dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button_page2_sort"
                     android:gravity="center"
                     android:text="광산구"
-                    android:textAlignment="center"
-                    android:textColor="#000000"
-                    android:textSize="16sp"
-                    app:strokeColor="@color/darkGray"
-                    app:strokeWidth="4.5dp" />
+                    android:textSize="18sp" />
 
             </LinearLayout>
 
