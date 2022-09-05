@@ -3,41 +3,29 @@ package com.weseekapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.Manifest;
-import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.location.Location;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.ConditionVariable;
 import android.os.Handler;
 import android.provider.Settings;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
+import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.HttpHeaderParser;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.snackbar.Snackbar;
@@ -148,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
             StoreInfoHandler.requestQueue = Volley.newRequestQueue(getApplicationContext());
         }
         // get Data.
-        sendRequest();
+        query_store_info_by_id();
         // check Data.
         handler.post(runable);
 
@@ -201,17 +189,95 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void sendRequest() {
+    public interface IFunction { public void parsingResp(String response);}
+
+    private void query_all_store_id() {
+        sendRequest("https://kirakirahikari.herokuapp.com/store_api/getStoreAll", new IFunction() {
+            public void parsingResp(String response)
+            {
+                // Log.d("WeSeek", response);
+                try {
+                    JSONArray jsonArray_ele = new JSONArray (response);
+                    for(int i=0; i< jsonArray_ele.length(); i++)
+                    {
+                        JSONObject jsonObject = (JSONObject) jsonArray_ele.opt(i);
+                        String store_id = jsonObject.optString("id");
+//                        query_store_info_by_id(store_id);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+    private void query_store_info_by_id() {
+        sendRequest("https://kirakirahikari.herokuapp.com/store_api/getStoreAll2", new IFunction() {
+            public void parsingResp(String response)
+            {
+//                Log.d("WeSeek", response);
+                try {
+                    JSONArray jsonArray = new JSONArray (response);
+                    for(int i=0; i<jsonArray.length(); i++)
+                    {
+                        JSONObject jsonObject = (JSONObject) jsonArray.opt(i);
+                        StoreInfo storeInfo = new StoreInfo(
+                                jsonObject.optString("evl_fda"),
+                                jsonObject.optString("store_name"),
+                                jsonObject.optString("store_long"),
+                                jsonObject.optString("store_lat"),
+                                jsonObject.optString("store_addr"),
+                                jsonObject.optString("evl_grade"),
+                                jsonObject.optString("store_tel"),
+                                jsonObject.optString("store_id"),
+                                jsonObject.optString("store_hours")
+                        );
+                        // store_menu
+                        String tmp_menu = jsonObject.optString("store_img");
+                        String[] menus = tmp_menu.split("////");
+                        for (String menu:
+                                menus) {
+                            if(menu.length()==0){
+                                continue;
+                            }
+                            storeInfo.store_menu.add(menu);
+                        }
+
+                        // store img_list
+                        String tmp_img = jsonObject.optString("store_img");
+                        String[] imgs = tmp_img.split(",");
+                        for (String img_url:
+                                imgs) {
+                            if(img_url.length()==0){
+                                continue;
+                            }
+                            storeInfo.img_list.add(img_url);
+                        }
+
+                        StoreInfoHandler storeInfoHandler = StoreInfoHandler.getInstance();
+                        storeInfoHandler.addStore(storeInfo);
+                        Log.d("WeSeek", "parsingResp: "+ storeInfo.toString());
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+        StoreInfoHandler storeInfoHandler = StoreInfoHandler.getInstance();
+        storeInfoHandler.setCurrent_state(StoreInfoHandler.State.NORMAL);
+    }
+
+    private void sendRequest(String url, IFunction f) {
         // 서버에 요청할 주소
-        String url = "https://kirakirahikari.herokuapp.com/store_api/getStoreAll";
+//        String url = "https://kirakirahikari.herokuapp.com/store_api/getStoreAll";
 
         // 요청 문자열 저장
         StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
             // 응답데이터를 받아오는 곳
             @Override
             public void onResponse(String response) {
-                Log.v("WeSeek", "Res"+response);
-                parsingResp(response);
+                f.parsingResp(response);
             }
         }, new Response.ErrorListener() {
             // 서버와의 연동 에러시 출력
@@ -238,41 +304,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
-////                BreakIterator edt_id;
 //                params.put("id",edt_join_id.getText().toString());
-//                params.put("pw",edt_join_pw.getText().toString());
-//                params.put("name", edt_join_name.getText().toString());
                 return params;
             }
+
         };
         stringRequest.setTag("ai");
         StoreInfoHandler.requestQueue.add(stringRequest);
-    }
-
-    private void parsingResp(String response)
-    {
-        Log.d("result", response);
-        try {
-            JSONArray jsonArray = new JSONArray (response);
-            JSONObject jsonObject1 = (JSONObject) jsonArray.opt(0);
-            JSONObject jsonObject2 = (JSONObject) jsonArray.opt(1);
-            if(jsonObject1.optString("result").compareTo("success")==0)
-            {
-//                PersonInfo personInfo = PersonInfo.getInstance();
-//                personInfo.setEveryThing(
-//                        jsonObject2.optString("user"),
-//                        jsonObject2.optString("nick"),
-//                        jsonObject2.optString("email"),
-//                        jsonObject2.optString("create_date"),
-//                        jsonObject2.optString("userprofile"),
-//                        jsonObject2.optString("pic"));
-
-            } else{
-                // todo
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
     }
 
     public Runnable runable = new Runnable() {
@@ -282,7 +320,7 @@ public class MainActivity extends AppCompatActivity {
             if(storeInfoHandler.getCurrent_state() == StoreInfoHandler.State.NORMAL){
                 Log.d("WeSeek", "Loading Store info from the https://kirakirahikari.herokuapp.com");
             }else{
-                handler.postDelayed(this, 500);
+                handler.postDelayed(this, 100);
             }
         }
     };

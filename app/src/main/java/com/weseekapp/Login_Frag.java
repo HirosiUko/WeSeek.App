@@ -146,6 +146,19 @@ public class Login_Frag extends Fragment {
         // 요청 문자열 저장
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url, stringListener, errorListener)
         {
+            @Override //response를 UTF8로 변경해주는 소스코드
+            protected Response<String> parseNetworkResponse(NetworkResponse response) {
+                try {
+                    String utf8String = new String(response.data, "UTF-8");
+                    return Response.success(utf8String, HttpHeaderParser.parseCacheHeaders(response));
+                } catch (UnsupportedEncodingException e) {
+                    // log error
+                    return Response.error(new ParseError(e));
+                } catch (Exception e) {
+                    // log error
+                    return Response.error(new ParseError(e));
+                }
+            }
             // 보낼 데이터를 저장하는 곳
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {

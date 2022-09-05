@@ -1,6 +1,10 @@
 package com.weseekapp;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 
 import com.android.volley.AuthFailureError;
@@ -18,7 +22,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -65,6 +73,5 @@ public class StoreInfoHandler {
 
     public void addStore(StoreInfo storeInfo){
         store_list.add(storeInfo);
-        current_state = State.NORMAL;
     }
 }
