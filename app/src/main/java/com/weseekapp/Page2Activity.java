@@ -179,24 +179,40 @@ public class Page2Activity extends Fragment implements View.OnClickListener{
         x = BitmapFactory.decodeStream(input);
         return new BitmapDrawable(getResources(),x);
     }
+    private String gu = "";
     @Override
     public void onClick(View view) {
+
         view.setSelected(!view.isSelected());
-        if (view.isSelected()){
-            if (view.getId() == R.id.btn_sort1){
-
-            }else if (view.getId() == R.id.btn_sort2){
-
-            }else if (view.getId() == R.id.btn_sort3){
-
-            }else if (view.getId() == R.id.btn_sort4){
-
-            }else if (view.getId() == R.id.btn_sort5){
-
+        if (!view.isSelected()){//고쳐주세요 ........ㅜㅜㅜㅜㅠㅜㅠㅜㅠㅜㅜㅠ
+            page2_recyclerView.setAdapter(page2Adapter);
+        } else if (view.isSelected()) {
+            if (view.getId() == R.id.btn_sort1) {
+                gu = "동구";
+            } else if (view.getId() == R.id.btn_sort2) {
+                gu = "서구";
+            } else if (view.getId() == R.id.btn_sort3) {
+                gu = "북구";
+            } else if (view.getId() == R.id.btn_sort4) {
+                gu = "남구";
+            } else if (view.getId() == R.id.btn_sort5) {
+                gu = "광산구";
+            }
+            ArrayList<Page2VO> filteredList = new ArrayList<>();
+            for (Page2VO vo : arrayList) {
+                if (vo.getVo_store_addr().contains(gu)) {
+                    filteredList.add(vo);
+                }
+            }
+            if (filteredList.isEmpty()) {
+            } else {
+                page2Adapter.setFilteredList(filteredList);
             }
         }
 
     }
+
+
     public void customToast(String text){
         LayoutInflater inflater = getLayoutInflater();
         View layout = inflater.inflate(R.layout.toast_board, (ViewGroup) page2_recyclerView.findViewById(R.id.toast_layout_root));
