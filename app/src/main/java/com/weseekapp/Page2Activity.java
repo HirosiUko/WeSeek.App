@@ -7,6 +7,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,7 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -36,18 +38,34 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Page2Activity extends Fragment {
+public class Page2Activity extends Fragment implements View.OnClickListener{
 
 
     private RecyclerView page2_recyclerView;
     private Page2Adapter page2Adapter;
     private SearchView searchView_page2;
+    private TextView btn_sort1, btn_sort2, btn_sort3, btn_sort4, btn_sort5;
     private ArrayList<Page2VO> arrayList;
+    private Boolean isSelected = false;
 
+    private CompoundButton button_favoite_page2;
+    private BounceInterpolator bounceInterpolator;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.page2, container, false);
+
+        btn_sort1 = view.findViewById(R.id.btn_sort1);
+        btn_sort2 = view.findViewById(R.id.btn_sort2);
+        btn_sort3 = view.findViewById(R.id.btn_sort3);
+        btn_sort4 = view.findViewById(R.id.btn_sort4);
+        btn_sort5 = view.findViewById(R.id.btn_sort5);
+
+        btn_sort1.setOnClickListener(this);
+        btn_sort2.setOnClickListener(this);
+        btn_sort3.setOnClickListener(this);
+        btn_sort4.setOnClickListener(this);
+        btn_sort5.setOnClickListener(this);
 
         searchView_page2 = (SearchView) view.findViewById(R.id.searchView_page2);
         searchView_page2.clearFocus();
@@ -120,6 +138,8 @@ public class Page2Activity extends Fragment {
 
 
 
+
+
         return view;
     }
 
@@ -131,7 +151,9 @@ public class Page2Activity extends Fragment {
             }
         }
         if (filteredList.isEmpty()){
-            Toast.makeText(getActivity().getApplicationContext(),"no data", Toast.LENGTH_SHORT).show();
+            customToast("no data");
+
+//            Toast.makeText(getActivity().getApplicationContext(),"no data", Toast.LENGTH_SHORT).show();
         } else {
             page2Adapter.setFilteredList(filteredList);
         }
@@ -149,4 +171,36 @@ public class Page2Activity extends Fragment {
         return new BitmapDrawable(getResources(),x);
     }
 
+    @Override
+    public void onClick(View view) {
+        view.setSelected(!view.isSelected());
+        if (view.isSelected()){
+            if (view.getId() == R.id.btn_sort1){
+
+            }else if (view.getId() == R.id.btn_sort2){
+
+            }else if (view.getId() == R.id.btn_sort3){
+
+            }else if (view.getId() == R.id.btn_sort4){
+
+            }else if (view.getId() == R.id.btn_sort5){
+
+            }
+        }
+
+    }
+    public void customToast(String text){
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.toast_board, (ViewGroup) page2_recyclerView.findViewById(R.id.toast_layout_root));
+        TextView textView = layout.findViewById(R.id.textboard);
+
+
+        Toast toastView = Toast.makeText(getContext().getApplicationContext(), "", Toast.LENGTH_SHORT);
+        toastView.setGravity(Gravity.CENTER,100,100);
+        toastView.setView(layout);
+        toastView.show();
+
+
+
+    }
 }

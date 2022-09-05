@@ -58,7 +58,8 @@
                             android:layout_weight="1"
                             android:gravity="center"
                             android:text="aaa"
-                            android:textSize="24sp" />
+                            android:textSize="18sp"
+                            android:textStyle="bold" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -98,7 +99,7 @@
                         android:layout_marginEnd="5dp"
                         android:layout_marginBottom="5dp"
                         android:text="광주 어쩌고구 저쩌고동 11-1"
-                        android:textSize="18sp" />
+                        android:textSize="16sp" />
 
                 </LinearLayout>
 
@@ -108,7 +109,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#CDCBCB">
+            android:background="#464646">
 
         </LinearLayout>
     </LinearLayout>
