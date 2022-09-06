@@ -25,6 +25,8 @@ public class Page2Adapter extends RecyclerView.Adapter<ViewHolder>{
     private BounceInterpolator bounceInterpolator;
     private ImageView page2_coupon;
     private View view;
+    public ArrayList<String> JjimList;
+    public Boolean isCheck[] = new Boolean[50];
 
 
     public interface OnItemClickListener {
@@ -82,22 +84,35 @@ public class Page2Adapter extends RecyclerView.Adapter<ViewHolder>{
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
                 compoundButton.startAnimation(scaleAnimation);
-                if (b == true){
-                    customToast("찜");
-
-//                    Toast toast = Toast.makeText(context,"찜!", Toast.LENGTH_SHORT);
-//                    toast.show();
-                }else{
-                    customToast("찜이 취소되었습니다");
-//                    Toast toast = Toast.makeText(context, "찜이 취소되었습니다", Toast.LENGTH_SHORT);
-//                    toast.show();
+                if (compoundButton.isChecked()){
+                    customToast(getItem(viewHolder.getAdapterPosition()).vo_store_id+" 찜!");
+//                    JjimList.add(getItem(viewHolder.getAdapterPosition()).vo_store_id);
+                }else if (!compoundButton.isChecked()){
+                    customToast("찜이 해제되었습니다");
+//                    JjimList.remove(getItem(viewHolder.getAdapterPosition()).vo_store_id);
                 }
 
 
+//                if (b == true){
+//                    customToast("찜");
+//
+////                    Toast toast = Toast.makeText(context,"찜!", Toast.LENGTH_SHORT);
+////                    toast.show();
+//                }else{
+//                    customToast("찜이 취소되었습니다");
+////                    Toast toast = Toast.makeText(context, "찜이 취소되었습니다", Toast.LENGTH_SHORT);
+////                    toast.show();
+//                }
             }
-
         });
+
+
+      if (button_favoite_page2.isChecked()){
+             JjimList.set(viewHolder.getAdapterPosition(), getItem(viewHolder.getPosition()).vo_store_id);
+
+      }
         page2_coupon = (ImageView) view.findViewById(R.id.page2_coupon);
+
         return viewHolder;
     }
 

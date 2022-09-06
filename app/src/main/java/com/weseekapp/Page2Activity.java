@@ -54,7 +54,8 @@ public class Page2Activity extends Fragment implements View.OnClickListener{
     private ArrayList<Page2VO> arrayList;
     private View view;
     private Handler handler;
-    private Boolean isSelected = false;
+
+    private Boolean isCheck[] = new Boolean[50];
 
 
     private CompoundButton button_favoite_page2;

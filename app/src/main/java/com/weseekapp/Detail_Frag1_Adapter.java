@@ -40,7 +40,6 @@ public class Detail_Frag1_Adapter extends BaseAdapter {
 
         Detail_Frag1_VO vo = items.get(i);
         ImageView detail_frag1_tv_img = view.findViewById(R.id.detail_page1_tv_img);
-
         detail_frag1_tv_img.setImageDrawable(vo.getDetail_frag1_img());
 
 
