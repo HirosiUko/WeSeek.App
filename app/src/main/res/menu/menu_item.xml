@@ -17,7 +17,7 @@
     <item
         android:id="@+id/page4"
         android:icon="@drawable/ic_action_person"
-        android:title="my" />
+        android:title="my page" />
     <item
         android:id="@+id/page5"
         android:icon="@drawable/ic_action_heart"

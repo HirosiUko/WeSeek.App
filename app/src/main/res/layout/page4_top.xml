@@ -8,9 +8,12 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="230dp"
         android:orientation="vertical"
-        android:outlineSpotShadowColor="#610808">
+        android:outlineSpotShadowColor="#610808"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -76,6 +79,7 @@
     </LinearLayout>
 
     <include
+        android:id="@+id/include2"
         layout="@layout/page4_face"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

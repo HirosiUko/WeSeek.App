@@ -9,6 +9,8 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
+import android.location.Address;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.net.Uri;
@@ -26,6 +28,7 @@ import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -59,10 +62,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Page3Activity extends Fragment implements OnMapReadyCallback, View.OnClickListener {
     @Nullable
@@ -87,6 +92,8 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
     private BounceInterpolator bounceInterpolator;
     private ScaleAnimation scaleAnimation;
 
+    private ArrayList<String> arrayList;
+    private SearchView page3_searchView;
 
     String url_id;
     String url_info;
@@ -220,6 +227,42 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
         dbthread.start(); // db 호출
 
         mapView.getMapAsync(this); // onMapReady 호출
+
+        // 서치뷰
+        page3_searchView = view.findViewById(R.id.page3_searchView);
+        page3_searchView.clearFocus();
+
+//        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapview);
+        page3_searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                String location = page3_searchView.getQuery().toString();
+                List<Address> addressList = null;
+                if (location != null || location.equals("")){
+                    Geocoder geocoder = new Geocoder(getContext().getApplicationContext());
+                    try {
+                        addressList = geocoder.getFromLocationName(location, 1);
+                    } catch (IOException e){
+                        e.printStackTrace();
+                    }
+                    Address address = addressList.get(0);
+                    LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+                    mMap.addMarker(new MarkerOptions().position(latLng).title(location));
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 0));
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+//        mapFragment.getMapAsync(this);
+
+
+
+
 
         return view;
     }
