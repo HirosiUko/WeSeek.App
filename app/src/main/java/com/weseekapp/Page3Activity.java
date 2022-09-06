@@ -67,6 +67,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Page3Activity extends Fragment implements OnMapReadyCallback, View.OnClickListener {
@@ -123,6 +124,8 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
     Animation slidingUp; // 슬라이딩이 왼쪽으로 펼쳐지는 애니메이션 객체
     Animation slidingDown; // 슬라이딩이 오른쪽으로 접어지는 애니메이션 객체
     boolean isOpen = false; // 페이지가 처음에는 오픈이 안 된 상태
+
+    public static Context context_page3;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -239,16 +242,27 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
                 String location = page3_searchView.getQuery().toString();
                 List<Address> addressList = null;
                 if (location != null || location.equals("")){
-                    Geocoder geocoder = new Geocoder(getContext().getApplicationContext());
+//                    Geocoder geocoder = new Geocoder(getContext().getApplicationContext());
                     try {
-                        addressList = geocoder.getFromLocationName(location, 1);
-                    } catch (IOException e){
+                        Log.d("서치뷰", "" + Arrays.asList(store_name).indexOf(location));
+                        cnt = Arrays.asList(store_name).indexOf(location);
+                        getDistance(loc[cnt].latitude, loc[cnt].longitude);
+                        infoset(cnt);
+                        infoset_simple(cnt);
+                        getInfo(store_id[cnt]);
+                        LatLng latLng = new LatLng(loc[cnt].latitude, loc[cnt].longitude);
+                        mMap.addMarker(new MarkerOptions().position(latLng).title(location));
+                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17));
+
+//                        addressList = geocoder.getFromLocationName(location, 1);
+                    } catch (Exception e){
                         e.printStackTrace();
                     }
-                    Address address = addressList.get(0);
-                    LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
-                    mMap.addMarker(new MarkerOptions().position(latLng).title(location));
-                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 0));
+
+//                    Address address = addressList.get(0);
+//                    LatLng latLng = new LatLng(address.getLatitude(), address.getLongitude());
+//                    mMap.addMarker(new MarkerOptions().position(latLng).title(location));
+//                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17));
                 }
                 return false;
             }
@@ -326,14 +340,21 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
                 try {
                     mMap.animateCamera(CameraUpdateFactory.zoomTo(17));
 
+                    if (cnt != 0){
 
-                    cnt = Integer.parseInt(marker.getId().replaceAll("[^\\d]", ""))-1;
+                    }else{
+                        cnt = Integer.parseInt(marker.getId().replaceAll("[^\\d]", ""))-1;
+                    }
+
                     Log.d("태그", ""+cnt);
 
                     getDistance(loc[cnt].latitude, loc[cnt].longitude);
                     infoset(cnt);
                     infoset_simple(cnt);
                     getInfo(store_id[cnt]);
+                    LatLng latLng = new LatLng(loc[cnt].latitude, loc[cnt].longitude);
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17));
+
                 }catch (Exception e){
                     e.printStackTrace();
                 }
@@ -518,6 +539,7 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
                                     break;
                                 }
                             }
+
 
                             Log.d("응답, 길이", urlt);
 
