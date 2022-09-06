@@ -24,20 +24,13 @@ public class Detail_Frag1 extends Fragment{
 
         frame_grid_detail_frag1 = (GridView) view.findViewById(R.id.frame_grid_detail_frag1);
         if (isStart == true){
-            adapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.wheat_back));
-            adapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.wheat_back));
-            adapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.wheat_back));
-            adapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.wheat_back));
-            adapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.wheat_back));
-            adapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.wheat_back));
-            adapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.wheat_back));
-            adapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.wheat_back));
-            adapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.wheat_back));
-            adapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.wheat_back));
-            adapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.wheat_back));
-            adapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.wheat_back));
-            adapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.wheat_back));
-            adapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.wheat_back));
+            adapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.starbucks_001));
+            adapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.starbucks_002));
+            adapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.starbucks_003));
+            adapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.starbucks_004));
+            adapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.starbucks_005));
+            adapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.starbucks_006));
+            adapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.starbucks_007));
 
             isStart = false;
         }

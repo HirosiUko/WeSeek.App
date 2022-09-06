@@ -1,12 +1,14 @@
 package com.weseekapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,14 +30,16 @@ public class ViewHolder extends RecyclerView.ViewHolder{
         page2_img_store = itemView.findViewById(R.id.page2_img_store);
         button_favorite_page2 = itemView.findViewById(R.id.button_favorite_page2);
         
-        page2_tv_name.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String strText = page2_tv_name.getText().toString();
-                Toast.makeText(itemView.getContext(), strText, Toast.LENGTH_SHORT).show();
-            }
-        });
-        
+//        page2_tv_name.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Context context1 = view.getContext();
+//                String strText = page2_tv_name.getText().toString();
+//                Intent intent = new Intent(context1, PageDetail.class);
+//                context1.startActivity(intent);
+//            }
+//        });
+//
         
         
         

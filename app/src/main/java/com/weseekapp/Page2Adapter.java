@@ -1,6 +1,7 @@
 package com.weseekapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,7 +28,7 @@ public class Page2Adapter extends RecyclerView.Adapter<ViewHolder>{
     private View view;
     public ArrayList<String> JjimList;
     public Boolean isCheck[] = new Boolean[50];
-
+    private TextView page2_tv_name;
 
     public interface OnItemClickListener {
         void onItemClick(int pos);
@@ -112,6 +113,10 @@ public class Page2Adapter extends RecyclerView.Adapter<ViewHolder>{
 
       }
         page2_coupon = (ImageView) view.findViewById(R.id.page2_coupon);
+
+
+
+
 
         return viewHolder;
     }

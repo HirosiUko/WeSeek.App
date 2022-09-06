@@ -24,7 +24,8 @@ import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Main_log_in extends AppCompatActivity {
+public class
+Main_log_in extends AppCompatActivity {
 
     private TextView edt_login_id, edt_login_pw;
     private ImageView btn_login_check;
