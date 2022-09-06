@@ -75,7 +75,7 @@ public class Page4Activity extends Fragment {
         //다이얼로그 텍스트 설정
         builder.setView(view);
         ((TextView)view.findViewById(R.id.textTitle)).setText("WeSeek.App");
-        ((TextView)view.findViewById(R.id.textMessage)).setText("아앗! 아직 로그인을 안하셨군요 데헷!\n 로그인후 저희와 함께 여행을 시작해요!❤️");
+        ((TextView)view.findViewById(R.id.textMessage)).setText("아앗! 아직 로그인을 안하셨군요!\n 로그인후 저희와 함께 여행을 시작해요!❤️");
         ((Button)view.findViewById(R.id.btn_join)).setText("Join");
         ((Button)view.findViewById(R.id.btn_profile_select_ok)).setText("Login");
 
