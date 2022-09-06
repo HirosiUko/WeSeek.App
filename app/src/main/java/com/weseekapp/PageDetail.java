@@ -80,6 +80,10 @@ public class PageDetail extends AppCompatActivity {
         int store_id = intent.getIntExtra("storeId", 0);
         Log.d("응답", "아이디넘겨받음: " + store_id);
 
+//        // page2
+//        Intent intent1 =getIntent();
+//
+
 
         scaleAnimation = new ScaleAnimation(0.7f, 1.0f, 0.7f, 1.0f, Animation.RELATIVE_TO_SELF,
                 0.7f, Animation.RELATIVE_TO_SELF, 0.7f);

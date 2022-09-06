@@ -1,12 +1,14 @@
 package com.weseekapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.Layout;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
@@ -50,10 +52,12 @@ public class Page2Activity extends Fragment implements View.OnClickListener{
     private RecyclerView page2_recyclerView;
     private Page2Adapter page2Adapter;
     private SearchView searchView_page2;
-    private TextView btn_sort1, btn_sort2, btn_sort3, btn_sort4, btn_sort5;
+    private TextView btn_sort1, btn_sort2, btn_sort3, btn_sort4, btn_sort5, page2_tv_name;
     private ArrayList<Page2VO> arrayList;
     private View view;
     private Handler handler;
+
+    private ImageView page2_coupon;
 
     private Boolean isCheck[] = new Boolean[50];
 
@@ -65,17 +69,23 @@ public class Page2Activity extends Fragment implements View.OnClickListener{
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.page2, container, false);
 
+
+
         btn_sort1 = view.findViewById(R.id.btn_sort1);
         btn_sort2 = view.findViewById(R.id.btn_sort2);
         btn_sort3 = view.findViewById(R.id.btn_sort3);
         btn_sort4 = view.findViewById(R.id.btn_sort4);
         btn_sort5 = view.findViewById(R.id.btn_sort5);
+        page2_tv_name = (TextView) view.findViewById(R.id.page2_tv_name);
 
         btn_sort1.setOnClickListener(this);
         btn_sort2.setOnClickListener(this);
         btn_sort3.setOnClickListener(this);
         btn_sort4.setOnClickListener(this);
         btn_sort5.setOnClickListener(this);
+
+
+
 
         searchView_page2 = (SearchView) view.findViewById(R.id.searchView_page2);
         searchView_page2.clearFocus();
@@ -94,6 +104,10 @@ public class Page2Activity extends Fragment implements View.OnClickListener{
         });
         loadingView();
 //        handler.post(runable);
+
+
+
+
         return view;
     }
 
@@ -229,7 +243,15 @@ public class Page2Activity extends Fragment implements View.OnClickListener{
                 page2Adapter.setFilteredList(filteredList);
             }
         }
+        if (view.getId()==R.id.page2_tv_name){
+            if(page2_tv_name.getText().toString().equals("나주곰탕 봉선관")){
+                Intent intent = new Intent(getActivity(), PageDetail.class);
+                startActivity(intent);
+            }
+        }
+
     }
+
 
 
     public void customToast(String text){

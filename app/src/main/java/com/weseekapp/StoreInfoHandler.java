@@ -31,7 +31,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class StoreInfoHandler {
+public class
+StoreInfoHandler {
     public enum State{
         NEVER_RECEIVED,
         SYNCING_DB,
