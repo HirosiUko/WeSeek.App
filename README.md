@@ -94,3 +94,22 @@
 🔀 ER 다이어그램
 ---
 ![image](https://user-images.githubusercontent.com/111555755/189051462-9710a4a2-898b-47a7-b518-d4a196b2a27c.png)
+
+✅ 유스케이스
+----
+![usecase](https://user-images.githubusercontent.com/111555755/189053029-2b2e77a9-3b84-41bf-bc6f-b76f96e00f98.PNG)
+
+🙌 서비스 흐름도
+---
+![image](https://user-images.githubusercontent.com/111555755/189055418-7642cba1-f638-4709-abae-64b9001fa130.png)
+
+## 📲 화면 구성
+### 1) 🖼 메뉴 구성
+![image](https://user-images.githubusercontent.com/111555755/189056165-352e4b1e-4b09-44d6-bb7d-18fd043dc7a5.png)
+
+### 2) 📘 메인 화면 구성
+![main_menu](https://user-images.githubusercontent.com/111555755/189056921-141e1c8f-45a9-4a79-a023-8fd0ac3d15a7.png)
+
+### 3) 📗 로그인 화면 구성
+![login_menu](https://user-images.githubusercontent.com/111555755/189057634-7295b20b-c550-4c80-8031-92daf3cc3eaf.png)
+
