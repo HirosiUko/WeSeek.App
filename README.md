@@ -94,3 +94,66 @@
 🔀 ER 다이어그램
 ---
 ![image](https://user-images.githubusercontent.com/111555755/189051462-9710a4a2-898b-47a7-b518-d4a196b2a27c.png)
+
+## 유스케이스
+![usecase](https://user-images.githubusercontent.com/111555755/189053029-2b2e77a9-3b84-41bf-bc6f-b76f96e00f98.PNG)
+
+## 서비스 흐름도
+![image](https://user-images.githubusercontent.com/111555755/189055418-7642cba1-f638-4709-abae-64b9001fa130.png)
+
+## 📲 화면 구성
+### 1) 🎞 메뉴 구성
+![image](https://user-images.githubusercontent.com/111555755/189056165-352e4b1e-4b09-44d6-bb7d-18fd043dc7a5.png)
+
+### 2) 📚 메인 화면 구성
+![main_menu](https://user-images.githubusercontent.com/111555755/189056921-141e1c8f-45a9-4a79-a023-8fd0ac3d15a7.png)
+
+### 3) 📗 로그인 화면 구성
+![login_menu](https://user-images.githubusercontent.com/111555755/189057634-7295b20b-c550-4c80-8031-92daf3cc3eaf.png)
+
+### 4) 📘 상세페이지 화면 구성
+![sanse_menu](https://user-images.githubusercontent.com/111555755/189058074-f6a9389b-8bc5-4086-be5d-d35eed5516f8.png)
+
+## 👩‍👧‍👦 TEAM MEMBER 구성 역할
+<table>
+  <tr>
+    <td align="center"><img src="https://user-images.githubusercontent.com/111551241/189067814-46a08d72-9699-4544-82ed-b72d2715a969.png" width="100" height="100"/></td>
+    <td align="center"><img src="https://user-images.githubusercontent.com/111551241/189067904-0cb889bd-425b-4da7-96d6-e4e1510890df.png" width="100" height="100"/></td>
+     <td align="center"><img src="https://user-images.githubusercontent.com/111551241/189068230-c7427197-2970-4ca4-a8b2-9ef24d40d837.png" width="100" height="100"/></td>
+    <td align="center"><img src="https://user-images.githubusercontent.com/111551241/189068300-eb2dca23-fc0e-4bbb-acb2-7ea60df8b61e.png" width="100" height="100"/></td>
+    <td align="center"><img src="https://user-images.githubusercontent.com/111551241/189068366-64686395-a158-4784-b682-1ce17faa4481.png" width="100" height="100"/></td>
+    <td align="center"><img src="https://user-images.githubusercontent.com/111551241/189068431-60d066e1-6570-484e-8fee-0ef4e6e130b6.jpg" width="100" height="100"/></td>
+  </tr>
+  <tr>
+    <td align="center"><strong>이동주</strong></td>
+    <td align="center"><strong>윤선지</strong></td>
+    <td align="center"><strong>이호준</strong></td>
+    <td align="center"><strong>하승권</strong></td>
+    <td align="center"><strong>이경령</strong></td>
+    <td align="center"><strong>김태완</strong></td>
+  </tr>
+  <tr>
+    <td align="center" width="150"><b>Android Backend</b></td>
+    <td align="center" width="150"><b>Android Frontend, Backend</b></td>
+    <td align="center" width="150"><b>Web backend, Managment</b></td>
+    <td align="center" width="150"><b>DB Building, Data Crawling</b></td>
+    <td align="center" width="150"><b>UI Design, Android Frontend</b></td>
+    <td align="center" width="150"><b>Web Frontend</b></td>
+  </tr>
+   <tr>
+    <td align="center"><b>Android Google Map 총괄<br>Animation 효과</b></td>
+    <td align="center"><b>Android View Design<br>Controller 총괄</b></td>
+    <td align="center"><b>Server 구축<br>DB-Android연동<br></b></td>
+    <td align="center"><b>DB 구축<br>식약처 Crawling<br>Google/kakao data Crawling</b></td>
+    <td align="center"><b>UI Design<br>Android View Design</b></td>
+    <td align="center"><b>Web Page 구축<br>관련 Data 수집<br>발표</b></td>
+  </tr>
+  <tr>
+    <td align="center"><a href="https://github.com/eil-you" target='_blank'>github</a></td>
+    <td align="center"><a href="https://github.com/wonjuju" target='_blank'>github</a></td>
+    <td align="center"><a href="https://github.com/HeEwOn96" target='_blank'>github</a></td>
+    <td align="center"><a href="https://github.com/sterham" target='_blank'>github</a></td>
+    <td align="center"><a href="https://github.com/eil-you" target='_blank'>github</a></td>
+    <td align="center"><a href="https://github.com/eil-you" target='_blank'>github</a></td>
+  </tr>
+</table>
