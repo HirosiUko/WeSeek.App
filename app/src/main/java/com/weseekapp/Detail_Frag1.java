@@ -22,6 +22,7 @@ public class Detail_Frag1 extends Fragment{
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.detail_page1, container, false);
 
+        // 상세페이지에 들어갈 이미지
         frame_grid_detail_frag1 = (GridView) view.findViewById(R.id.frame_grid_detail_frag1);
         if (isStart == true){
             adapter.addItem(ContextCompat.getDrawable(getContext(), R.drawable.starbucks_001));

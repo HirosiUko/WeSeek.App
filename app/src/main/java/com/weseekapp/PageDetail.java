@@ -84,7 +84,7 @@ public class PageDetail extends AppCompatActivity {
 //        Intent intent1 =getIntent();
 //
 
-
+        // 하트애니메이션
         scaleAnimation = new ScaleAnimation(0.7f, 1.0f, 0.7f, 1.0f, Animation.RELATIVE_TO_SELF,
                 0.7f, Animation.RELATIVE_TO_SELF, 0.7f);
         scaleAnimation.setDuration(500);
