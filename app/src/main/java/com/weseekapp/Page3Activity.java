@@ -73,20 +73,20 @@ import java.util.List;
 public class Page3Activity extends Fragment implements OnMapReadyCallback, View.OnClickListener {
     @Nullable
 
-    private GoogleMap mMap;
-    private MapView mapView;
-    private TextView tv_name, tv_star, tv_distance, tv_adr; // 심플 페이지 뷰
-    private ImageView img_detail;
+    private GoogleMap mMap; // 지도
+    private MapView mapView; // 맵뷰
+    private TextView tv_name, tv_star, tv_distance, tv_adr; // 심플 페이지 뷰 (이름, 별점, 거리, 주소)
+    private ImageView img_detail; // 디테일 이미지 이미집퓨
 
     private TextView tv_store_id, tv_store_name, tv_store_tel, tv_store_adr, tv_store_hours, tv_store_distance, tv_store_url; // 상세 페이지 뷰
 
     // 상세 페이지 버튼
-    private TextView btn_link, btn_cancel, btn_detailPage;
-    private ImageView btn_call;
+    private TextView btn_link, btn_cancel, btn_detailPage; // 링크, 뒤로가기, 가게별 세부페이지 이동 버튼
+    private ImageView btn_call; // 전화 버튼
 
     private ImageView img_store_img, img_store_thumb, img_store_star_01, img_store_star_02, img_store_star_03;
-    private ImageButton btn_pre, btn_next;
-    private TextView btn_search;
+    private ImageButton btn_pre, btn_next; // 좌우이동 버튼
+    private TextView btn_search; // 주변탐색 버튼
     private int cnt = 0;
 
     private CompoundButton page3_favorite_animation;
@@ -117,7 +117,7 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
     String distance; // 거리
     String imgUrl; // 이미지 URL
 
-    ProgressDialog customProgressDialog;
+    ProgressDialog customProgressDialog; // 로딩창 선언
 
 
     LinearLayout sliding; // 애니메이션을 동작시킬 객체
@@ -131,11 +131,11 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.page3, container, false);
 
-        isOpen = false;
+        isOpen = false; // 닫힌 상태
 
-        sliding = (LinearLayout) view.findViewById(R.id.sliding);
-        slidingUp= AnimationUtils.loadAnimation(view.getContext(), R.anim.sliding_up);
-        slidingDown= AnimationUtils.loadAnimation(view.getContext(), R.anim.sliding_down);
+        sliding = (LinearLayout) view.findViewById(R.id.sliding); // 페이지 슬라이딩할 객체 지정
+        slidingUp= AnimationUtils.loadAnimation(view.getContext(), R.anim.sliding_up); // 페이지 위로 올리기
+        slidingDown= AnimationUtils.loadAnimation(view.getContext(), R.anim.sliding_down); // 페이지 닫기
 
         SlidingAnimationListener listener = new SlidingAnimationListener();
         slidingUp.setAnimationListener(listener);
@@ -157,7 +157,7 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
         });
 
 
-        customProgressDialog = new ProgressDialog(view.getContext());
+        customProgressDialog = new ProgressDialog(view.getContext()); // 로딩창
         customProgressDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
 
 
@@ -213,21 +213,21 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
         LocationManager locationManager = (LocationManager) getActivity().getSystemService(getContext().LOCATION_SERVICE);
 
         if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-
+            // 권한체크
         }
 
         try {
-            Location loc_Current = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            curLat = loc_Current.getLatitude();
-            curLon = loc_Current.getLongitude();
+            Location loc_Current = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER); // GPS 현재위치 가져오기
+            curLat = loc_Current.getLatitude(); // 현재위도
+            curLon = loc_Current.getLongitude(); // 현재경도
             Log.d("현재위치", "" + curLat + "," + curLon);
         }catch (Exception e){
             e.printStackTrace();
         }
 
 
-        dbSet dbthread = new dbSet();
-        dbthread.start(); // db 호출
+        dbSet dbthread = new dbSet(); // 스레드 선언
+        dbthread.start(); // 스레드 호출
 
         mapView.getMapAsync(this); // onMapReady 호출
 
@@ -247,12 +247,12 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
                         Log.d("서치뷰", "" + Arrays.asList(store_name).indexOf(location));
                         cnt = Arrays.asList(store_name).indexOf(location);
                         getDistance(loc[cnt].latitude, loc[cnt].longitude);
-                        infoset(cnt);
-                        infoset_simple(cnt);
-                        getInfo(store_id[cnt]);
-                        LatLng latLng = new LatLng(loc[cnt].latitude, loc[cnt].longitude);
-                        mMap.addMarker(new MarkerOptions().position(latLng).title(location));
-                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17));
+                        infoset(cnt); // 정보 출력 메소드 1
+                        infoset_simple(cnt); // 정보 출력 메소드 2
+                        getInfo(store_id[cnt]); // 가게별 세부정보 출력 메소드
+                        LatLng latLng = new LatLng(loc[cnt].latitude, loc[cnt].longitude); // 마커찍기용 위치정보 선언
+                        mMap.addMarker(new MarkerOptions().position(latLng).title(location)); // 마커 추가
+                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17)); // 카메라이동
 
 //                        addressList = geocoder.getFromLocationName(location, 1);
                     } catch (Exception e){
@@ -317,51 +317,51 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
         }
 
 
-        BitmapDrawable bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.markerblue);
+        BitmapDrawable bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.markerblue); // 현재위치 표시용 블루마커 이미지 등록
         Bitmap b = bitmapdraw.getBitmap();
         Bitmap blueMarker = Bitmap.createScaledBitmap(b, 80, 120, false);
 
         try {
             MarkerOptions markerOptions = new MarkerOptions();
-            markerOptions.position(currentLoc)
+            markerOptions.position(currentLoc) // 마커선언
                     .title("현재위치")
                     .icon(BitmapDescriptorFactory.fromBitmap(blueMarker));
 
-            mMap.addMarker(markerOptions);
+            mMap.addMarker(markerOptions); // 마커추가
 
-            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLoc, 17));
+            mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLoc, 17)); // 카메라 이동
         }catch (Exception e){
             e.printStackTrace();
         }
 
-        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() { // 마커 클릭 리스너
             @Override
-            public boolean onMarkerClick(@NonNull Marker marker) {
+            public boolean onMarkerClick(@NonNull Marker marker) { // 마커를 클릭했을 때의 동작
                 try {
-                    mMap.animateCamera(CameraUpdateFactory.zoomTo(17));
+                    mMap.animateCamera(CameraUpdateFactory.zoomTo(17)); // 카메라 이동
 
-                    if (cnt != 0){
+                    if (cnt != 0){ // 가게 배열 인덱싱용 변수 cnt 초기화
 
                     }else{
-                        cnt = Integer.parseInt(marker.getId().replaceAll("[^\\d]", ""))-1;
+                        cnt = Integer.parseInt(marker.getId().replaceAll("[^\\d]", ""))-1; // 마커 id 받아와서 cnt로 재선언
                     }
 
                     Log.d("태그", ""+cnt);
 
-                    getDistance(loc[cnt].latitude, loc[cnt].longitude);
-                    infoset(cnt);
+                    getDistance(loc[cnt].latitude, loc[cnt].longitude); //거리
+                    infoset(cnt); // 정보
                     infoset_simple(cnt);
                     getInfo(store_id[cnt]);
-                    LatLng latLng = new LatLng(loc[cnt].latitude, loc[cnt].longitude);
-                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17));
+                    LatLng latLng = new LatLng(loc[cnt].latitude, loc[cnt].longitude); // 위치
+                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 17)); // 카메라 이동
 
                 }catch (Exception e){
                     e.printStackTrace();
                 }
 
                 if (isOpen){ // 슬라이딩 레이아웃이 열려져 있으면
-                    // 보류
-                } else if (marker.getTitle().equals("현재위치")){
+                    
+                } else if (marker.getTitle().equals("현재위치")){ // 클릭한 마커의 타이틀이 '현재위치' 일 경우
                     if (isOpen){ // 슬라이딩 레이아웃이 열려져 있으면
                         sliding.startAnimation(slidingDown); // 슬라이딩 레이아웃 닫기
                     }
@@ -376,7 +376,7 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
             }
         });
 
-        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() { // 맵을 클릭했을 때의 이밴트
             @Override
             public void onMapClick(@NonNull LatLng latLng) {
                 if (isOpen){ // 슬라이딩 레이아웃이 열려져 있으면
@@ -391,7 +391,7 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
 
 
 
-    private class dbSet extends Thread { // db에서 데이터 가져오기
+    private class dbSet extends Thread { // db에서 데이터 가져오는 스레드
         @Override
         public void run() {
 
@@ -407,8 +407,9 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
 //                            response.setCharacterEncoding("UTF-8");
                             String result = "";
                             try {
-                                JSONArray jsonArray = new JSONArray(response);
+                                JSONArray jsonArray = new JSONArray(response); // jsonArray방식으로 db 가져오기
 
+                                // 각 항목 배열 초기화
                                 store_id = new int[jsonArray.length()];
                                 store_name = new String[jsonArray.length()];
                                 store_address = new String[jsonArray.length()];
@@ -424,6 +425,7 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
 
                                     JSONObject jsonObject = (JSONObject) jsonArray.get(i);
 
+                                    // 각 배열에 DB에서 가져온 정보 등록
                                     store_id[i] = jsonObject.getInt("id");
                                     store_name[i] = jsonObject.getString("place_name");
                                     store_address[i] = jsonObject.getString("address_name");
@@ -434,7 +436,7 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
 
                                     Double lat = jsonObject.getDouble("y");
                                     Double lon = jsonObject.getDouble("x");
-
+                                    
                                     loc[i] = new LatLng(lat, lon);
 
                                 }
@@ -482,7 +484,7 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
         }
     }
 
-    public String getDistance(double lat, double lon){
+    public String getDistance(double lat, double lon){ // 현재 위치에서 목표 지점까지의 거리를 반환하는 메소드
         Location locationA = new Location("current");
         locationA.setLatitude(curLat);
         locationA.setLongitude(curLon);
@@ -493,20 +495,20 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
 
         double dis = locationA.distanceTo(locationB);
 
-        if (dis < 1000){
-            distance = "" + (int)dis + " m";
-        } else{
-            distance = "" + ((int)dis)/10*10 / 1000.0 + " km";
+        if (dis < 1000){ // 거리가 1000m 미만일 때
+            distance = "" + (int)dis + " m"; // m 로 표시
+        } else{ // 1000m 이상일 떄
+            distance = "" + ((int)dis)/10*10 / 1000.0 + " km"; // km로 표시
         }
         Log.d("거리", distance);
 
-        return distance;
+        return distance; // 거리 반환
     }
 
     public String getInfo(int store_id){ // 개선필요
         StringRequest request = new StringRequest(
                 Request.Method.GET,
-                url_info = "https://kirakirahikari.herokuapp.com/store_api/getStoreInfoFromId?store_id=" + store_id,
+                url_info = "https://kirakirahikari.herokuapp.com/store_api/getStoreInfoFromId?store_id=" + store_id, // store id로 세부정보 가져오기
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -522,21 +524,21 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
                                 Log.d("응답, imgUrls", imgUrl);
                             }
 
-                            if (hours.equals("N\\/A")){
+                            if (hours.equals("N\\/A")){ // 영업시간 값이 공란일 때
                                 tv_store_hours.setText("정보 없음");
                             }else{
                                 tv_store_hours.setText(hours);
                             }
                             Log.d("응답", hours);
 
-                            String[] imgUrls = imgUrl.split(",");
+                            String[] imgUrls = imgUrl.split(","); // 이미지 url들 가져오기
                             String urlt = "";
 
-                            for (int i = 0; i < imgUrls.length; i++){
-                                if (imgUrls[i].length() != 0){
+                            for (int i = 0; i < imgUrls.length; i++){ // 빈 url 주소가 있어서 그것을 걸러내는 과정 필요
+                                if (imgUrls[i].length() != 0){ // url이 빈 값이 아닐 때
                                     Log.d("응답, 길이", "" + imgUrls[i].length());
-                                    urlt = imgUrls[i];
-                                    break;
+                                    urlt = imgUrls[i]; // 변수 urlt에 이미지 url 추가
+                                    break; 
                                 }
                             }
 
@@ -544,7 +546,7 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
                             Log.d("응답, 길이", urlt);
 
                             Log.d("응답, imgUrls", urlt);
-                            Glide.with(getContext()).load(urlt).into(img_store_thumb);
+                            Glide.with(getContext()).load(urlt).into(img_store_thumb); // glide 라이브러리를 사용하여 이미지 출력
 
 
                         } catch (JSONException e) {
@@ -569,7 +571,7 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
         return hours;
     }
 
-    public void infoset_simple(int cnt){
+    public void infoset_simple(int cnt){ // 간단 정보창 출력 메소드
 
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc[cnt], 17));
 
@@ -581,7 +583,7 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
     }
 
 
-    public void infoset(int cnt){
+    public void infoset(int cnt){ // 세부정보창 출력 메소드
 
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(loc[cnt], 17));
 
@@ -634,7 +636,7 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
 
 
 
-            }else if (view.getId() == R.id.btn_pre){
+            }else if (view.getId() == R.id.btn_pre){ // 이전 버튼
                 if (cnt > 0){
                     cnt--;
                     Log.d("cnt", ""+cnt);
@@ -649,7 +651,7 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
                     infoset_simple(cnt);
                 }
 
-            }else if (view.getId() == R.id.btn_next){
+            }else if (view.getId() == R.id.btn_next){ // 다음 버튼
                 if (cnt < store_id.length -1){
                     cnt++;
                     Log.d("cnt", ""+cnt);
@@ -663,18 +665,18 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
                     infoset_simple(cnt);
                 }
 
-            }else if (view.getId() == R.id.btn_cancel){
+            }else if (view.getId() == R.id.btn_cancel){ // 취소 버튼
                 if (isOpen){
                     sliding.startAnimation(slidingDown);
                 }
 
-            }else if (view.getId() == R.id.btn_call){
-                String num = tv_store_tel.getText().toString().replace("-", "");
+            }else if (view.getId() == R.id.btn_call){ // 전화 버튼
+                String num = tv_store_tel.getText().toString().replace("-", ""); // 불러온 db에서 숫자만을 가져오는 과정
                 Log.d("응답", num);
                 Uri uri = Uri.parse("tel:"+num);
                 Intent intent = new Intent(Intent.ACTION_DIAL, uri);
-                startActivity(intent);
-            }else if (view.getId() == R.id.btn_detailPage){
+                startActivity(intent); // 전화 액티비티로 이동
+            }else if (view.getId() == R.id.btn_detailPage){ // 디테일 페이지 버튼
                 Intent intent = new Intent(getContext(), PageDetail.class);
                 int storeIdtoDetail = store_id[cnt];
                 Log.d("응답", "디테일페이지 : " + storeIdtoDetail);
@@ -683,7 +685,7 @@ public class Page3Activity extends Fragment implements OnMapReadyCallback, View.
 
 
 
-            }else if (view.getId() == R.id.btn_link){
+            }else if (view.getId() == R.id.btn_link){ // 링크 버튼
                 ClipboardManager clipboard = (ClipboardManager) getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
                 ClipData clip = ClipData.newPlainText("label", tv_store_url.getText().toString());
                 Toast.makeText(getActivity().getApplicationContext(),"클립보드에 복사되었습니다.", Toast.LENGTH_SHORT).show();

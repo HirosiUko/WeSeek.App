@@ -6,7 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends AppCompatActivity { // 스플래시 액티비티 - 초기 시작화면
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +23,6 @@ public class SplashActivity extends AppCompatActivity {
                 startActivity(intent);
                 finish();
             }
-        },2000);
+        },2000); // 2초 후 다음 화면으로 이동
     }
 }
