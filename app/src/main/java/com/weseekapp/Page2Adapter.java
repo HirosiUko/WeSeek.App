@@ -29,6 +29,8 @@ public class Page2Adapter extends RecyclerView.Adapter<ViewHolder>{
     public ArrayList<String> JjimList;
     public Boolean isCheck[] = new Boolean[50];
     private TextView page2_tv_name;
+    private RatingBar page2_stars;
+    private ArrayList<String> list = new ArrayList<>();
 
     public interface OnItemClickListener {
         void onItemClick(int pos);
@@ -107,12 +109,14 @@ public class Page2Adapter extends RecyclerView.Adapter<ViewHolder>{
             }
         });
 
-
+//        page2_stars = (RatingBar) view.findViewById(R.id.page2_stars);
+//        page2_stars.setNumStars();
       if (button_favoite_page2.isChecked()){
              JjimList.set(viewHolder.getAdapterPosition(), getItem(viewHolder.getPosition()).vo_store_id);
 
       }
         page2_coupon = (ImageView) view.findViewById(R.id.page2_coupon);
+
 
 
 
@@ -125,13 +129,21 @@ public class Page2Adapter extends RecyclerView.Adapter<ViewHolder>{
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Page2VO vo = arrayList.get(position);
 
+//        holder.page2_coupon.setImageResource(R.drawable.coupon_red);
+//        if (position % 2 == 1){
+//            holder.page2_coupon.setVisibility(View.INVISIBLE);
+//        }else{
+//            holder.page2_coupon.setVisibility(View.VISIBLE);
+//        }
+
         holder.page2_tv_name.setText(vo.vo_store_id);
         holder.page2_tv_addr.setText(vo.vo_store_addr);
         vo.vo_store_pic.into(holder.page2_img_store);
         //page2_stars
 //        holder.page
 //        vo.vo_stars.setNumStars();
-        holder.button_favorite_page2.setOnClickListener((View.OnClickListener) vo.vo_btn_favorite);
+//        holder.page2_stars.setNumStars(vo.vo_stars.getNumStars());
+//        holder.button_favorite_page2.setOnClickListener((View.OnClickListener) vo.vo_btn_favorite);
     }
 
     @Override
@@ -179,6 +191,7 @@ public class Page2Adapter extends RecyclerView.Adapter<ViewHolder>{
         notifyDataSetChanged();
 
     }
+    // 커스텀토스트
     public void customToast(String text){
         LayoutInflater inflater = LayoutInflater.from(button_favoite_page2.getContext());
         View layout = inflater.inflate(R.layout.toast_board, (ViewGroup) view.findViewById(R.id.toast_layout_root));

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,7 +21,9 @@ public class ViewHolder extends RecyclerView.ViewHolder{
     public TextView page2_tv_addr;
     public ImageView page2_img_store;
     public CompoundButton button_favorite_page2;
-    
+    public RatingBar page2_stars;
+    public ImageView page2_coupon;
+
     public ViewHolder(Context context, @NonNull View itemView) {
         super(itemView);
         

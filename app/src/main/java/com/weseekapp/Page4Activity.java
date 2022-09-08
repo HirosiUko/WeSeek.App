@@ -32,6 +32,7 @@ public class Page4Activity extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.page4, container, false);
 
+        // 동그란사진
         circle_iv=(CircleImageView) view.findViewById(R.id.circle_iv);
         circle_iv.setOnClickListener(new View.OnClickListener() {
             @Override

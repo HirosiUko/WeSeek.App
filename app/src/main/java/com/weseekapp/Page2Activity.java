@@ -59,6 +59,8 @@ public class Page2Activity extends Fragment implements View.OnClickListener{
 
     private ImageView page2_coupon;
 
+    private RatingBar page2_stars;
+
     private Boolean isCheck[] = new Boolean[50];
 
 
@@ -70,7 +72,7 @@ public class Page2Activity extends Fragment implements View.OnClickListener{
         view = inflater.inflate(R.layout.page2, container, false);
 
 
-
+        // 화면상단 지역별 SORT 버튼
         btn_sort1 = view.findViewById(R.id.btn_sort1);
         btn_sort2 = view.findViewById(R.id.btn_sort2);
         btn_sort3 = view.findViewById(R.id.btn_sort3);
@@ -86,7 +88,7 @@ public class Page2Activity extends Fragment implements View.OnClickListener{
 
 
 
-
+        // 서치뷰
         searchView_page2 = (SearchView) view.findViewById(R.id.searchView_page2);
         searchView_page2.clearFocus();
 
@@ -105,6 +107,8 @@ public class Page2Activity extends Fragment implements View.OnClickListener{
         loadingView();
 //        handler.post(runable);
 
+        page2_stars = (RatingBar) view.findViewById(R.id.page2_stars);
+//        page2_stars.setNumStars();
 
 
 
@@ -167,7 +171,7 @@ public class Page2Activity extends Fragment implements View.OnClickListener{
 
         page2_recyclerView.setAdapter(page2Adapter);
     }
-
+    // 서치뷰의 FliterList
     private void filterList(String text) {
         ArrayList<Page2VO> filteredList = new ArrayList<>();
         for (Page2VO vo : arrayList){
@@ -194,6 +198,7 @@ public class Page2Activity extends Fragment implements View.OnClickListener{
         x = BitmapFactory.decodeStream(input);
         return new BitmapDrawable(getResources(),x);
     }
+    // 지역별로 나누기와 중복선택방지
     private String gu = "";
     @Override
     public void onClick(View clicked_view) {
@@ -253,7 +258,7 @@ public class Page2Activity extends Fragment implements View.OnClickListener{
     }
 
 
-
+    // 커스텀 토스트
     public void customToast(String text){
         LayoutInflater inflater = getLayoutInflater();
         View layout = inflater.inflate(R.layout.toast_board, (ViewGroup) page2_recyclerView.findViewById(R.id.toast_layout_root));
